@@ -139,6 +139,28 @@ in {
     enable = true;
     userEmail = "pierrez1984@gmail.com";
     userName = "zh-py";
+    extraConfig = {
+      core = {
+        editor = "nvim";
+        pager = "delta --dark";
+        whitespace = "trailing-space,space-before-tab";
+      };
+      interactive = {
+        diffFilter = "delta --color-only";
+      };
+      delta = {
+        navigate = true;
+        light = false;
+        side-by-side = true;
+        line-numbers = true;
+      };
+      merge = {
+        conflictstyle = "diff3";
+      };
+      diff = {
+        colorMoved = "default";
+      };
+    };
   };
 
   programs.fzf = {
