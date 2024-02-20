@@ -41,7 +41,6 @@ in {
     glances
     bottom
     aria
-    alacritty
     thefuck
     rclone
     #syncthing
