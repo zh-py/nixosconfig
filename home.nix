@@ -32,6 +32,7 @@ in {
     xsel
     nomacs
     #mpv-unwrapped
+    mpv
     yt-dlp
     wordnet
     htop
@@ -108,6 +109,7 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/mpv".source = dotfiles/mpv;
   };
 
   # Home Manager can also manage your environment variables through
