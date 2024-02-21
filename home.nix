@@ -29,6 +29,11 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
     deluge
+    xsel
+    nomacs
+    #mpv-unwrapped
+    yt-dlp
+    wordnet
     htop
     neofetch
     du-dust
@@ -134,6 +139,17 @@ in {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
   };
+
+  #programs.mpv = {
+    #enable = true;
+    #bindings = {
+      #"Alt+0" = "set window-scale 0.5";
+    #};
+    #config = {
+      #ytdl-format="bestvideo[height<=?480][fps<=?30][vcodec!=?webm]+bestaudio/best";
+      #cache-default = 4000000;
+    #};
+  #};
 
   programs.git = {
     enable = true;
