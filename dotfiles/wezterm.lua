@@ -26,22 +26,7 @@ return {
 	color_schemes = { ['My Framer'] = my_framer, },
 	color_scheme = 'My Framer',
 	keys = {
-		-- Create a new tab in the same domain as the current pane.
-		-- This is usually what you want.
-		{
-			key = 't',
-			mods = 'SHIFT|ALT',
-			action = act.SpawnTab 'CurrentPaneDomain',
-		},
-		-- Create a new tab in the default domain
-		{ key = 't', mods = 'SHIFT|ALT', action = act.SpawnTab 'DefaultDomain' },
-		-- Create a tab in a named domain
-		{
-			key = 't',
-			mods = 'SHIFT|ALT',
-			action = act.SpawnTab {
-				DomainName = 'unix',
-			},
-		},
+		--{ key = 't', mods = 'SHIFT|ALT', action = act.SpawnTab 'CurrentPaneDomain', },
+		{ key = 't', mods = 'CMD',       action = act.SpawnTab 'CurrentPaneDomain', },
 	}
 }
