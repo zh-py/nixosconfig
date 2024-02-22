@@ -13,9 +13,9 @@ end)
 local act = wezterm.action
 return {
 	font_size = 12,
-	window_background_opacity = 0.95,
+	window_background_opacity = 0.96,
 	hide_tab_bar_if_only_one_tab = true,
-	default_cursor_style = "BlinkingUnderline",
+	default_cursor_style = "SteadyBar",
 	cursor_blink_rate = 600,
 	default_prog = { "zsh" },
 	window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
