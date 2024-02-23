@@ -32,7 +32,8 @@ in {
     deluge
     xsel
     nomacs
-    #mpv-unwrapped
+    maestral
+    insync
     mpv
     yt-dlp
     wordnet
@@ -443,6 +444,7 @@ in {
         config = builtins.readFile(./neovim/telescope.lua);
       }
       telescope-file-browser-nvim
+      telescope-ui-select-nvim
       {
         plugin = indent-blankline-nvim;
         type = "lua";
