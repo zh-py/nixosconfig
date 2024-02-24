@@ -32,11 +32,16 @@ in {
     deluge
     xsel
     nomacs
+    xorg.xev
+    xorg.setxkbmap
+    xorg.xkbcomp
+    gh
     maestral
     insync
     mpv
     yt-dlp
     wordnet
+    btop
     htop
     neofetch
     du-dust
@@ -113,8 +118,9 @@ in {
     # '';
     ".config/mpv".source = dotfiles/mpv;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
+    #".Xmodmap".source = dotfiles/.Xmodmap;
+    ".xkb".source = dotfiles/.xkb;
   };
-
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
@@ -136,6 +142,7 @@ in {
     TERMINAL = "alacritty";
     XDG_CONFIG_HOME = "$HOME/.config";
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -194,10 +201,11 @@ in {
     enableCompletion = true;
     shellAliases = {
       ll = "ls -l";
-      bl = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 42";
-      bh = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 77";
+      #bl = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 42";
+      #bh = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 77";
     };
     initExtra = builtins.readFile ./dotfiles/.zshrc;
+    envExtra= builtins.readFile ./dotfiles/.zshenv;
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
