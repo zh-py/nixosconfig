@@ -12,7 +12,7 @@ end)
 
 local act = wezterm.action
 return {
-	font_size = 12,
+	font_size = 13,
 	window_background_opacity = 0.96,
 	hide_tab_bar_if_only_one_tab = true,
 	default_cursor_style = "SteadyBar",

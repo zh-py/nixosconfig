@@ -3,6 +3,33 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+#let
+  #compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
+    #${pkgs.xorg.xkbcomp}/bin/xkbcomp ${./path/to/layout.xkb} $out
+  #'';
+#in
+let
+ customKeyboardLayout = pkgs.writeText "custom-keyboard-layout" ''
+    xkb_keymap {
+	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
+	xkb_types     { include "complete"	};
+	xkb_compat    { include "complete"	};
+        partial
+        xkb_symbols "swap" {
+            include "pc+us+inet(evdev)+altwin(ctrl_win)"
+            replace key <RTRN> { [ backslash, bar ] };
+            replace key <BKSL> { [ Return, Return ] };
+            replace key <LSGT> { [ Shift_L, Super_L ] };
+        };
+    };
+  '';
+  # Help catch errors in the custom keyboard layout at build time
+  compiledKeyboardLayout = pkgs.runCommand "compiled-keyboard-layout" {} ''
+    ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $out
+  '';
+in
+
+
 
 {
   imports =
@@ -43,38 +70,103 @@
     LC_TIME = "sw_TZ";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #options = {
+  #+    services.xserver.windowManager.fvwm3 = {
+  #+      enable = mkEnableOption "Fvwm3 window manager";
+  #+    };
+  #+  };
+  #services.xserver.windowManager.fvwm3.enable = true
+  #services.xserver.desktopManager.default = "fvwm3";
+  #services.xserver.desktopManager.session =
+    #[ { manage = "desktop";
+      #name = "fvwm3";
+      #start =
+        #''
+          ##xmodmap ~/.Xmodmap
+          #${pkgs.fvwm3}/bin/fvwm3 &
+          #waitPID=$!
+        #'';
+      #}
+    #];
+  #services.xserver.displayManager.defaultSession = "fvwm3";
+  #services.xserver.windowManager.fvwm3.enable = true;
+  #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
-  # Enable the Cinnamon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-
-  # Configure keymap in X11
+  # Configure keymap in X11 37
   services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
+    enable = true;
+    displayManager.lightdm.enable = true;
+    desktopManager.xfce.enable = true;
+    #windowManager.i3.enable = true;
+    #xkb.layout = "us";
+    #xkb.variant = "";
+    #displayManager.sessionCommands = "xkbcomp dotfiles/mylayout.xkb $DISPLAY";
+    #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
+    #displayManager.sessionCommands =
+      #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
+          #keycode 51 = Return
+          #keycode 36 = backslash bar
+      #''}"
+    #xkb.extraLayouts.mylayout = {
+      #description = "swap Return and Backslash";
+      #languages   = [ "eng" ];
+      #symbolsFile = /etc/nixos/dotfiles/mylayout;
+    #};
+
+    # Load custom keyboard layout on boot/resume
+    #displayManager.sessionCommands = "sleep 8 && ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
+    #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && xmodmap /etc/nixos/dotfiles/.Xmodmap";
+    displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
+    #displayManager.sessionCommands = "sleep 5 && xmodmap -e 'keycode 51 = Return'";
+    #displayManager.sessionCommands = "sleep 5 && xkbcomp mylayout.xkb ${customKeyboardLayout} $DISPLAY";
+    #displayManager.defaultSession = "cinnamon-wayland";
+    #displayManager.sessionCommands = "xkbcomp ${customKeyboardLayout} $DISPLAY";
+    #displayManager.sessionCommands = "xmodmap -e 'keycode 51 = Return'";
+
+
+#displayManager.sessionCommands =
+  #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
+      #keycode 51 = Return
+      #keycode 36 = backslash bar
+  #''}"
   };
+
+  #services.xserver.desktopManager.session =
+    #[ { manage = "desktop";
+        #start = ''
+          #xmodmap /etc/nixos/dotfiles/.Xmodmap
+        #'';
+      #}
+    #];
+
+
+
+  ## Configure the console keymap from the xserver keyboard settings
+  #console.useXkbConfig = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+  #services.pipewire = {
+    #enable = true;
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
+    #pulse.enable = true;
+    ## If you want to use JACK applications, uncomment this
+    ##jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+    ## use the example session manager (no others are packaged yet so this is enabled by default,
+    ## no need to redefine it in your config for now)
+    ##media-session.enable = true;
+  #};
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -102,6 +194,17 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     xorg.xmodmap
+    xorg.xev
+    xorg.setxkbmap
+    xorg.xkbcomp
+    xfce.xfce4-dict
+    xfce.xfce4-panel
+    xfce.xfce4-appfinder
+    xfce.xfce4-settings
+    xfce.xfwm4
+    xfce.xfce4-dict
+    xfce.xfce4-pulseaudio-plugin
+    #fvwm3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

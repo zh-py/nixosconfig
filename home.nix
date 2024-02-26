@@ -32,13 +32,11 @@ in {
     deluge
     xsel
     nomacs
-    xorg.xev
-    xorg.setxkbmap
-    xorg.xkbcomp
     gh
     maestral
     insync
     mpv
+    playerctl
     yt-dlp
     wordnet
     btop
@@ -119,7 +117,7 @@ in {
     ".config/mpv".source = dotfiles/mpv;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
     #".Xmodmap".source = dotfiles/.Xmodmap;
-    ".xkb".source = dotfiles/.xkb;
+    #".xkb".source = dotfiles/.xkb;
   };
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
@@ -205,7 +203,7 @@ in {
       #bh = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 77";
     };
     initExtra = builtins.readFile ./dotfiles/.zshrc;
-    envExtra= builtins.readFile ./dotfiles/.zshenv;
+    #envExtra= builtins.readFile ./dotfiles/.zshenv;
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
@@ -564,6 +562,11 @@ in {
           cyan = "0x63f2f1";
           white = "0xa6b3cc";
         };
+      };
+      keyboard = {
+        bindings = [
+          { key = "Q"; mods = "Control"; action = "Quit"; }
+        ];
       };
     };
   };
