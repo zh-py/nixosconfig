@@ -33,8 +33,8 @@ in {
     xsel
     nomacs
     gh
-    maestral
     insync
+    maestral
     mpv
     playerctl
     yt-dlp

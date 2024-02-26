@@ -142,7 +142,8 @@ in
 
 
   ## Configure the console keymap from the xserver keyboard settings
-  #console.useXkbConfig = true;
+  console.useXkbConfig = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
