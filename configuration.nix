@@ -170,6 +170,7 @@ in
     #media-session.enable = true;
   };
 
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -193,9 +194,10 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     gsimplecal
+    linuxKernel.packages.linux_6_7.perf
+    #libinput-gestures
     xorg.xmodmap
     xorg.xev
     xorg.setxkbmap
@@ -207,10 +209,7 @@ in
     xfce.xfwm4
     xfce.xfce4-dict
     xfce.xfce4-pulseaudio-plugin
-    #ncpamixer
     pavucontrol
-    #wireplumber
-    #fvwm3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -101,6 +101,28 @@ in {
         openpyxl
       ]))
   ];
+
+  #services.fusuma = {
+    #enable = true;
+    #extraPackages = with pkgs; [ xdotool ];
+    #settings = {
+      #threshold = { swipe = 0.1; };
+      #interval = { swipe = 0.7; };
+      #swipe = {
+        #"4" = {
+          #left = {
+            #command = "xdotool key ctrl+alt+Left";
+          #};
+          #right = {
+            #command = "xdotool key ctrl+alt+Right";
+          #};
+        #};
+      #};
+    #};
+  #};
+
+
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
