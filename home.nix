@@ -290,7 +290,6 @@ in {
       autocmd Filetype markdown map! <silent> <F5> <ESC> :w<CR>:MarkdownPreview<CR>
       map [b :bprevious<CR>
       map ]b :bnext<CR>
-      map bq :Bdelete<CR>
       lua vim.keymap.set("n", "H", [[<cmd>bprevious<cr>]])
       lua vim.keymap.set("n", "L", [[<cmd>bnext<cr>]])
     '';

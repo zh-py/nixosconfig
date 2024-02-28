@@ -12,7 +12,7 @@ end)
 
 local act = wezterm.action
 return {
-	font_size = 13,
+	font_size = 12.0,
 	--font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Light', }),
 	font = wezterm.font('FiraCode Nerd Font Mono'),
 	window_background_opacity = 0.96,
