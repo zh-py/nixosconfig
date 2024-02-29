@@ -32,6 +32,10 @@ in {
     deluge
     xsel
     nomacs
+    powerstat
+    powertop
+    lm_sensors
+    tlp
     gh
     insync
     maestral
