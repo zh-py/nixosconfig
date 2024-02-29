@@ -221,6 +221,7 @@ in
     xfce.xfce4-dict
     libcamera
     xfce.xfce4-pulseaudio-plugin
+    qpwgraph
     pavucontrol
   ];
 
