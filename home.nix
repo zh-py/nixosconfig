@@ -31,6 +31,9 @@ in {
     wezterm
     deluge
     xsel
+    galculator
+    speedcrunch
+    qalculate-gtk
     nomacs
     powerstat
     powertop
