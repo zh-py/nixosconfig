@@ -173,14 +173,21 @@ in
       "10-clock-rate" = {
         "context.properties" = {
           "default.clock.rate" = 44100;
-          "default.clock.quantum" = 512;
-          "default.clock.min-quantum" = 128;
+          "default.clock.quantum" = 1024;
+          "default.clock.min-quantum" = 1024;
           "default.clock.max-quantum" = 1024;
         };
       };
     };
   };
 
+  environment.etc."wireplumber/bluetooth.lua.d/50-bluez-config.lua" = {
+    text = ''
+      bluez_monitor.properties = {
+        ["bluez5.default.rate"] = 44100,
+      }
+    '';
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
