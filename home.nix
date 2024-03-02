@@ -7,8 +7,7 @@
 }: let
   inherit (pkgs.lib) mkIf optionals;
   tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-medium
-    xifthen ifmtarg framed paralist titlesec;
+    inherit (pkgs.texlive) scheme-full;
   });
 in {
   home.username = "py";
@@ -46,6 +45,10 @@ in {
     playerctl
     yt-dlp
     wordnet
+    mupdf
+    okular
+    qpdfview
+    zathura
     btop
     htop
     neofetch
@@ -56,6 +59,20 @@ in {
     delta
     #maple-mono
     jetbrains-mono
+    paratype-pt-sans
+    uw-ttyp0
+    #tamsyn
+    vistafonts
+    #unscii
+    gohufont
+    xorg.xbitmaps
+    zpix-pixel-font
+    #ucs-fonts
+    #profont
+    cozette
+    terminus_font
+    terminus_font_ttf
+    roboto
     glances
     bottom
     aria
@@ -410,9 +427,9 @@ in {
       {
         plugin = vimtex;
         config = /* vim */ ''
-          let g:vimtex_view_method='skim'
-          let g:vimtex_view_skim_activate=0
-          let g:vimtex_view_skim_reading_bar=1
+          let g:vimtex_view_general_method='qpdfview'
+          "let g:vimtex_view_skim_activate=0
+          "let g:vimtex_view_skim_reading_bar=1
           let g:vimtex_syntax_enabled=0
         '';
       }
@@ -544,13 +561,22 @@ in {
         startup_mode = "Maximized";
       };
       font = {
-        size = 12.0;
-        normal.family = "JetbrainsMono Nerd Font";
-        bold.family = "JetbrainsMono Nerd Font";
-        italic.family = "JetbrainsMono Nerd Font";
+        size = 13;
+        #normal.family = "JetbrainsMono Nerd Font";
+        #bold.family = "JetbrainsMono Nerd Font";
+        #italic.family = "JetbrainsMono Nerd Font";
         #normal.family = "Hack Nerd Font Mono";
         #bold.family = "Hack Nerd Font Mono";
         #italic.family = "Hack Nerd Font Mono";
+        #normal.family = "terminus";
+        #bold.family = "terminus";
+        #italic.family = "terminus";
+        #normal.family = "gohufont";
+        #bold.family = "gohufont";
+        #italic.family = "gohufont";
+        normal.family = "Ttyp0";
+        bold.family = "Ttyp0";
+        italic.family = "Ttyp0";
       };
       cursor = {
         style.shape = "Beam";

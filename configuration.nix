@@ -95,8 +95,18 @@ in
   # Configure keymap in X11 37
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true;
-    desktopManager.xfce.enable = true;
+    #displayManager.lightdm.enable = true;
+    #displayManager = {
+      #lightdm = {
+        #enable = true;
+        #greeters.slick = {
+          #enable = true;
+          #theme.name = "Zukitre-dark";
+        #};
+      #};
+    #};
+    desktopManager.lxqt.enable = true;
+    #windowManager.icewm.enable = true;
     #windowManager.i3.enable = true;
     #xkb.layout = "us";
     #xkb.variant = "";
@@ -219,6 +229,7 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -226,21 +237,24 @@ in
     wget
     gsimplecal
     #linuxKernel.packages.linux_6_7.perf
-    #libinput-gestures
-    xorg.xmodmap
+    libinput-gestures
+    #xorg.xmodmap
     xorg.xev
     xorg.setxkbmap
     xorg.xkbcomp
-    xfce.xfce4-dict
-    xfce.xfce4-panel
-    xfce.xfce4-appfinder
-    xfce.xfce4-settings
-    xfce.xfwm4
-    xfce.xfce4-dict
-    libcamera
-    xfce.xfce4-pulseaudio-plugin
+    #xfce.xfce4-dict
+    #xfce.xfce4-panel
+    #xfce.xfce4-appfinder
+    #xfce.xfce4-settings
+    #xfce.xfwm4
+    #xfce.xfce4-dict
+    #xfce.xfce4-pulseaudio-plugin
+    #lxqt.lxqt-globalkeys
+    #lxqt.lxqt-session
+    lxqt.lxqt-runner
     qpwgraph
     pavucontrol
+    bumblebee
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
