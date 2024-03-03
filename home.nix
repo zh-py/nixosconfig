@@ -60,6 +60,15 @@ in {
     bat
     delta
     fontconfig
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    source-han-sans-vf-ttf
+    source-han-serif-vf-ttf
+    source-han-sans
+    source-han-serif
+    ark-pixel-font
+    zpix-pixel-font
+    wqy_microhei
     helvetica-neue-lt-std
     aileron
     ubuntu_font_family
@@ -73,7 +82,6 @@ in {
     #unscii
     gohufont
     xorg.xbitmaps
-    zpix-pixel-font
     #ucs-fonts
     #profont
     cozette
