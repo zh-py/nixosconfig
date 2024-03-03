@@ -27,6 +27,8 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    opera
+    google-chrome
     wezterm
     deluge
     xsel
@@ -57,6 +59,11 @@ in {
     ripgrep
     bat
     delta
+    fontconfig
+    helvetica-neue-lt-std
+    aileron
+    ubuntu_font_family
+    fira
     #maple-mono
     jetbrains-mono
     paratype-pt-sans

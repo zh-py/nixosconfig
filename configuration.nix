@@ -252,6 +252,7 @@ in
     #lxqt.lxqt-globalkeys
     #lxqt.lxqt-session
     lxqt.lxqt-runner
+    playerctl
     qpwgraph
     pavucontrol
     bumblebee
