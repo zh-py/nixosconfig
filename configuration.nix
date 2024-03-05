@@ -230,6 +230,38 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  fonts.packages = with pkgs; [
+    meslo-lgs-nf
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    source-han-sans-vf-ttf
+    source-han-serif-vf-ttf
+    source-han-sans
+    source-han-serif
+    #ark-pixel-font
+    #zpix-pixel-font
+    wqy_microhei
+    helvetica-neue-lt-std
+    aileron
+    ubuntu_font_family
+    fira
+    #maple-mono
+    jetbrains-mono
+    paratype-pt-sans
+    uw-ttyp0
+    #tamsyn
+    vistafonts
+    #unscii
+    gohufont
+    xorg.xbitmaps
+    #ucs-fonts
+    #profont
+    cozette
+    terminus_font
+    terminus_font_ttf
+    roboto
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.py = {
     isNormalUser = true;

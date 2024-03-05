@@ -58,7 +58,6 @@ in {
     zathura
     btop
     htop
-    lf
     trashy
     neofetch
     du-dust
@@ -67,34 +66,6 @@ in {
     bat
     delta
     fontconfig
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    source-han-sans-vf-ttf
-    source-han-serif-vf-ttf
-    source-han-sans
-    source-han-serif
-    ark-pixel-font
-    zpix-pixel-font
-    wqy_microhei
-    helvetica-neue-lt-std
-    aileron
-    ubuntu_font_family
-    fira
-    #maple-mono
-    jetbrains-mono
-    paratype-pt-sans
-    uw-ttyp0
-    #tamsyn
-    vistafonts
-    #unscii
-    gohufont
-    xorg.xbitmaps
-    #ucs-fonts
-    #profont
-    cozette
-    terminus_font
-    terminus_font_ttf
-    roboto
     glances
     bottom
     aria
@@ -185,6 +156,7 @@ in {
     # '';
     ".config/mpv".source = dotfiles/mpv;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
+    ".config/lf/icons".source = dotfiles/icons;
     #".Xmodmap".source = dotfiles/.Xmodmap;
     #".xkb".source = dotfiles/.xkb;
   };
@@ -230,6 +202,24 @@ in {
     #};
   #};
 
+  programs.lf = {
+    enable = true;
+    settings = {
+      number = true;
+      icons = true;
+      hidden = true;
+    };
+    keybindings = {
+      gh = "cd ~";
+      gd = "cd ~/Downloads";
+      gc = "cd ~/.config";
+      gn = "cd /etc/nixos/";
+      dd = "trash";
+      md = "mkdir";
+      i = "$less $f";
+    };
+  };
+
   programs.git = {
     enable = true;
     userEmail = "pierrez1984@gmail.com";
@@ -271,8 +261,23 @@ in {
       #bl = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 42";
       #bh = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 77";
     };
-    initExtra = builtins.readFile ./dotfiles/.zshrc;
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      #{
+        #name = "powerlevel10k-config";
+        #src = ./dotfiles/.p10k.zsh;
+        #file = "p10k.zsh";
+      #}
+    ];
+    #initExtra = builtins.readFile ./dotfiles/.zshrc;
     #envExtra= builtins.readFile ./dotfiles/.zshenv;
+    initExtra = "
+      source ~/.p10k.zsh
+    ";
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
