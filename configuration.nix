@@ -178,7 +178,6 @@ in
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-    wireplumber.enable = true;
     extraConfig.pipewire = {
       "10-clock-rate" = {
         "context.properties" = {
@@ -189,26 +188,44 @@ in
         };
       };
     };
+    #wireplumber.enable = true;
+    wireplumber = {
+      enable = true;
+      configPackages = [
+	(pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
+          bluez_monitor.properties = {
+            ["bluez5.default.rate"] = 44100,
+            ["bluez5.enable-sbc-xq"] = true,
+            ["bluez5.enable-msbc"] = false,
+            ["bluez5.enable-hw-volume"] = true,
+            ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
+          }
+	'')
+      ];
+      #extraLuaConfig.bluetooth."52-bluez-config" = ''
+	#bluez_monitor.properties = {
+          #["bluez5.default.rate"] = 44100,
+          #["bluez5.enable-sbc-xq"] = true,
+          #["bluez5.enable-msbc"] = false,
+          #["bluez5.enable-hw-volume"] = true,
+          #["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
+	#}
+      #'';
+    };
   };
 
-  #environment.etc."wireplumber/bluetooth.lua.d/50-bluez-config.lua" = {
-    #text = ''
+
+  #environment.etc = {
+    #"wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
       #bluez_monitor.properties = {
+        #["bluez5.default.rate"] = 44100,
+        #["bluez5.enable-sbc-xq"] = true,
+        #["bluez5.enable-msbc"] = false,
+        #["bluez5.enable-hw-volume"] = true,
+        #["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
       #}
     #'';
   #};
-
-  environment.etc = {
-    "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
-      bluez_monitor.properties = {
-        ["bluez5.default.rate"] = 44100,
-        ["bluez5.enable-sbc-xq"] = true,
-        ["bluez5.enable-msbc"] = false,
-        ["bluez5.enable-hw-volume"] = true,
-        ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-      }
-    '';
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -229,7 +246,6 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.nvidia.acceptLicense = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -249,14 +265,19 @@ in
     #xfce.xfwm4
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
-    #lxqt.lxqt-globalkeys
-    #lxqt.lxqt-session
     lxqt.lxqt-runner
     playerctl
     qpwgraph
     pavucontrol
-    bumblebee
   ];
+
+  system.activationScripts.diff = {
+    supportsDryActivation = true;
+    text = ''
+      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff \
+           /run/current-system "$systemConfig"
+    '';
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

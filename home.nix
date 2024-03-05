@@ -27,6 +27,8 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    libreoffice
+    haskellPackages.cpuinfo
     opera
     google-chrome
     wezterm
@@ -39,6 +41,10 @@ in {
     powerstat
     powertop
     lm_sensors
+    nix-du
+    nix-tree
+    nix-index
+    graphviz
     tlp
     gh
     insync
@@ -53,6 +59,8 @@ in {
     zathura
     btop
     htop
+    lf
+    trashy
     neofetch
     du-dust
     fd
