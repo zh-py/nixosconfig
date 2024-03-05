@@ -28,7 +28,6 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
     libreoffice
-    haskellPackages.cpuinfo
     opera
     google-chrome
     wezterm
@@ -129,6 +128,7 @@ in {
 
     (python311.withPackages (p:
       with p; [
+        py-cpuinfo
         pip
         numpy
         sympy
