@@ -43,6 +43,8 @@ in {
     nix-du
     nix-tree
     nix-index
+    unzip
+    unar
     graphviz
     tlp
     gh
@@ -155,8 +157,9 @@ in {
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/mpv".source = dotfiles/mpv;
+    #".config/lf".source = dotfiles/lf-config;
+    ".config/lf/icons".source = dotfiles/lf-config/icons;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
-    ".config/lf/icons".source = dotfiles/icons;
     #".Xmodmap".source = dotfiles/.Xmodmap;
     #".xkb".source = dotfiles/.xkb;
   };
@@ -206,7 +209,7 @@ in {
     enable = true;
     settings = {
       number = true;
-      icons = true;
+      icons = false;
       hidden = true;
     };
     keybindings = {
@@ -218,6 +221,9 @@ in {
       md = "mkdir";
       i = "$less $f";
     };
+    extraConfig = ''
+      #!/bin/sh
+    '';
   };
 
   programs.git = {
