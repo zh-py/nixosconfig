@@ -1,0 +1,55 @@
+swipe:
+  4:
+    left:
+      command: 'xdotool key ctrl+alt+Right'
+      threshold: 0.5
+      interval: 0.75
+    right:
+      command: 'xdotool key ctrl+alt+Left'
+      threshold: 0.5
+      interval: 0.75
+  3:
+    begin:
+      command: xdotool mousedown 1
+    update:
+      command: xdotool mousemove_relative -- $move_x, $move_y
+      #threshold: 0.2
+      interval: 0.00001
+      accel: 3.5
+    end:
+      command: xdotool mouseup 1
+
+pinch:
+  4:
+    in:
+      command: 'xdotool key ctrl+alt+d'
+      threshold: 0.5
+    out:
+      command: 'xdotool key ctrl+alt+d'
+      threshold: 0.5
+  2:
+    out:
+      command: 'xdotool keydown ctrl click 4 keyup ctrl'
+      threshold: 0.02
+    in:
+      command: 'xdotool keydown ctrl click 5 keyup ctrl'
+      threshold: 0.02
+
+hold:
+  4:
+    command: 'xdotool key super' # Activity
+
+plugin:
+  inputs:
+    libinput_command_input: # options for lib/plugin/inputs/libinput_command_input
+      enable-tap: true #click to tap
+      enable-dwt: true #disable tap while typing
+      show-keycodes: true #https://github.com/iberianpig/fusuma-plugin-keypress#add-show-keycode-option
+
+#threshold:
+  #swipe: 1
+  #pinch: 1
+
+#interval:
+  #swipe: 1
+  #pinch: 1

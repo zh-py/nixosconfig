@@ -126,7 +126,6 @@ in
     # Load custom keyboard layout on boot/resume
     #displayManager.sessionCommands = "sleep 8 && ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && xmodmap /etc/nixos/dotfiles/.Xmodmap";
-    displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
     #displayManager.sessionCommands = "sleep 5 && xmodmap -e 'keycode 51 = Return'";
     #displayManager.sessionCommands = "sleep 5 && xkbcomp mylayout.xkb ${customKeyboardLayout} $DISPLAY";
     #displayManager.defaultSession = "cinnamon-wayland";
@@ -139,6 +138,18 @@ in
       #keycode 51 = Return
       #keycode 36 = backslash bar
   #''}"
+
+
+    libinput = {
+      enable = true;
+      touchpad.tapping = true;
+      touchpad.naturalScrolling = true;
+      touchpad.scrollMethod = "twofinger";
+      touchpad.disableWhileTyping = true;
+      touchpad.clickMethod = "clickfinger";
+      touchpad.tappingDragLock = true;
+    };
+    displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
   };
 
   #services.xserver.desktopManager.session =
@@ -227,8 +238,6 @@ in
     #'';
   #};
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   fonts.packages = with pkgs; [
     meslo-lgs-nf
@@ -266,7 +275,7 @@ in
   users.users.py = {
     isNormalUser = true;
     description = "py";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "input" "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
     ];
@@ -285,7 +294,10 @@ in
     wget
     gsimplecal
     #linuxKernel.packages.linux_6_7.perf
+    wmctrl
+    xdotool
     libinput-gestures
+    libinput
     #xorg.xmodmap
     xorg.xev
     xorg.setxkbmap

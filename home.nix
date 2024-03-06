@@ -27,6 +27,7 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    fusuma
     libreoffice
     opera
     google-chrome
@@ -122,10 +123,11 @@ in {
       ]))
   ];
 
-  #services.fusuma = {
-    #enable = true;
+
+  services.fusuma = {
+    enable = true;
     #extraPackages = with pkgs; [ xdotool ];
-    #settings = {
+    settings = {
       #threshold = { swipe = 0.1; };
       #interval = { swipe = 0.7; };
       #swipe = {
@@ -138,8 +140,11 @@ in {
           #};
         #};
       #};
+    };
+    #config = {
+      #xdg.configFile."fusuma/config.yml".source = /dotfiles/fusuma/config.yml;
     #};
-  #};
+  };
 
 
 
@@ -157,9 +162,10 @@ in {
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/mpv".source = dotfiles/mpv;
-    #".config/lf".source = dotfiles/lf-config;
     ".config/lf/icons".source = dotfiles/lf-config/icons;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
+    #".config/lf".source = dotfiles/lf-config;
+    ".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
     #".Xmodmap".source = dotfiles/.Xmodmap;
     #".xkb".source = dotfiles/.xkb;
   };
