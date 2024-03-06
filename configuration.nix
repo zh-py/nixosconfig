@@ -95,7 +95,7 @@ in
   # Configure keymap in X11 37
   services.xserver = {
     enable = true;
-    #displayManager.lightdm.enable = true;
+    displayManager.sddm.enable = true;
     #displayManager = {
       #lightdm = {
         #enable = true;
@@ -165,6 +165,7 @@ in
   ## Configure the console keymap from the xserver keyboard settings
   console.useXkbConfig = true;
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -310,6 +311,7 @@ in
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
     lxqt.lxqt-runner
+    nm-tray
     playerctl
     qpwgraph
     pavucontrol

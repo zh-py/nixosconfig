@@ -32,6 +32,8 @@ in {
     opera
     google-chrome
     wezterm
+    cava
+    mediainfo-gui
     deluge
     xsel
     galculator
@@ -103,6 +105,7 @@ in {
     (python311.withPackages (p:
       with p; [
         py-cpuinfo
+        extractcode
         pip
         numpy
         sympy
@@ -124,6 +127,7 @@ in {
   ];
 
 
+  #services.fusuma.enable = true;
   services.fusuma = {
     enable = true;
     #extraPackages = with pkgs; [ xdotool ];
@@ -141,9 +145,6 @@ in {
         #};
       #};
     };
-    #config = {
-      #xdg.configFile."fusuma/config.yml".source = /dotfiles/fusuma/config.yml;
-    #};
   };
 
 
@@ -166,6 +167,7 @@ in {
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
     #".config/lf".source = dotfiles/lf-config;
     ".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
+    ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
     #".Xmodmap".source = dotfiles/.Xmodmap;
     #".xkb".source = dotfiles/.xkb;
   };
@@ -223,12 +225,17 @@ in {
       gd = "cd ~/Downloads";
       gc = "cd ~/.config";
       gn = "cd /etc/nixos/";
-      dd = "trash";
+      DD = "trash";
       md = "mkdir";
       i = "$less $f";
+      oo = "extractcode";
+      sp = "usage";
     };
     extraConfig = ''
       #!/bin/sh
+      cmd trash $IFS="$(printf '\n\t')"; trash $fx
+      cmd extractcode $IFS="$(printf '\n\t')"; extractcode $fx
+      cmd usage $du -h -d1 | less
     '';
   };
 
@@ -285,7 +292,7 @@ in {
         file = ".p10k.zsh";
       }
     ];
-    #initExtra = builtins.readFile ./dotfiles/.zshrc;
+    initExtra = builtins.readFile ./dotfiles/.zshrc;
     #envExtra= builtins.readFile ./dotfiles/.zshenv;
     oh-my-zsh = {
       enable = true;
