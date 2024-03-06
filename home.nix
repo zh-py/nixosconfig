@@ -167,6 +167,7 @@ in {
     ".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
     ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
+    ".config/lf/lf.bash".source = dotfiles/lf-config/lf.bash;
     #".config/lf".source = dotfiles/lf-config;
     #".config/lf/icons".source = dotfiles/lf-config/icons;
     #".Xmodmap".source = dotfiles/.Xmodmap;
@@ -231,12 +232,17 @@ in {
       i = "$less $f";
       oo = "extractcode";
       sp = "usage";
+      Q = "quit-and-cd";
     };
     extraConfig = ''
       #!/bin/sh
       cmd trash $IFS="$(printf '\n\t')"; trash $fx
       cmd extractcode $IFS="$(printf '\n\t')"; extractcode $fx
       cmd usage $du -h -d1 | less
+      cmd quit-and-cd &{{
+        pwd > $LF_CD_FILE
+        lf -remote "send $id quit"
+      }}
     '';
   };
 

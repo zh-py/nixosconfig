@@ -4,3 +4,5 @@ if [ -f "$LFCD" ]; then
 fi
 
 bindkey -s '^o' 'lfcd\n'  # zsh
+
+source $HOME/.config/lf/lf.bash
