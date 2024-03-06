@@ -1,11 +1,6 @@
+LFCD="$HOME/.config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+ source "$LFCD"
+fi
 
-#cmd unarchive ${{
-  #case "$f" in
-      #*.zip) unzip "$f" ;;
-      #*.rar) unar "$f" ;;
-      #*.tar.gz) tar -xzvf "$f" ;;
-      #*.tar.bz2) tar -xjvf "$f" ;;
-      #*.tar) tar -xvf "$f" ;;
-      #*) echo "Unsupported format" ;;
-  #esac
-#}}
+bindkey -s '^o' 'lfcd\n'  # zsh

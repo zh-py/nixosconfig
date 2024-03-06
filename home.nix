@@ -163,11 +163,12 @@ in {
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/mpv".source = dotfiles/mpv;
-    ".config/lf/icons".source = dotfiles/lf-config/icons;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
-    #".config/lf".source = dotfiles/lf-config;
     ".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
     ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
+    ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
+    #".config/lf".source = dotfiles/lf-config;
+    #".config/lf/icons".source = dotfiles/lf-config/icons;
     #".Xmodmap".source = dotfiles/.Xmodmap;
     #".xkb".source = dotfiles/.xkb;
   };
@@ -217,8 +218,8 @@ in {
     enable = true;
     settings = {
       number = true;
-      icons = false;
       hidden = true;
+      icons = false;
     };
     keybindings = {
       gh = "cd ~";
