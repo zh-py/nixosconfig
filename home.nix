@@ -28,7 +28,8 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
     fusuma
-    libreoffice
+    libreoffice-qt
+    hunspell
     opera
     google-chrome
     wezterm
@@ -65,6 +66,7 @@ in {
     htop
     trashy
     neofetch
+    fastfetch
     du-dust
     fd
     ripgrep
