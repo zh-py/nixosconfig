@@ -221,6 +221,7 @@ in {
     enable = true;
     settings = {
       number = true;
+      relativenumber = true;
       hidden = true;
       icons = false;
     };
