@@ -303,6 +303,7 @@ in
     xorg.xev
     xorg.setxkbmap
     xorg.xkbcomp
+    #xkeysnail
     #xfce.xfce4-dict
     #xfce.xfce4-panel
     #xfce.xfce4-appfinder
