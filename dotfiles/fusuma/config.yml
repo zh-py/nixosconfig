@@ -8,6 +8,9 @@ swipe:
       command: 'xdotool key ctrl+alt+Left'
       threshold: 0.5
       interval: 0.75
+    up:
+      command: 'xdotool key ctrl+alt+m'
+      threshold: 0.2
   3:
     begin:
       command: xdotool mousedown 1

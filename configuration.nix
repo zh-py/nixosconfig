@@ -296,6 +296,7 @@ in
     gsimplecal
     #linuxKernel.packages.linux_6_7.perf
     wmctrl
+    xorg.xprop
     xdotool
     libinput-gestures
     libinput
