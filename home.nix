@@ -239,6 +239,7 @@ in {
     };
     extraConfig = ''
       #!/bin/sh
+      #https://github.com/gokcehan/lf/wiki/Tips
       cmd trash $IFS="$(printf '\n\t')"; trash $fx
       cmd extractcode $IFS="$(printf '\n\t')"; extractcode $fx
       cmd usage $du -h -d1 | less
@@ -246,6 +247,12 @@ in {
         pwd > $LF_CD_FILE
         lf -remote "send $id quit"
       }}
+      #cmd open &{{
+        #case $(file --mime-type -Lb $f) in
+          #text/*) lf -remote "send $id \$$EDITOR \$fx";;
+          #*) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+        #esac
+      #}}
     '';
   };
 
@@ -355,22 +362,38 @@ in {
       lua vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])
       lua vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]])
       lua vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])
-      autocmd Filetype python map <silent> <F5> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
-      autocmd Filetype python map! <silent> <F5> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
+      autocmd Filetype python map <silent> <A-r> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
+      autocmd Filetype python map! <silent> <A-r> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
       autocmd FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
       autocmd FileType python map <silent> <leader>B obreakpoint()<esc>
-      autocmd Filetype tex,latex map <F5> :w <Enter> <localleader>lk<localleader>ll
-      autocmd Filetype tex,latex map! <F5> <ESC> :w <Enter> <localleader>lk<localleader>ll
-      autocmd Filetype tex,latex map <F4> <localleader>le
-      autocmd Filetype tex,latex map! <F4> <ESC> <localleader>le
+      autocmd Filetype tex,latex map <A-r> :w <Enter> <localleader>lk<localleader>ll
+      autocmd Filetype tex,latex map! <A-r> <ESC> :w <Enter> <localleader>lk<localleader>ll
+      autocmd Filetype tex,latex map <A-e> <localleader>le
+      autocmd Filetype tex,latex map! <A-e> <ESC> <localleader>le
       autocmd Filetype tex,latex set shiftwidth=4
-      autocmd Filetype markdown map <silent> <F5> :w<CR>:MarkdownPreview<CR>
-      autocmd Filetype markdown map! <silent> <F5> <ESC> :w<CR>:MarkdownPreview<CR>
+      autocmd Filetype markdown map <silent> <A-r> :w<CR>:MarkdownPreview<CR>
+      autocmd Filetype markdown map! <silent> <A-r> <ESC> :w<CR>:MarkdownPreview<CR>
       map [b :bprevious<CR>
       map ]b :bnext<CR>
       map qb :Bdelete<CR>
       lua vim.keymap.set("n", "H", [[<cmd>bprevious<cr>]])
       lua vim.keymap.set("n", "L", [[<cmd>bnext<cr>]])
+      if has("autocmd")
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+      endif
+      autocmd FileType css setlocal tabstop=2 shiftwidth=2
+      autocmd FileType haskell setlocal tabstop=2 shiftwidth=2
+      autocmd FileType nix setlocal tabstop=2 shiftwidth=2
+      autocmd FileType json setlocal tabstop=2 shiftwidth=2
+      autocmd FileType cpp setlocal tabstop=2 shiftwidth=2
+      autocmd FileType c setlocal tabstop=2 shiftwidth=2
+      autocmd FileType java setlocal tabstop=4 shiftwidth=4
+      autocmd FileType markdown setlocal spell
+      autocmd FileType markdown setlocal tabstop=2 shiftwidth=2
+      au BufRead,BufNewFile *.wiki setlocal textwidth=80 spell tabstop=2 shiftwidth=2
+      autocmd FileType xml setlocal tabstop=2 shiftwidth=2
+      autocmd FileType help wincmd L
+      autocmd FileType gitcommit setlocal spell
     '';
       #let g:airline#extensions#tabline#enabled = 1
       #let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
@@ -615,7 +638,7 @@ in {
         startup_mode = "Maximized";
       };
       font = {
-        size = 13;
+        size = 14;
         #normal.family = "JetbrainsMono Nerd Font";
         #bold.family = "JetbrainsMono Nerd Font";
         #italic.family = "JetbrainsMono Nerd Font";
