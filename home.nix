@@ -62,6 +62,7 @@ in {
     okular
     qpdfview
     zathura
+    telegram-desktop
     btop
     htop
     trashy
