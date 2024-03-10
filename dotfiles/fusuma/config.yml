@@ -1,11 +1,11 @@
 swipe:
   4:
     left:
-      command: 'xdotool key ctrl+alt+Right'
+      command: 'xdotool key ctrl+Right'
       threshold: 0.5
       interval: 0.75
     right:
-      command: 'xdotool key ctrl+alt+Left'
+      command: 'xdotool key ctrl+Left'
       threshold: 0.5
       interval: 0.75
     up:
