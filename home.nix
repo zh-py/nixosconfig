@@ -31,6 +31,7 @@ in {
     libreoffice-qt
     hunspell
     opera
+    qutebrowser
     google-chrome
     wezterm
     cava
@@ -365,15 +366,23 @@ in {
       lua vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])
       autocmd Filetype python map <silent> <A-r> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
       autocmd Filetype python map! <silent> <A-r> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
+      autocmd Filetype python map <silent> <F5> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
+      autocmd Filetype python map! <silent> <F5> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
       autocmd FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
       autocmd FileType python map <silent> <leader>B obreakpoint()<esc>
       autocmd Filetype tex,latex map <A-r> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map! <A-r> <ESC> :w <Enter> <localleader>lk<localleader>ll
+      autocmd Filetype tex,latex map <F5> :w <Enter> <localleader>lk<localleader>ll
+      autocmd Filetype tex,latex map! <F5> <ESC> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map <A-e> <localleader>le
       autocmd Filetype tex,latex map! <A-e> <ESC> <localleader>le
+      autocmd Filetype tex,latex map <F4> <localleader>le
+      autocmd Filetype tex,latex map! <F4> <ESC> <localleader>le
       autocmd Filetype tex,latex set shiftwidth=4
       autocmd Filetype markdown map <silent> <A-r> :w<CR>:MarkdownPreview<CR>
       autocmd Filetype markdown map! <silent> <A-r> <ESC> :w<CR>:MarkdownPreview<CR>
+      autocmd Filetype markdown map <silent> <F5> :w<CR>:MarkdownPreview<CR>
+      autocmd Filetype markdown map! <silent> <F5> <ESC> :w<CR>:MarkdownPreview<CR>
       map [b :bprevious<CR>
       map ]b :bnext<CR>
       map qb :Bdelete<CR>
