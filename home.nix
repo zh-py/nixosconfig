@@ -30,8 +30,6 @@ in {
     fusuma
     libreoffice-qt
     hunspell
-    opera
-    qutebrowser
     google-chrome
     wezterm
     cava
