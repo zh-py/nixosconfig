@@ -89,6 +89,9 @@ in {
     tree-sitter
     tree-sitter-grammars.tree-sitter-python
     texlab
+    spotify
+    librespot
+    spotube
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
