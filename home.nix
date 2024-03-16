@@ -27,6 +27,7 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    sageWithDoc
     fusuma
     libreoffice-qt
     hunspell
@@ -291,8 +292,32 @@ in {
     enable = true;
   };
 
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    baseIndex = 1;
+    historyLimit = 100000;
+    #newSession = true;
+    #escapeTime = 0;
+    plugins = with pkgs; [
+      tmuxPlugins.better-mouse-mode
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = '' 
+          set -g @catppuccin_flavour 'frappe'
+          set -g @catppuccin_window_tabs_enabled on
+          set -g @catppuccin_date_time "%H:%M"
+        '';
+      }
+    ];
+    extraConfig = ''
+      set-option -g mouse on
+    '';
+  };
+
   programs.zsh = {
     enable = true;
+    #autosuggestion.enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
     shellAliases = {
@@ -430,6 +455,7 @@ in {
       nerdcommenter
       markdown-preview-nvim
       vim-bbye
+      tmux-nvim
       #{
         #plugin = zk-nvim;
         #type = "lua";
