@@ -347,6 +347,7 @@ in {
       set nu rnu
       let &scrolloff = 5
       nn <F7> :setlocal spell! spell?<CR>
+      nn <A-s> :setlocal spell! spell?<CR>
       autocmd Filetype lua setlocal tabstop=4
       autocmd Filetype lua setlocal shiftwidth=4
       cnoremap <C-a> <Home>
