@@ -50,7 +50,6 @@ in {
     unzip
     unar
     graphviz
-    tlp
     gh
     insync
     maestral

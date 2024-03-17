@@ -172,7 +172,29 @@ in
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  hardware.system76.power-daemon.enable = true;
+
   services.blueman.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0="60";
+      STOP_CHARGE_THRESH_BAT0="80";
+    };
+  };
+
+  services.mbpfan = {
+    enable = true;
+    settings = {
+      general = {
+        low_temp = 67;
+        high_temp = 77;
+        max_temp = 85;
+        polling_interval = 7;
+      };
+    };
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -300,6 +322,9 @@ in
     xdotool
     libinput-gestures
     libinput
+    inxi
+    linuxKernel.packages.linux_6_8.system76-power
+    #coreboot-utils #ectool
     #xorg.xmodmap
     xorg.xev
     xorg.setxkbmap
