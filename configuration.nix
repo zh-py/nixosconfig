@@ -292,6 +292,16 @@ in
     terminus_font
     terminus_font_ttf
     roboto
+    dina-font
+    unscii
+    tamzen
+    envypn-font
+    efont-unicode
+    spleen
+    ucs-fonts
+    google-fonts
+    corefonts
+    wineWowPackages.fonts
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -342,6 +352,9 @@ in
     playerctl
     qpwgraph
     pavucontrol
+    font-manager
+    #fontmatrix
+    fontpreview
   ];
 
   system.activationScripts.diff = {
