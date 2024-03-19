@@ -37,6 +37,12 @@ in
       ./hardware-configuration.nix
     ];
   
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

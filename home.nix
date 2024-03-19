@@ -132,23 +132,63 @@ in {
   ];
 
 
-  #services.fusuma.enable = true;
   services.fusuma = {
     enable = true;
-    #extraPackages = with pkgs; [ xdotool ];
+    extraPackages = with pkgs; [ xdotool ];
     settings = {
-      #threshold = { swipe = 0.1; };
-      #interval = { swipe = 0.7; };
-      #swipe = {
+      threshold = { swipe = 0.1; };
+      interval = { swipe = 0.7; };
+      swipe = {
+        "4" = {
+          left = {
+            command = "xdotool key ctrl+Right";
+            threshold = 0.5;
+            interval = 0.75;
+          };
+          right = {
+            command = "xdotool key ctrl+Left";
+            threshold = 0.5;
+            interval = 0.75;
+          };
+          up = {
+            command = "xdotool key ctrl+alt+m";
+            threshold = 0.2;
+          };
+        };
+        "3" = {
+          begin = {
+            command = "xdotool mousedown 1";
+          };
+          update = {
+            command = "xdotool mousemove_relative -- $move_x, $move_y";
+            interval = 0.01;
+            accel = 4;
+          };
+          end = {
+            command = "xdotool mouseup 1";
+          };
+        };
+      };
+      pinch = {
         #"4" = {
-          #left = {
-            #command = "xdotool key ctrl+alt+Left";
+          #in = {
+            #command = "xdotool key ctrl+alt+d";
+            #threshold = 0.5;
           #};
-          #right = {
-            #command = "xdotool key ctrl+alt+Right";
+          #out = {
+            #command = "xdotool key ctrl+alt+d";
+            #threshold = 0.5;
           #};
         #};
-      #};
+        #"2" = {
+          #in = {
+            #command = "xdotool keydown ctrl click 5 keyup ctrl";
+          #};
+          #out = {
+            #command = "xdotool keydown ctrl click 4 keyup ctrl";
+          #};
+        #};
+      };
     };
   };
 
@@ -169,7 +209,7 @@ in {
     # '';
     ".config/mpv".source = dotfiles/mpv;
     ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
-    ".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
+    #".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
     ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
     ".config/lf/lf.bash".source = dotfiles/lf-config/lf.bash;
@@ -316,8 +356,7 @@ in {
 
   programs.zsh = {
     enable = true;
-    #autosuggestion.enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     shellAliases = {
       ll = "ls -l";
