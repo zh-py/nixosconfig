@@ -14,12 +14,12 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7b6f30de-daf5-4f60-aaaf-de6df39f87ea";
+    { device = "/dev/disk/by-uuid/01419ed8-eba9-4873-a037-295cbe5c34fb";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/67E3-17ED";
+    { device = "/dev/disk/by-uuid/1AF2-1AFB";
       fsType = "vfat";
     };
 
