@@ -313,6 +313,15 @@
       </action>
     </keybind>
     <!-- Keybindings for Play/Pause -->
+		<keybind key="XF86AudioLowerVolume">
+      <action name="Execute"><execute>pamixer --decrease 2</execute></action>
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute"><execute>pamixer --increase 2</execute></action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute"><execute>pamixer --toggle-mute</execute></action>
+    </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
         <command>playerctl play-pause</command>

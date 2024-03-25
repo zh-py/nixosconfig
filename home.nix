@@ -136,6 +136,10 @@ in {
   services.fusuma = {
     enable = true;
     extraPackages = with pkgs; [ xdotool ];
+    #settings = ''
+      #${builtins.readFile ./dotfiles/fusuma/settingconfig.yml}
+    #'';
+    #settings = builtins.readFile ./dotfiles/fusuma/config.yml;
     settings = {
       threshold = { swipe = 0.1; };
       interval = { swipe = 0.7; };
@@ -162,8 +166,8 @@ in {
           };
           update = {
             command = "xdotool mousemove_relative -- $move_x, $move_y";
-            interval = 0.01;
             accel = 4;
+            interval = 0.01;
           };
           end = {
             command = "xdotool mouseup 1";
@@ -171,24 +175,26 @@ in {
         };
       };
       pinch = {
-        #"4" = {
-          #in = {
-            #command = "xdotool key ctrl+alt+d";
-            #threshold = 0.5;
-          #};
-          #out = {
-            #command = "xdotool key ctrl+alt+d";
-            #threshold = 0.5;
-          #};
-        #};
-        #"2" = {
-          #in = {
-            #command = "xdotool keydown ctrl click 5 keyup ctrl";
-          #};
-          #out = {
-            #command = "xdotool keydown ctrl click 4 keyup ctrl";
-          #};
-        #};
+        "4" = {
+          "in" = {
+            command = "xdotool key ctrl+alt+d";
+            threshold = 0.5;
+          };
+          out = {
+            command = "xdotool key ctrl+alt+d";
+            threshold = 0.5;
+          };
+        };
+        "2" = {
+          "in" = {
+            command = "xdotool keydown ctrl click 5 keyup ctrl";
+            threshold = 0.02;
+          };
+          out = {
+            command = "xdotool keydown ctrl click 4 keyup ctrl";
+            threshold = 0.02;
+          };
+        };
       };
     };
   };
@@ -260,6 +266,11 @@ in {
       #ytdl-format="bestvideo[height<=?480][fps<=?30][vcodec!=?webm]+bestaudio/best";
       #cache-default = 4000000;
     #};
+  #};
+
+  #programs.tint2 = {
+    #enable = true;
+    #extraConfig = builtins.readFile ./dotfiles/tint2rc;
   #};
 
   programs.lf = {
