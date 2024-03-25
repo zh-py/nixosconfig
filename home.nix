@@ -27,6 +27,7 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    advcpmv #copy with bar
     sageWithDoc
     fusuma
     libreoffice-qt
