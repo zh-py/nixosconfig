@@ -232,7 +232,7 @@ in
     wireplumber = {
       enable = true;
       configPackages = [
-	(pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
+        (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
           bluez_monitor.properties = {
             ["bluez5.default.rate"] = 44100,
             ["bluez5.enable-sbc-xq"] = true,
@@ -240,16 +240,16 @@ in
             ["bluez5.enable-hw-volume"] = true,
             ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
           }
-	'')
+        '')
       ];
       #extraLuaConfig.bluetooth."52-bluez-config" = ''
-	#bluez_monitor.properties = {
+        #bluez_monitor.properties = {
           #["bluez5.default.rate"] = 44100,
           #["bluez5.enable-sbc-xq"] = true,
           #["bluez5.enable-msbc"] = false,
           #["bluez5.enable-hw-volume"] = true,
           #["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-	#}
+        #}
       #'';
     };
   };
@@ -347,7 +347,7 @@ in
     xorg.xkbcomp
     #xkeysnail
     #xfce.xfce4-dict
-    #xfce.xfce4-panel
+    xfce.xfce4-panel
     #xfce.xfce4-appfinder
     #xfce.xfce4-settings
     #xfce.xfwm4

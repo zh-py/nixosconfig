@@ -214,6 +214,7 @@ in {
     ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
     ".config/lf/lf.bash".source = dotfiles/lf-config/lf.bash;
+    ".config/openbox/rc.xml".source = dotfiles/openbox/rc.xml;
     #".config/lf".source = dotfiles/lf-config;
     #".config/lf/icons".source = dotfiles/lf-config/icons;
     #".Xmodmap".source = dotfiles/.Xmodmap;
