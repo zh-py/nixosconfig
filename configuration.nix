@@ -347,7 +347,7 @@ in
     xorg.xkbcomp
     #xkeysnail
     #xfce.xfce4-dict
-    xfce.xfce4-panel
+    #xfce.xfce4-panel
     #xfce.xfce4-appfinder
     #xfce.xfce4-settings
     #xfce.xfwm4
