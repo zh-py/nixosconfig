@@ -28,6 +28,7 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
     advcpmv #copy with progress bar, xcp being other option
+    calcurse
     sageWithDoc
     fusuma
     libreoffice-qt
