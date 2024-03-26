@@ -333,7 +333,8 @@ in
     playerctl
     qpwgraph
     #pavucontrol
-    pamixer
+    #pamixer
+    #pw-volume
     font-manager
     #fontmatrix
     fontpreview

@@ -27,7 +27,7 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
-    advcpmv #copy with bar
+    advcpmv #copy with progress bar, xcp being other option
     sageWithDoc
     fusuma
     libreoffice-qt
@@ -194,6 +194,15 @@ in {
           out = {
             command = "xdotool keydown ctrl click 4 keyup ctrl";
             threshold = 0.02;
+          };
+        };
+      };
+      plugin = {
+        inputs = {
+          libinput_command_input = {
+            enable-tap = true;
+            enable-dwt = true;
+            show-keycodes = true;
           };
         };
       };
