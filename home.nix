@@ -25,8 +25,10 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    #appimage-run
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
+    gparted
     advcpmv #copy with progress bar, xcp being other option
     calcurse
     sageWithDoc
@@ -711,11 +713,11 @@ in {
         '';
       }
       nvim-dap
-      {
-        plugin = nvim-dap-python;
-        type = "lua";
-        config = builtins.readFile(./neovim/debuggerpy.lua);
-      }
+      #{
+        #plugin = nvim-dap-python;
+        #type = "lua";
+        #config = builtins.readFile(./neovim/debuggerpy.lua);
+      #}
       telescope-dap-nvim
       nvim-dap-ui
       neodev-nvim

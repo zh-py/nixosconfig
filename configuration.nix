@@ -320,6 +320,7 @@ in
     xorg.xev
     xorg.setxkbmap
     xorg.xkbcomp
+    #xorg.xhost # for gparted
     #xkeysnail
     #xfce.xfce4-dict
     xfce.xfce4-panel
