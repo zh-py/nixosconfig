@@ -7,11 +7,18 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nur, ... }: {
     nixosConfigurations = {
       py = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          nur.nixosModules.nur
+          # This adds a nur configuration option.
+          # Use `config.nur` for packages like this:
+          # ({ config, ... }: {
+          #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
+          # })
+
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
