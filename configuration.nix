@@ -232,10 +232,10 @@ in
       enable = true;
       configPackages = [
         (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/bluez.conf" ''
-            monitor.bluez.properties = {
-              bluez5.default.rate = 44100
-              bluez5.enable-sbc-xq = true
-              bluez5.enable-hw-volume = true
+          monitor.bluez.properties = {
+            bluez5.default.rate = 44100
+            bluez5.enable-sbc-xq = true
+            bluez5.enable-hw-volume = true
             }
         '')
       ];
