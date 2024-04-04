@@ -9,21 +9,23 @@
   #'';
 #in
 let
- customKeyboardLayout = pkgs.writeText "custom-keyboard-layout" ''
+  customKeyboardLayout = pkgs.writeText "custom-keyboard-layout" ''
     xkb_keymap {
-	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
-	xkb_types     { include "complete"	};
-	xkb_compat    { include "complete"	};
+      xkb_keycodes  { include "evdev+aliases(qwerty)"	};
+      xkb_types     { include "complete"	};
+      xkb_compat    { include "complete"	};
         partial
         xkb_symbols "swap" {
             include "pc+us+inet(evdev)+altwin(ctrl_win)"
             replace key <RTRN> { [ backslash, bar ] };
             replace key <BKSL> { [ Return, Return ] };
             replace key <LSGT> { [ Shift_L, Super_L ] };
-        };
-    };
+          };
+      };
   '';
+
   # Help catch errors in the custom keyboard layout at build time
+
   compiledKeyboardLayout = pkgs.runCommand "compiled-keyboard-layout" {} ''
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $out
   '';
@@ -75,6 +77,22 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  #i18n = {
+    #inputMethod = {
+      #enabled = "fcitx5";
+      #fcitx5.addons = with pkgs; [
+        #fcitx5-mozc
+        #fcitx5-chinese-addons
+        #fcitx5-gtk
+      #];
+    #};
+  #};
+
+  #i18n.inputMethod = {
+    #enabled = "ibus";
+    #ibus.engines = with pkgs.ibus-engines; [libpinyin];
+  #};
 
   #options = {
   #+    services.xserver.windowManager.fvwm3 = {

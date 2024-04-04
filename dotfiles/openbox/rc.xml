@@ -182,9 +182,9 @@
     <keybind key="C-A-BackSpace">
       <action name="ToggleMaximize"/>
     </keybind>
-    <keybind key="C-k">
-      <action name="ToggleMaximize"/>
-    </keybind>
+    <!--<keybind key="C-k">-->
+      <!--<action name="ToggleMaximize"/>-->
+    <!--</keybind>-->
     <keybind key="C-j">
       <action name="Iconify"/>
     </keybind>

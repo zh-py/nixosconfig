@@ -93,6 +93,7 @@ in {
     tree-sitter
     tree-sitter-grammars.tree-sitter-python
     texlab
+    obsidian
     spotify
     librespot
     spotube
