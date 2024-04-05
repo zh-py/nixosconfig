@@ -29,7 +29,7 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     tex
     gparted
-    advcpmv #copy with progress bar, xcp being other option
+    xcp
     calcurse
     sageWithDoc
     fusuma
@@ -95,7 +95,7 @@ in {
     texlab
     obsidian
     spotify
-    librespot
+    #librespot
     spotube
     vlc
 
