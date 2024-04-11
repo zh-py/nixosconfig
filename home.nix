@@ -27,6 +27,8 @@ in {
   home.packages = with pkgs; [
     #appimage-run
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
+    eza
+    tldr
     tex
     gparted
     xcp
@@ -98,6 +100,7 @@ in {
     #librespot
     spotube
     vlc
+    superTux
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
