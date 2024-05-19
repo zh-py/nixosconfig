@@ -28,12 +28,14 @@ in {
     #appimage-run
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     eza
+    lsof
     tldr
+    bandwhich
     tex
+    sage
     gparted
     xcp
     calcurse
-    sageWithDoc
     fusuma
     libreoffice-qt
     hunspell
@@ -100,7 +102,9 @@ in {
     #librespot
     spotube
     vlc
-    superTux
+    photoprism
+    docker
+    conda
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -116,7 +120,7 @@ in {
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    (python311.withPackages (p:
+    (python312.withPackages (p:
       with p; [
         py-cpuinfo
         extractcode
@@ -137,6 +141,7 @@ in {
         pynvim
         send2trash
         openpyxl
+        pytest
       ]))
   ];
 
@@ -465,6 +470,7 @@ in {
       autocmd Filetype python map! <silent> <F5> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
       autocmd FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
       autocmd FileType python map <silent> <leader>B obreakpoint()<esc>
+      let g:vimtex_compiler_engine = 'lualatex'
       autocmd Filetype tex,latex map <A-r> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map! <A-r> <ESC> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map <F5> :w <Enter> <localleader>lk<localleader>ll

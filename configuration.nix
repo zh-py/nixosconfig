@@ -116,10 +116,14 @@ in
   #services.xserver.windowManager.fvwm3.enable = true;
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
+  # Enable automatic login for the user.
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "py";
+  services.displayManager.sddm.enable = true;
+
   # Configure keymap in X11 37
   services.xserver = {
     enable = true;
-    displayManager.sddm.enable = true;
     #displayManager = {
       #lightdm = {
         #enable = true;
@@ -163,17 +167,17 @@ in
       #keycode 36 = backslash bar
   #''}"
 
-
-    libinput = {
-      enable = true;
-      touchpad.tapping = true;
-      touchpad.naturalScrolling = true;
-      touchpad.scrollMethod = "twofinger";
-      touchpad.disableWhileTyping = true;
-      touchpad.clickMethod = "clickfinger";
-      touchpad.tappingDragLock = true;
-    };
     displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
+  };
+
+  services.libinput = {
+    enable = true;
+    touchpad.tapping = true;
+    touchpad.naturalScrolling = true;
+    touchpad.scrollMethod = "twofinger";
+    touchpad.disableWhileTyping = true;
+    touchpad.clickMethod = "clickfinger";
+    touchpad.tappingDragLock = true;
   };
 
   #services.xserver.desktopManager.session =
@@ -183,7 +187,7 @@ in
         #'';
       #}
     #];
-
+  
 
 
   ## Configure the console keymap from the xserver keyboard settings
@@ -313,9 +317,6 @@ in
     ];
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "py";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
