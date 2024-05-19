@@ -470,7 +470,6 @@ in {
       autocmd Filetype python map! <silent> <F5> <ESC> :w<CR>:terminal python3 % -m pdb<CR>:startinsert<CR>
       autocmd FileType python map <silent> <leader>b oimport ipdb; ipdb.set_trace()<esc>
       autocmd FileType python map <silent> <leader>B obreakpoint()<esc>
-      let g:vimtex_compiler_engine = 'lualatex'
       autocmd Filetype tex,latex map <A-r> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map! <A-r> <ESC> :w <Enter> <localleader>lk<localleader>ll
       autocmd Filetype tex,latex map <F5> :w <Enter> <localleader>lk<localleader>ll
