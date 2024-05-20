@@ -49,6 +49,9 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  #boot.extraModprobeConfig = ''
+    #options hid_apple fnmode=1
+  #'';
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -223,6 +226,7 @@ in
       };
     };
   };
+
 
   # Enable sound with pipewire.
   sound.enable = true;

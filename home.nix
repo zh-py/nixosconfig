@@ -27,8 +27,11 @@ in {
   home.packages = with pkgs; [
     #appimage-run
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
+    mc
     xxdiff
     krename
+    libsForQt5.kio-extras
+    libsForQt5.konsole
     krusader
     eza
     lsof
