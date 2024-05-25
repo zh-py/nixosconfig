@@ -55,6 +55,11 @@ in {
     speedcrunch
     qalculate-gtk
     nomacs
+    gpicview
+    gImageReader
+    viewnior
+    libheif
+    gimp
     powerstat
     powertop
     lm_sensors
