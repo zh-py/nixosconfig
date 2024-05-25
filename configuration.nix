@@ -399,11 +399,11 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
-
+  services.openssh.enable = true;
+  networking.nftables.enable = true;
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 2283 ];
+  networking.firewall.allowedUDPPorts = [ 2283 ]; # 2283:immich
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
