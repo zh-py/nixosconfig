@@ -60,6 +60,7 @@ in {
     viewnior
     libheif
     gimp
+    imagemagick
     powerstat
     powertop
     lm_sensors
