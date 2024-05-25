@@ -109,7 +109,6 @@ in {
     spotube
     vlc
     photoprism
-    docker
     conda
 
  

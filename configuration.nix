@@ -54,13 +54,13 @@ in
   #'';
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
+  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -311,11 +311,20 @@ in
     wineWowPackages.fonts
   ];
 
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.py = {
     isNormalUser = true;
     description = "py";
-    extraGroups = [ "input" "networkmanager" "wheel" ];
+    extraGroups = [ "input" "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
     ];
