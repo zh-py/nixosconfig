@@ -39,6 +39,7 @@ in {
     bandwhich
     tex
     sage
+    exfatprogs
     gparted
     xcp
     calcurse
