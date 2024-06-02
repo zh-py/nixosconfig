@@ -201,6 +201,11 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
+
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.system76.power-daemon.enable = true;
@@ -344,6 +349,8 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #nur.repos.wolfangaukang.vdhcoapp
+    libimobiledevice
+    ifuse
     wget
     gsimplecal
     #linuxKernel.packages.linux_6_7.perf
