@@ -117,6 +117,17 @@ in {
     vlc
     photoprism
     conda
+    zotero_7
+    netcdf
+    netcdffortran
+    mpich
+    jasper
+    libpng
+    zlib
+    gfortran
+    libgcc
+    tcsh
+    whatsapp-for-linux
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
