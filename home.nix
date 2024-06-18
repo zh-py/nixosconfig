@@ -115,7 +115,6 @@ in {
     #librespot
     spotube
     vlc
-    photoprism
     conda
     zotero_7
     netcdf
