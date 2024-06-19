@@ -543,6 +543,7 @@ in {
       #let g:airline_symbols.maxlinenr = '☰ '
       #let g:airline_symbols.dirty='⚡'
     plugins = with pkgs.vimPlugins; [
+      copilot-vim
       vim-visual-multi
       gruvbox
       trouble-nvim
