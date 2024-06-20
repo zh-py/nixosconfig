@@ -127,6 +127,7 @@ in {
     libgcc
     tcsh
     whatsapp-for-linux
+    bluetooth_battery
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -164,6 +165,7 @@ in {
         send2trash
         openpyxl
         pytest
+        torch
       ]))
   ];
 
