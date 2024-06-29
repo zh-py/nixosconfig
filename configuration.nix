@@ -176,8 +176,16 @@ in
 
 
   services.xremap = {
-    #withX11 = true;
-    config = {
+    #yamlConfig = ''
+      #keymap:
+        #- name: Google
+          #application:
+            #only: Google-chrome
+          #remap:
+            #Super-1: C-1
+            #Super-2: C-2
+    #'';
+    config = { #82lines
       modmap = [
         {
           name = "Global";
@@ -207,6 +215,26 @@ in
             "Super-r" = "C-r";
             "Super-Equal" = "C-Equal";
             "Super-Minus" = "C-Minus";
+            "Super-0" = ["C-0" "M-0"];
+            "Super-1" = ["C-1" "M-1"];
+            "Super-2" = ["C-2" "M-2"];
+            "Super-3" = ["C-3" "M-3"];
+            "Super-4" = ["C-4" "M-4"];
+            "Super-5" = ["C-5" "M-5"];
+            "Super-6" = ["C-6" "M-6"];
+            "Super-7" = ["C-7" "M-7"];
+            "Super-8" = ["C-8" "M-8"];
+            "Super-9" = ["C-9" "M-9"];
+            #"Super-1" = "M-1";
+            #"Super-2" = "M-2";
+            #"Super-3" = "M-3";
+            #"Super-4" = "M-4";
+            #"Super-5" = "M-5";
+            #"Super-6" = "M-6";
+            #"Super-7" = "M-7";
+            #"Super-8" = "M-8";
+            #"Super-9" = "M-9";
+            "Super-BTN_LEFT" = "C-BTN_LEFT";
           };
         }
         {
