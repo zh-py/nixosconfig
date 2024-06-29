@@ -32,7 +32,7 @@ return {
 	color_schemes = { ['My Framer'] = my_framer, },
 	color_scheme = 'My Framer',
 	keys = {
-		--{ key = 't', mods = 'CMD|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
-		{ key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain', },
+		{ key = 't', mods = 'CMD|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
+		--{ key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain', },
 	}
 }
