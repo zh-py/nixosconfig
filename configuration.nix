@@ -193,11 +193,14 @@ in
           remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
           #remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
         }
-        #{
-          #name = "Chrome";
-          #remap = { "Super_R" = "Ctrl_R"; };
+        {
+          name = "Chrome";
+          remap = { "Super_L" = "Ctrl_L"; };
+          application = {
+            "only" = "Google-chrome";
+          };
           #application.only = [ "Google-chrome" ];
-        #}
+        }
       ];
 
       keymap = [
