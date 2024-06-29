@@ -170,8 +170,114 @@ in
       #keycode 36 = backslash bar
   #''}"
 
-    displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
+    #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
+    displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
   };
+
+
+  services.xremap = {
+    #withX11 = true;
+    config = {
+      modmap = [
+        {
+          name = "Global";
+          remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+          remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+          #remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
+        }
+        #{
+          #name = "Chrome";
+          #remap = { "Super_R" = "Ctrl_R"; };
+          #application.only = [ "Google-chrome" ];
+        #}
+      ];
+
+      keymap = [
+        {
+          name = "Global";
+          remap = {
+            "Super-Shift-T" = "C-Shift-T";
+            "Super-w" = "C-w";
+            "Super-q" = "C-q";
+            "Super-f" = "C-f";
+            "Super-t" = "C-t";
+            "Super-c" = "C-c";
+            "Super-x" = "C-x";
+            "Super-v" = "C-v";
+            "Super-r" = "C-r";
+            "Super-Equal" = "C-Equal";
+            "Super-Minus" = "C-Minus";
+          };
+        }
+        {
+          name = "Chrome";
+          remap = {
+            "Super-1" = "C-1";
+            "Super-2" = "C-2";
+            "Super-3" = "C-3";
+            "Super-4" = "C-4";
+            "Super-5" = "C-5";
+            "Super-6" = "C-6";
+            "Super-7" = "C-7";
+            "Super-8" = "C-8";
+            "Super-9" = "C-9";
+            "Super-0" = "C-0";
+            #"Super-BTN_LEFT" = "C-BTN_LEFT";
+          };
+          application = {
+            "only" = "Google-chrome";
+          };
+        }
+        {
+          name = "Firefox";
+          remap = {
+            "Super-1" = "M-1";
+            "Super-2" = "M-2";
+            "Super-3" = "M-3";
+            "Super-4" = "M-4";
+            "Super-5" = "M-5";
+            "Super-6" = "M-6";
+            "Super-7" = "M-7";
+            "Super-8" = "M-8";
+            "Super-9" = "M-9";
+            "Super-0" = "M-0";
+          };
+          application = {
+            "only" = "firefox";
+          };
+        }
+      ];
+    };
+  };
+
+
+  ## Modmap for single key rebinds
+  #services.xremap.config.modmap = [
+    #{
+      #name = "Global";
+      #remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+      #remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+      #name = "Chrome";
+      #remap = { "LEFTMETA" = "LEFTCTRL"; };
+      #application.only = [ "Google-chrome" ];
+    #}
+  #];
+
+  ## Keymap for key combo rebinds
+  #services.xremap.config.keymap = [
+    #{
+      #name = "CMD";
+      #remap = { "Super-tab" = "c-tab"; };
+      #remap = { "Super-w" = "c-w"; };
+      #remap = { "Super-q" = "c-q"; };
+      #remap = { "Super-t" = "c-t"; };
+      #remap = { "Super-c" = "c-c"; };
+      #remap = { "Super-x" = "c-x"; };
+      #remap = { "Super-v" = "c-v"; };
+      ## NOTE: no application-specific remaps work without features (see configuration)
+    #}
+  #];
+
 
   services.libinput = {
     enable = true;
