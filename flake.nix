@@ -19,7 +19,7 @@
           # ({ config, ... }: {
           #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
           # })
-          inputs.xremap-flake.nixosModules.default
+          #inputs.xremap-flake.nixosModules.default
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {

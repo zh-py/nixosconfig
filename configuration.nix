@@ -175,59 +175,146 @@ in
   };
 
 
-  services.xremap = {
+  #services.xremap = {
     #yamlConfig = ''
-      #keymap:
-        #- name: Google
-          #application:
-            #only: Google-chrome
-          #remap:
-            #Super-1: C-1
-            #Super-2: C-2
+      ##nothing for now
     #'';
-    config = { #82lines
-      modmap = [
-        {
-          name = "Global";
-          remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
-          remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
-          #remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
-        }
-        {
-          name = "Chrome";
-          remap = { "Super_L" = "Ctrl_L"; };
-          application = {
-            "only" = "Google-chrome";
-          };
-          #application.only = [ "Google-chrome" ];
-        }
-      ];
+  #};
 
-      keymap = [
-        {
-          name = "Global";
-          remap = {
-            "Super-Shift-T" = "C-Shift-T";
-            "Super-w" = "C-w";
-            "Super-q" = "C-q";
-            "Super-f" = "C-f";
-            "Super-t" = "C-t";
-            "Super-c" = "C-c";
-            "Super-x" = "C-x";
-            "Super-v" = "C-v";
-            "Super-r" = "C-r";
-            "Super-Equal" = "C-Equal";
-            "Super-Minus" = "C-Minus";
-            "Super-0" = ["C-0" "M-0"];
-            "Super-1" = ["C-1" "M-1"];
-            "Super-2" = ["C-2" "M-2"];
-            "Super-3" = ["C-3" "M-3"];
-            "Super-4" = ["C-4" "M-4"];
-            "Super-5" = ["C-5" "M-5"];
-            "Super-6" = ["C-6" "M-6"];
-            "Super-7" = ["C-7" "M-7"];
-            "Super-8" = ["C-8" "M-8"];
-            "Super-9" = ["C-9" "M-9"];
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Serial Keyboards]
+    MatchUdevType=keyboard
+    MatchName=keyd virtual keyboard
+    AttrKeyboardIntegration=internal
+  '';
+  #users.groups.keyd.name = "keyd";
+
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            "102nd" = "leftshift";
+          };
+        };
+        extraConfig = ''
+          \=enter
+          enter=\
+          [meta]
+          f=C-f
+          q=C-q
+          w=C-w
+          r=C-r
+          t=C-t
+          x=C-x
+          v=C-v
+          c=C-c
+          l=C-l
+          -=C--
+          ==C-=
+          [meta+shift]
+          t=C+S+t
+        '';
+      };
+    };
+  };
+
+  #services.input-remapper = {
+    #enable = true;
+  #};
+
+  #systemd.user.services.set-xhost = { #114
+    #description = "Run a one-shot command upon user login";
+    #path = [ pkgs.xorg.xhost ];
+    #wantedBy = [ "default.target" ];
+    #script = "xhost +SI:localuser:root";
+    #environment.DISPLAY = ":0.0"; # NOTE: This is hardcoded for this flake
+  #};
+  #services.xremap = {
+    #withX11 = true;
+    ##yamlConfig = ''
+      ##keymap:
+        ##- name: Google
+          ##application:
+            ##only: Google-chrome
+          ##remap:
+            ##Super-1: C-1
+            ##Super-2: C-2
+    ##'';
+    #config = {
+      #modmap = [
+        #{
+          #name = "Global";
+          #remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+          #remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+          ##remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
+        #}
+        #{
+          #name = "Chrome";
+          #remap = { "Super_L" = "Ctrl_L"; };
+          #application.only = [ "Google-chrome" ];
+        #}
+      #];
+
+      #keymap = [
+        #{
+          #name = "Global";
+          #remap = {
+            #"Super-Shift-T" = "C-Shift-T";
+            #"Super-w" = "C-w";
+            #"Super-q" = "C-q";
+            #"Super-f" = "C-f";
+            #"Super-t" = "C-t";
+            #"Super-c" = "C-c";
+            #"Super-x" = "C-x";
+            #"Super-v" = "C-v";
+            #"Super-r" = "C-r";
+            #"Super-l" = "C-l";
+            #"Super-Equal" = "C-Equal";
+            #"Super-Minus" = "C-Minus";
+            ##"Super-0" = ["C-0" "M-0"];
+            ##"Super-1" = ["C-1" "M-1"];
+            ##"Super-2" = ["C-2" "M-2"];
+            ##"Super-3" = ["C-3" "M-3"];
+            ##"Super-4" = ["C-4" "M-4"];
+            ##"Super-5" = ["C-5" "M-5"];
+            ##"Super-6" = ["C-6" "M-6"];
+            ##"Super-7" = ["C-7" "M-7"];
+            ##"Super-8" = ["C-8" "M-8"];
+            ##"Super-9" = ["C-9" "M-9"];
+            ##"Super-1" = "M-1";
+            ##"Super-2" = "M-2";
+            ##"Super-3" = "M-3";
+            ##"Super-4" = "M-4";
+            ##"Super-5" = "M-5";
+            ##"Super-6" = "M-6";
+            ##"Super-7" = "M-7";
+            ##"Super-8" = "M-8";
+            ##"Super-9" = "M-9";
+            ##"Super-BTN_LEFT" = "C-BTN_LEFT";
+          #};
+        #}
+        #{
+          #name = "Chrome";
+          #remap = {
+            #"Super-1" = "C-1";
+            #"Super-2" = "C-2";
+            #"Super-3" = "C-3";
+            #"Super-4" = "C-4";
+            #"Super-5" = "C-5";
+            #"Super-6" = "C-6";
+            #"Super-7" = "C-7";
+            #"Super-8" = "C-8";
+            #"Super-9" = "C-9";
+            #"Super-0" = "C-0";
+          #};
+          #application.only = [ "Google-chrome" ];
+        #}
+        #{
+          #name = "Firefox";
+          #remap = {
             #"Super-1" = "M-1";
             #"Super-2" = "M-2";
             #"Super-3" = "M-3";
@@ -237,58 +324,22 @@ in
             #"Super-7" = "M-7";
             #"Super-8" = "M-8";
             #"Super-9" = "M-9";
-            "Super-BTN_LEFT" = "C-BTN_LEFT";
-          };
-        }
-        {
-          name = "Chrome";
-          remap = {
-            "Super-1" = "C-1";
-            "Super-2" = "C-2";
-            "Super-3" = "C-3";
-            "Super-4" = "C-4";
-            "Super-5" = "C-5";
-            "Super-6" = "C-6";
-            "Super-7" = "C-7";
-            "Super-8" = "C-8";
-            "Super-9" = "C-9";
-            "Super-0" = "C-0";
-            #"Super-BTN_LEFT" = "C-BTN_LEFT";
-          };
-          application = {
-            "only" = "Google-chrome";
-          };
-        }
-        {
-          name = "Firefox";
-          remap = {
-            "Super-1" = "M-1";
-            "Super-2" = "M-2";
-            "Super-3" = "M-3";
-            "Super-4" = "M-4";
-            "Super-5" = "M-5";
-            "Super-6" = "M-6";
-            "Super-7" = "M-7";
-            "Super-8" = "M-8";
-            "Super-9" = "M-9";
-            "Super-0" = "M-0";
-          };
-          application = {
-            "only" = "firefox";
-          };
-        }
-      ];
-    };
-  };
+            #"Super-0" = "M-0";
+          #};
+          #application.only = [ "firefox" ];
+        #}
+      #];
+    #};
+  #};
 
 
-  ## Modmap for single key rebinds
-  #services.xremap.config.modmap = [
-    #{
-      #name = "Global";
-      #remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
-      #remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
-      #name = "Chrome";
+  ### Modmap for single key rebinds
+  ##services.xremap.config.modmap = [
+    ##{
+      ##name = "Global";
+      ##remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+      ##remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+      ##name = "Chrome";
       #remap = { "LEFTMETA" = "LEFTCTRL"; };
       #application.only = [ "Google-chrome" ];
     #}
@@ -466,7 +517,8 @@ in
   users.users.py = {
     isNormalUser = true;
     description = "py";
-    extraGroups = [ "input" "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" ];
+    #extraGroups = [ "input" "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
     ];
@@ -522,6 +574,7 @@ in
     font-manager
     #fontmatrix
     fontpreview
+    keyd
   ];
 
   system.activationScripts.diff = {
