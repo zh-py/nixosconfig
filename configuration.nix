@@ -202,25 +202,71 @@ in
         extraConfig = ''
           \=enter
           enter=\
-          [meta]
-          f=C-f
-          q=C-q
-          w=C-w
-          r=C-r
-          t=C-t
-          x=C-x
-          v=C-v
-          c=C-c
-          l=C-l
-          -=C--
-          ==C-=
-          [meta+shift]
-          t=C+S+t
+          leftmeta = layer(meta_mac)
+          [meta_mac:C]
+          1 = M-1
+          2 = M-2
+          3 = M-3
+          4 = M-4
+          5 = M-5
+          6 = M-6
+          7 = M-7
+          8 = M-8
+          9 = M-9
+          space = M-space
+          # Copy
+          c = C-insert
+          # Paste
+          v = S-insert
+          # Cut
+          x = S-delete
+
+          # Move cursor to beginning of line
+          left = home
+          # Move cursor to end of Line
+          right = end
+
+          # As soon as tab is pressed (but not yet released), we switch to the
+          # "app_switch_state" overlay where we can handle Meta-Backtick differently.
+          # Also, send a 'M-tab' key tap before entering app_switch_sate.
+          tab = swapm(app_switch_state, M-tab)
+
+          # Meta-Backtick: Switch to next window in the application group
+          # - A-f6 is the default binding for 'cycle-group' in gnome
+          # - keybinding: `gsettings get org.gnome.desktop.wm.keybindings cycle-group`
+          ` = A-f6
+
+          # app_switch_state modifier layer; inherits from 'Meta' modifier layer
+          [app_switch_state:M]
+
+          # Meta-Tab: Switch to next application
+          # - keybinding: `gsettings get org.gnome.desktop.wm.keybindings switch-applications`
+          tab = M-tab
+          right = M-tab
+
+          # Meta-Backtick: Switch to previous application
+          # - keybinding: `gsettings get org.gnome.desktop.wm.keybindings switch-applications-backward`
+          ` = M-S-tab
+          left = M-S-tab
         '';
       };
     };
   };
 
+          #[meta]
+          #f=C-f
+          #q=C-q
+          #w=C-w
+          #r=C-r
+          #t=C-t
+          #x=C-x
+          #v=C-v
+          #c=C-c
+          #l=C-l
+          #-=C--
+          #==C-=
+          #[meta+shift]
+          #t=C+S+t
   #services.input-remapper = {
     #enable = true;
   #};
@@ -518,7 +564,6 @@ in
     isNormalUser = true;
     description = "py";
     extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" ];
-    #extraGroups = [ "input" "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
     ];
