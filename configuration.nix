@@ -85,17 +85,16 @@ in
     #inputMethod = {
       #enabled = "fcitx5";
       #fcitx5.addons = with pkgs; [
-        #fcitx5-mozc
         #fcitx5-chinese-addons
         #fcitx5-gtk
       #];
     #};
   #};
 
-  #i18n.inputMethod = {
-    #enabled = "ibus";
-    #ibus.engines = with pkgs.ibus-engines; [libpinyin];
-  #};
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [libpinyin];
+  };
 
   #options = {
   #+    services.xserver.windowManager.fvwm3 = {

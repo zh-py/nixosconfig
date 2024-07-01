@@ -83,6 +83,7 @@ in {
     qpdfview
     zathura
     telegram-desktop
+    #wechat-uos
     btop
     htop
     trashy
@@ -545,7 +546,7 @@ in {
       #let g:airline_symbols.maxlinenr = '☰ '
       #let g:airline_symbols.dirty='⚡'
     plugins = with pkgs.vimPlugins; [
-      copilot-vim
+      #copilot-vim
       vim-visual-multi
       gruvbox
       trouble-nvim
