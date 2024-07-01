@@ -215,6 +215,7 @@ in
           8 = A-8
           9 = A-9
           space = M-space
+          backspace = delete
           # Copy
           c = C-insert
           # Paste
@@ -264,8 +265,8 @@ in
           [meta_mac+shift]
           h=M-S-h
           l=M-S-l
-          c=M-S-c
-          v=M-S-v
+          c=C-S-c
+          v=C-S-v
         '';
       };
     };

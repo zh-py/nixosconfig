@@ -45,5 +45,7 @@ return {
 		{ key = '7', mods = 'ALT',       action = act.ActivateTab(6) },
 		{ key = '8', mods = 'ALT',       action = act.ActivateTab(7) },
 		{ key = '9', mods = 'ALT',       action = act.ActivateTab(8) },
+		--{ key = 'c', mods = 'CMD', action = act.CopyTo 'Clipboard' },
+		--{ key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
 	}
 }
