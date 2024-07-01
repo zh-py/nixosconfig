@@ -222,10 +222,14 @@ in
           # Cut
           x = S-delete
 
-          # Move cursor to beginning of line
-          left = home
-          # Move cursor to end of Line
-          right = end
+          ## Move cursor to beginning of line
+          #left = home
+          ## Move cursor to end of Line
+          #right = end
+          left=A-left
+          right=A-right
+          up=A-up
+          down=A-down
 
           # As soon as tab is pressed (but not yet released), we switch to the
           # "app_switch_state" overlay where we can handle Meta-Backtick differently.
