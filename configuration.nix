@@ -260,6 +260,8 @@ in
           [meta_mac+shift]
           h=M-S-h
           l=M-S-l
+          c=M-S-c
+          v=M-S-v
         '';
       };
     };
