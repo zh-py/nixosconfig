@@ -203,16 +203,17 @@ in
           \=enter
           enter=\
           leftmeta = layer(meta_mac)
+          rightmeta = layer(meta_mac)
           [meta_mac:C]
-          1 = M-1
-          2 = M-2
-          3 = M-3
-          4 = M-4
-          5 = M-5
-          6 = M-6
-          7 = M-7
-          8 = M-8
-          9 = M-9
+          1 = A-1
+          2 = A-2
+          3 = A-3
+          4 = A-4
+          5 = A-5
+          6 = A-6
+          7 = A-7
+          8 = A-8
+          9 = A-9
           space = M-space
           # Copy
           c = C-insert
@@ -248,6 +249,18 @@ in
           # - keybinding: `gsettings get org.gnome.desktop.wm.keybindings switch-applications-backward`
           ` = M-S-tab
           left = M-S-tab
+
+          # https://github.com/canadaduane/my-nixos-conf/blob/main/system/keyd/keyd.conf#L80C1-L83C14
+          #shift = layer(meta_mac_shift)
+          #[meta_mac_shift:C-S]
+          ## Highlight to beginning of line
+          #left = S-home
+          ## Highlight to end of Line
+          #right = S-end
+          [meta_mac+shift]
+          h=M-S-h
+          l=M-S-l
+          t=M-S-t
         '';
       };
     };
@@ -267,6 +280,9 @@ in
           #==C-=
           #[meta+shift]
           #t=C+S+t
+          #[meta_mac+shift]
+          #h=M-S-h
+          #l=M-S-l
   #services.input-remapper = {
     #enable = true;
   #};
