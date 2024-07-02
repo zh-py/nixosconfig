@@ -879,7 +879,7 @@
   # end of the example
 -->
 		<application type="normal">
-			<maximized>true</maximized>
+			<maximized>false</maximized>
 			<decor>no</decor>
 		</application>
   </applications>
