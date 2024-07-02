@@ -182,14 +182,15 @@
 		<keybind key="A-F11">
 			<action name="ToggleDecorations"/>
 		</keybind>
-    <keybind key="C-A-BackSpace">
-      <action name="ToggleMaximize"/>
-    </keybind>
-    <!--<keybind key="C-k">-->
-      <!--<action name="ToggleMaximize"/>-->
-    <!--</keybind>-->
-    <keybind key="C-j">
-      <action name="Iconify"/>
+		<keybind key="C-A-BackSpace">
+			<action name="ToggleMaximize"/>
+		</keybind>
+		<keybind key="C-A-k">
+			<action name="Maximize"/>
+		</keybind>
+    <keybind key="C-A-j">
+      <!--<action name="Iconify"/>-->
+      <action name="Unmaximize"/>
     </keybind>
     <keybind key="C-q">
       <action name="Close"/>
@@ -877,5 +878,9 @@
 
   # end of the example
 -->
+		<application type="normal">
+			<maximized>true</maximized>
+			<decor>no</decor>
+		</application>
   </applications>
 </openbox_config>
