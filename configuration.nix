@@ -180,6 +180,9 @@ in
     #'';
   #};
 
+  environment.variables = {
+  };
+
   environment.etc."libinput/local-overrides.quirks".text = ''
     [Serial Keyboards]
     MatchUdevType=keyboard
@@ -530,6 +533,7 @@ in
 
 
   fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     meslo-lgs-nf
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif

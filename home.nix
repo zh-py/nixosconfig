@@ -27,7 +27,6 @@ in {
 
   home.packages = with pkgs; [
     #appimage-run
-    (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
     mc
     xxdiff
     krename
