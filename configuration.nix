@@ -643,6 +643,11 @@ in
     keyd
   ];
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+
+  ];
+
   system.activationScripts.diff = {
     supportsDryActivation = true;
     text = ''
