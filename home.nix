@@ -129,6 +129,8 @@ in {
     tcsh
     whatsapp-for-linux
     bluetooth_battery
+    shadowsocks-rust
+    v2raya
 
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
