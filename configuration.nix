@@ -482,10 +482,10 @@ in
     enable = true;
     settings = {
       general = {
-        low_temp = 67;
-        high_temp = 77;
+        low_temp = 68;
+        high_temp = 78;
         max_temp = 85;
-        polling_interval = 7;
+        polling_interval = 9;
       };
     };
   };
