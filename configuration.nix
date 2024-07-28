@@ -81,18 +81,9 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  #i18n = {
-    #inputMethod = {
-      #enabled = "fcitx5";
-      #fcitx5.addons = with pkgs; [
-        #fcitx5-chinese-addons
-        #fcitx5-gtk
-      #];
-    #};
-  #};
 
   i18n.inputMethod = {
-    enabled = "ibus";
+    type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [libpinyin];
   };
 
@@ -491,8 +482,6 @@ in
   };
 
 
-  # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -570,7 +559,7 @@ in
     efont-unicode
     spleen
     ucs-fonts
-    google-fonts
+    #google-fonts
     corefonts
     wineWowPackages.fonts
   ];

@@ -29,6 +29,7 @@ in {
     #appimage-run
     mc
     xxdiff
+    peazip
     krename
     libsForQt5.kio-extras
     libsForQt5.konsole
@@ -38,7 +39,9 @@ in {
     tldr
     bandwhich
     tex
-    sage
+    sageWithDoc
+    sagetex
+    openblas
     exfatprogs
     gparted
     xcp
@@ -145,6 +148,11 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    #(python311.withPackages (p:
+      #with p; [
+        #extractcode
+      #]))
 
     (python312.withPackages (p:
       with p; [

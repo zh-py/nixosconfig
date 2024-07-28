@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    xremap-flake.url = "github:xremap/nix-flake";
+    #xremap-flake.url = "github:xremap/nix-flake";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nur, ... }: {
