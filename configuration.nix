@@ -597,6 +597,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #nur.repos.wolfangaukang.vdhcoapp
+    brightnessctl
     libimobiledevice
     ifuse
     wget
@@ -612,8 +613,8 @@ in
     #coreboot-utils #ectool
     #xorg.xmodmap
     xorg.xev
-    xorg.setxkbmap
-    xorg.xkbcomp
+    #xorg.setxkbmap
+    #xorg.xkbcomp
     #xorg.xhost # for gparted
     #xkeysnail
     #xfce.xfce4-dict
