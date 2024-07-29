@@ -83,8 +83,11 @@ in
 
 
   i18n.inputMethod = {
+    enable = true;
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [libpinyin];
+    #type = "fcitx5";
+    #fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
 
   #options = {
