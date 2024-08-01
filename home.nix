@@ -68,14 +68,14 @@ in {
     powerstat
     powertop
     lm_sensors
-    nix-du
+    #nix-du
     nix-tree
     nix-index
     unzip
     unar
     graphviz
     gh
-    insync
+    #insync
     maestral
     mpv
     playerctl
