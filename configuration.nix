@@ -53,15 +53,36 @@ in
     #options hid_apple fnmode=1
   #'';
 
-  networking.hostName = "nixos"; # Define your hostname.
+
+  networking = {
+
+    hostName = "nixos";
+
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+
+    wireless = {
+      iwd = {
+        enable = true;
+        settings = {
+          IPv6 = {
+            Enabled = true;
+          };
+          Settings = {
+            AutoConnect = true;
+          };
+        };
+      };
+    };
+
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Africa/Dar_es_Salaam";
@@ -628,7 +649,6 @@ in
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
     lxqt.lxqt-runner
-    nm-tray
     playerctl
     qpwgraph
     #pavucontrol
