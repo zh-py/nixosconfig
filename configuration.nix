@@ -42,7 +42,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 12d";
+    options = "--delete-older-than 30d";
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
@@ -58,10 +58,10 @@ in
 
     hostName = "nixos";
 
-    networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";
-    };
+    #networkmanager = {
+      #enable = false;
+      #wifi.backend = "iwd";
+    #};
 
     wireless = {
       iwd = {
