@@ -44,7 +44,10 @@ in {
     openblas
     exfatprogs
     gparted
-    xcp
+    #xcp
+    bar
+    pv
+    progress
     calcurse
     fusuma
     libreoffice-qt
