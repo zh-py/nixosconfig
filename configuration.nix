@@ -67,8 +67,12 @@ in
       iwd = {
         enable = true;
         settings = {
-          IPv6 = {
-            Enabled = true;
+          General = {
+            EnableNetworkConfiguration = true;
+          };
+          Network = {
+            EnableIPv6 = true;
+            RoutePriorityOffset = 300;
           };
           Settings = {
             AutoConnect = true;
