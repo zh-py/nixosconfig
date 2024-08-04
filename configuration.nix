@@ -60,11 +60,6 @@ in
 
     hostName = "nixos";
 
-    #networkmanager = {
-      #enable = false;
-      #wifi.backend = "iwd";
-    #};
-
     wireless = {
       iwd = {
         enable = true;
@@ -82,6 +77,11 @@ in
         };
       };
     };
+
+    #networkmanager = {
+      #enable = false;
+      #wifi.backend = "iwd";
+    #};
 
     #proxy = {
       #default = "http://user:password@proxy:port/";
@@ -610,9 +610,8 @@ in
     isNormalUser = true;
     description = "py";
     extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" ];
-    packages = with pkgs; [
-      firefox
-    ];
+    #packages = with pkgs; [
+    #];
   };
 
 
@@ -695,7 +694,7 @@ in
   services.openssh.enable = true;
   networking.nftables.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 2283 ];
+  networking.firewall.allowedTCPPorts = [ 2283 ]; # 2283:immich
   networking.firewall.allowedUDPPorts = [ 2283 ]; # 2283:immich
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -707,7 +706,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   #services.logind.lidSwitch = "ignore";
 
