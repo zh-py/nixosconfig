@@ -53,6 +53,8 @@ in
     #options hid_apple fnmode=1
   #'';
 
+  services.connman.enable = true;
+  services.connman.wifi.backend = "iwd";
 
   networking = {
 
