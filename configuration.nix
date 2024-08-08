@@ -78,10 +78,10 @@ in
       };
     };
 
-    #networkmanager = {
-      #enable = false;
-      #wifi.backend = "iwd";
-    #};
+    networkmanager = {
+      enable = false;
+      wifi.backend = "iwd";
+    };
 
     #proxy = {
       #default = "http://user:password@proxy:port/";
@@ -141,10 +141,19 @@ in
   #services.xserver.windowManager.fvwm3.enable = true;
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "py";
-  services.displayManager.sddm.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
+
+  services.displayManager = {
+    autoLogin = {
+      enable = false;
+      user = "py";
+    };
+    sddm = {
+      enable = true;
+      wayland.enable = false;
+    };
+  };
 
   # Configure keymap in X11 37
   services.xserver = {
@@ -475,9 +484,7 @@ in
 
 
   ## Configure the console keymap from the xserver keyboard settings
-  console.useXkbConfig = true;
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
+  #console.useXkbConfig = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -649,13 +656,13 @@ in
     #xorg.xhost # for gparted
     #xkeysnail
     #xfce.xfce4-dict
-    xfce.xfce4-panel
+    #xfce.xfce4-panel
     #xfce.xfce4-appfinder
     #xfce.xfce4-settings
     #xfce.xfwm4
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
-    lxqt.lxqt-runner
+    #lxqt.lxqt-runner
     playerctl
     qpwgraph
     #pavucontrol

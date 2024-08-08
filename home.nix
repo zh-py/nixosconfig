@@ -81,6 +81,7 @@ in {
     gh
     #insync
     maestral
+    keepassxc
     mpv
     playerctl
     yt-dlp
