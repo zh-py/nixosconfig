@@ -52,7 +52,7 @@ in {
     progress
     calcurse
     fusuma
-    libreoffice-qt
+    libreoffice-qt6
     hunspell
     wezterm
     cava
@@ -165,6 +165,14 @@ in {
         extractcode
         pip
         numpy
+        jupyter
+        qtconsole
+        pyqt6
+        pyside6
+        pyqt6-webengine
+        pyqt6-charts
+        pyqt5
+        pyside2
         sympy
         requests
         pandas
@@ -283,6 +291,7 @@ in {
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
     ".config/lf/lf.bash".source = dotfiles/lf-config/lf.bash;
     ".config/openbox/rc.xml".source = dotfiles/openbox/rc.xml;
+    #".jupyter/jupyter_qtconsole_config.py".source = dotfiles/jupyter_qtconsole_config.py;
     #".config/calcurse/caldav/config".source = dotfiles/calcurse-caldav/config; #git doesn't allow, so manually copy
     #".config/lf".source = dotfiles/lf-config;
     #".config/lf/icons".source = dotfiles/lf-config/icons;

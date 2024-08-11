@@ -650,7 +650,18 @@ in
     linuxKernel.packages.linux_6_8.system76-power
     #coreboot-utils #ectool
     #xorg.xmodmap
-    xorg.xev
+    #xorg.xev
+    #xorg.libX11
+    #xorg.libxcb
+    #xorg.libXrender
+    #xorg.libXi
+    libsForQt5.qt5.qtwayland
+    libsForQt5.qt5.qtbase
+    kdePackages.qtwayland
+    kdePackages.qtbase
+    kdePackages.qt6gtk2
+    kdePackages.qt6ct
+    kdePackages.libquotient
     #xorg.setxkbmap
     #xorg.xkbcomp
     #xorg.xhost # for gparted
