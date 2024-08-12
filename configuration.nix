@@ -554,6 +554,8 @@ in
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
           "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" "hsp_hs" "hsp_ag" ];
+          #"bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" ];
+          #"bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" ];
         };
       };
     #wireplumber = {
