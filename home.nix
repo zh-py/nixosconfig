@@ -41,7 +41,7 @@ in {
     tldr
     bandwhich
     tex
-    sageWithDoc
+    sage
     sagetex
     openblas
     exfatprogs
@@ -139,7 +139,6 @@ in {
     bluetooth_battery
     shadowsocks-rust
     v2raya
-
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -167,12 +166,6 @@ in {
         numpy
         jupyter
         qtconsole
-        pyqt6
-        pyside6
-        pyqt6-webengine
-        pyqt6-charts
-        pyqt5
-        pyside2
         sympy
         requests
         pandas
@@ -323,6 +316,7 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.sagemath.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;

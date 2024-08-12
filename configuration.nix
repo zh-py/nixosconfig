@@ -547,15 +547,26 @@ in
     };
     wireplumber = {
       enable = true;
-      configPackages = [
-        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/bluez.conf" ''
-          monitor.bluez.properties = {
-            bluez5.default.rate = 44100
-            bluez5.enable-sbc-xq = true
-            bluez5.enable-hw-volume = true
-            }
-        '')
-      ];
+      extraConfig.bluetoothEnhancements = {
+        "monitor.bluez.properties" = {
+          "bluez5.default.rate" = 44100;
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" "hsp_hs" "hsp_ag" ];
+        };
+      };
+    #wireplumber = {
+      #enable = true;
+      #configPackages = [
+        #(pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/bluez.conf" ''
+          #monitor.bluez.properties = {
+            #bluez5.default.rate = 44100
+            #bluez5.enable-sbc-xq = true
+            #bluez5.enable-hw-volume = true
+            #}
+        #'')
+      #];
     };
   };
 
