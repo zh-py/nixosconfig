@@ -47,7 +47,7 @@ in {
     openblas
     exfatprogs
     gparted
-    #xcp
+    xcp
     bar
     pv
     progress
@@ -103,7 +103,7 @@ in {
     fd
     ripgrep
     bat
-    #delta
+    delta
     fontconfig
     glances
     bottom
@@ -115,7 +115,7 @@ in {
     pyright
     ruff
     ruff-lsp
-    #luajitPackages.luacheck
+    luajitPackages.luacheck
     lua-language-server
     marksman
     tree-sitter
@@ -123,8 +123,6 @@ in {
     texlab
     obsidian
     spotify
-    #librespot
-    #spotify-qt
     spotube
     vlc
     conda
@@ -138,9 +136,7 @@ in {
     gfortran
     libgcc
     tcsh
-    whatsapp-for-linux
     bluetooth_battery
-    shadowsocks-rust
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
