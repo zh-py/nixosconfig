@@ -559,6 +559,7 @@ in
     ubuntu_font_family
     fira
     #maple-mono
+    julia-mono
     jetbrains-mono
     paratype-pt-sans
     uw-ttyp0
