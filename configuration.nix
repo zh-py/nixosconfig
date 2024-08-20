@@ -206,22 +206,10 @@ in
   };
 
 
-  #services.xremap = {
-    #yamlConfig = ''
-      ##nothing for now
-    #'';
-  #};
 
   environment.variables = {
   };
 
-  environment.etc."libinput/local-overrides.quirks".text = ''
-    [Serial Keyboards]
-    MatchUdevType=keyboard
-    MatchName=keyd virtual keyboard
-    AttrKeyboardIntegration=internal
-  '';
-  #users.groups.keyd.name = "keyd";
 
   services.keyd = {
     enable = true;
@@ -306,23 +294,6 @@ in
     };
   };
 
-          #[meta]
-          #f=C-f
-          #q=C-q
-          #w=C-w
-          #r=C-r
-          #t=C-t
-          #x=C-x
-          #v=C-v
-          #c=C-c
-          #l=C-l
-          #-=C--
-          #==C-=
-          #[meta+shift]
-          #t=C+S+t
-          #[meta_mac+shift]
-          #h=M-S-h
-          #l=M-S-l
   #services.input-remapper = {
     #enable = true;
   #};
@@ -554,8 +525,6 @@ in
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
           "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" "hsp_hs" "hsp_ag" ];
-          #"bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" ];
-          #"bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hsp_hs" "hsp_ag" ];
         };
       };
     #wireplumber = {
@@ -660,8 +629,8 @@ in
     libinput-gestures
     libinput
     inxi
-    linuxKernel.packages.linux_6_8.system76-power
-    #coreboot-utils #ectool
+    #linuxKernel.packages.linux_6_8.system76-power
+    ##coreboot-utils #ectool
     #xorg.xmodmap
     #xorg.xev
     #xorg.libX11
@@ -674,7 +643,6 @@ in
     kdePackages.qtbase
     kdePackages.qt6gtk2
     kdePackages.qt6ct
-    kdePackages.libquotient
     #xorg.setxkbmap
     #xorg.xkbcomp
     #xorg.xhost # for gparted
@@ -729,6 +697,7 @@ in
   networking.firewall.allowedUDPPorts = [ 2283 ]; # 2283:immich
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
   services.v2raya.enable = true;
 
   # This value determines the NixOS release from which the default

@@ -28,6 +28,7 @@ in {
   home.packages = with pkgs; [
     firefox
     google-chrome
+    tor-browser
     #appimage-run
     mc
     xxdiff
@@ -39,7 +40,7 @@ in {
     eza
     lsof
     tldr
-    bandwhich
+    #bandwhich
     tex
     sage
     sagetex
@@ -72,7 +73,7 @@ in {
     powerstat
     powertop
     lm_sensors
-    #nix-du
+    nix-du
     nix-tree
     nix-index
     #unzip
@@ -91,6 +92,7 @@ in {
     qpdfview
     zathura
     telegram-desktop
+    skypeforlinux
     #wechat-uos
     btop
     htop
@@ -101,19 +103,19 @@ in {
     fd
     ripgrep
     bat
-    delta
+    #delta
     fontconfig
     glances
     bottom
     aria
     thefuck
     rclone
-    #syncthing
+    syncthing
     nil
     pyright
     ruff
     ruff-lsp
-    luajitPackages.luacheck
+    #luajitPackages.luacheck
     lua-language-server
     marksman
     tree-sitter
@@ -122,6 +124,7 @@ in {
     obsidian
     spotify
     #librespot
+    #spotify-qt
     spotube
     vlc
     conda
@@ -138,7 +141,6 @@ in {
     whatsapp-for-linux
     bluetooth_battery
     shadowsocks-rust
-    v2raya
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -185,6 +187,7 @@ in {
         torch
       ]))
   ];
+
 
 
   services.fusuma = {
@@ -278,7 +281,7 @@ in {
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/mpv".source = dotfiles/mpv;
-    ".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
+    #".config/wezterm/wezterm.lua".source = dotfiles/wezterm.lua;
     #".config/fusuma/config.yml".source = dotfiles/fusuma/config.yml;
     ".config/systemd/user/maestral.service".source = dotfiles/maestral.service;
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
@@ -430,6 +433,96 @@ in {
     ];
     extraConfig = ''
       set-option -g mouse on
+    '';
+  };
+
+  programs.kitty = {
+    enable = true;
+    shellIntegration.enableZshIntegration = true;
+    font.name = "Terminus (TTF)";
+    font.size = 12;
+    theme = "Space Gray Eighties";
+    extraConfig = ''
+      shell_integration enabled
+      shell zsh
+      editor .
+      tab_bar_edge top
+      tab_bar_style powerline
+      tab_switch_strategy right
+      tab_title_template " {index}: {f'{title[:6]}…{title[-6:]}' if title.rindex(title[-1]) + 1 > 13 else title.center(7)} "
+      tab_bar_margin_width 6
+      tab_powerline_style round
+      tab_separator " ┇"
+      macos_option_as_alt yes
+      map alt+1 goto_tab 1
+      map alt+2 goto_tab 2
+      map alt+3 goto_tab 3
+      map alt+4 goto_tab 4
+      map alt+5 goto_tab 5
+      map alt+6 goto_tab 6
+      map alt+7 goto_tab 7
+      map alt+8 goto_tab 8
+      map alt+9 goto_tab 9
+      map ctrl+shift+t new_tab_with_cwd
+      map cmd+shift+h previous_tab
+      map cmd+shift+l next_tab
+
+    '';
+  };
+
+  programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    extraConfig = ''
+      local wezterm = require 'wezterm'
+      local my_framer = wezterm.color.get_builtin_schemes()['Framer (base16)']
+      my_framer.cursor_fg = '#181818'
+      my_framer.cursor_bg = '#EEEEEE'
+      my_framer.compose_cursor = '#20BCFC'
+      local mux = wezterm.mux
+      wezterm.on('gui-startup', function()
+        local tab, pane, window = mux.spawn_window(cmd or {})
+        window:gui_window():maximize()
+      end)
+      local act = wezterm.action
+      return {
+        font_size = 12,
+        --font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Light', }),
+        font = wezterm.font('FiraCode Nerd Font Mono'),
+        --font = wezterm.font('Terminus'),
+        --font = wezterm.font("MesloLGS NF"),
+        --font = wezterm.font('Ttyp0'),
+        --font = wezterm.font('System'),
+        window_background_opacity = 0.96,
+        hide_tab_bar_if_only_one_tab = true,
+        default_cursor_style = "SteadyBar",
+        cursor_blink_rate = 600,
+        default_prog = { "zsh" },
+        window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+        window_decorations = "NONE",
+        use_fancy_tab_bar = false,
+        adjust_window_size_when_changing_font_size = false,
+        inactive_pane_hsb = { saturation = 1, brightness = 1 }, -- s0.9, b0.8
+        color_schemes = { ['My Framer'] = my_framer, },
+        color_scheme = 'My Framer',
+        keys = {
+          { key = 't', mods = 'CMD|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
+          --{ key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain', },
+          { key = 'l', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(1) },
+          { key = 'h', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(-1) },
+          { key = '1', mods = 'ALT',       action = act.ActivateTab(0) },
+          { key = '2', mods = 'ALT',       action = act.ActivateTab(1) },
+          { key = '3', mods = 'ALT',       action = act.ActivateTab(2) },
+          { key = '4', mods = 'ALT',       action = act.ActivateTab(3) },
+          { key = '5', mods = 'ALT',       action = act.ActivateTab(4) },
+          { key = '6', mods = 'ALT',       action = act.ActivateTab(5) },
+          { key = '7', mods = 'ALT',       action = act.ActivateTab(6) },
+          { key = '8', mods = 'ALT',       action = act.ActivateTab(7) },
+          { key = '9', mods = 'ALT',       action = act.ActivateTab(8) },
+          --{ key = 'c', mods = 'CMD', action = act.CopyTo 'Clipboard' },
+          --{ key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
+        }
+      }
     '';
   };
 
