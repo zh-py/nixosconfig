@@ -481,16 +481,23 @@ in {
         local tab, pane, window = mux.spawn_window(cmd or {})
         window:gui_window():maximize()
       end)
+      local gpus = wezterm.gui.enumerate_gpus()
       local act = wezterm.action
       return {
         font_size = 12,
         --font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Light', }),
-        font = wezterm.font('FiraCode Nerd Font Mono'),
+        --font = wezterm.font('FiraCode Nerd Font Mono'),
         --font = wezterm.font('Terminus'),
         --font = wezterm.font("MesloLGS NF"),
-        --font = wezterm.font('Ttyp0'),
+        font = wezterm.font('Ttyp0'),
         --font = wezterm.font('System'),
-        window_background_opacity = 0.96,
+        webgpu_preferred_adapter = gpus[1],
+        front_end = "WebGpu",
+        --front_end = "OpenGL",
+        enable_wayland = false,
+        webgpu_force_fallback_adapter = true,
+        webgpu_power_preference = "HighPerformance",
+        window_background_opacity = 1,
         hide_tab_bar_if_only_one_tab = true,
         default_cursor_style = "SteadyBar",
         cursor_blink_rate = 600,
