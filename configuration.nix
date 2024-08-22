@@ -289,10 +289,10 @@ in
           ## Highlight to end of Line
           #right = S-end
           [meta_mac+shift]
-          h=M-S-h
-          l=M-S-l
-          c=C-S-c
-          v=C-S-v
+          h = M-S-h
+          l = M-S-l
+          c = C-S-c
+          v = C-S-v
         '';
       };
     };

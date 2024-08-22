@@ -465,7 +465,10 @@ in {
       map ctrl+shift+t new_tab_with_cwd
       map cmd+shift+h previous_tab
       map cmd+shift+l next_tab
-
+      #map cmd+c copy_to_clipboard
+      map ctrl+insert copy_and_clear_or_interrupt
+      #map cmd+v paste_from_clipboard
+      map shift+insert paste_from_clipboard
     '';
   };
 
