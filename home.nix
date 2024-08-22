@@ -446,7 +446,8 @@ in {
       tab_bar_style powerline
       tab_switch_strategy right
       #tab_title_template " {index}: {f'{title[:6]}…{title[-6:]}' if title.rindex(title[-1]) + 1 > 13 else title.center(7)}"
-      tab_title_template "{index}: {title[title.rfind('/')+1:]}"
+      #tab_title_template "{index}: {title[title.rfind('/')+1:]}"
+      tab_title_template " {index}: {f'…{title[-14:]}' if title.rindex(title[-1]) + 1 > 15 else title.center(10)}"
       active_tab_font_style bold
       tab_bar_margin_width 6
       tab_powerline_style round

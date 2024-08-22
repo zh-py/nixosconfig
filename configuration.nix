@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 #let
   #compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
     #${pkgs.xorg.xkbcomp}/bin/xkbcomp ${./path/to/layout.xkb} $out
@@ -39,6 +39,10 @@ in
       ./hardware-configuration.nix
     ];
   
+  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+  #nix.settings.substituters = lib.mkBefore [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
