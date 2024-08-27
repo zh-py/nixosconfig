@@ -629,7 +629,13 @@ in
     gsimplecal
     #linuxKernel.packages.linux_6_7.perf
     wmctrl
-    xorg.xprop
+    #xorg.xprop
+    nordzy-cursor-theme
+    numix-cursor-theme
+    openzone-cursors
+    vimix-cursor-theme
+    vimix-cursors
+    volantes-cursors
     xdotool
     libinput-gestures
     libinput

@@ -26,49 +26,60 @@ in {
   # environment.
 
   home.packages = with pkgs; [
+    #nixos only
     firefox
     google-chrome
     tor-browser
-    #appimage-run
-    mc
-    xxdiff
+    nomacs
+    gimp
     peazip
-    krename
     libsForQt5.kio-extras
     libsForQt5.konsole
+    libreoffice-qt6
+    speedcrunch
+    gpicview
+    gImageReader
+    viewnior
     krusader
+    xxdiff
+    okular
+    qpdfview
+    zathura
+    telegram-desktop
+    skypeforlinux
+    gparted
+    galculator
+    qalculate-gtk
+    playerctl
+    bluetooth_battery
+    tex
+    bar
+    pv
+    mediainfo-gui
+    trashy
+    #insync
+    maestral
+    keepassxc
+    #appimage-run
+
+    #share
+    mc
+    krename
     eza
     lsof
     tldr
     #bandwhich
-    tex
     sage
     sagetex
     openblas
     exfatprogs
-    gparted
-    xcp
-    bar
-    pv
     progress
     calcurse
-    fusuma
-    libreoffice-qt6
     hunspell
-    wezterm
     cava
-    mediainfo-gui
     deluge
     xsel
-    galculator
-    speedcrunch
-    qalculate-gtk
-    nomacs
-    gpicview
-    gImageReader
-    viewnior
     libheif
-    gimp
     imagemagick
     powerstat
     powertop
@@ -80,23 +91,13 @@ in {
     #unar
     graphviz
     gh
-    #insync
-    maestral
-    keepassxc
     mpv
-    playerctl
     yt-dlp
     wordnet
     mupdf
-    okular
-    qpdfview
-    zathura
-    telegram-desktop
-    skypeforlinux
     #wechat-uos
     btop
     htop
-    trashy
     neofetch
     fastfetch
     du-dust
@@ -125,6 +126,9 @@ in {
     spotify
     spotube
     vlc
+    #ffmpeg_7-headless
+    #ffmpeg_7-full
+    ffmpeg_7
     conda
     zotero_7
     netcdf
@@ -136,7 +140,6 @@ in {
     gfortran
     libgcc
     tcsh
-    bluetooth_battery
  
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
