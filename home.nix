@@ -27,6 +27,7 @@ in {
 
   home.packages = with pkgs; [
     #nixos only
+    fusuma
     firefox
     google-chrome
     tor-browser
