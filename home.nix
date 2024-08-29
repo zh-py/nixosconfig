@@ -4,12 +4,14 @@
   pkgs,
   lib,
   ...
-}: let
-  inherit (pkgs.lib) mkIf optionals;
-  tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-full;
-  });
-in {
+}:
+{
+#}: let
+  #inherit (pkgs.lib) mkIf optionals;
+  #tex = (pkgs.texlive.combine {
+    #inherit (pkgs.texlive) scheme-full;
+  #});
+#in {
   home.username = "py";
   home.homeDirectory = "/home/py";
 
@@ -48,12 +50,13 @@ in {
     zathura
     telegram-desktop
     skypeforlinux
+    zoom-us
     gparted
     galculator
     qalculate-gtk
     playerctl
     bluetooth_battery
-    tex
+    texliveFull
     bar
     pv
     mediainfo-gui

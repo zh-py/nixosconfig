@@ -469,6 +469,8 @@ in
     package = pkgs.usbmuxd2;
   };
 
+  #hardware.facetimehd.enable = true;
+  #hardware.facetimehd.withCalibration = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.system76.power-daemon.enable = true;
@@ -483,6 +485,7 @@ in
     };
   };
 
+  services.thermald.enable = true;
   services.mbpfan = {
     enable = true;
     settings = {
@@ -622,12 +625,13 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #nur.repos.wolfangaukang.vdhcoapp
+    thermald
+    #linuxKernel.packages.linux_6_6.facetimehd
     brightnessctl
     libimobiledevice
     ifuse
     wget
     gsimplecal
-    #linuxKernel.packages.linux_6_7.perf
     wmctrl
     #xorg.xprop
     nordzy-cursor-theme
