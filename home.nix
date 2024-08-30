@@ -86,7 +86,6 @@
     libheif
     imagemagick
     powerstat
-    powertop
     lm_sensors
     nix-du
     nix-tree
@@ -222,17 +221,31 @@
         };
         "3" = {
           begin = {
-            command = "xdotool mousedown 1";
+            command = "ydotool click 40";
+            interval = 0.00;
           };
           update = {
-            command = "xdotool mousemove_relative -- $move_x, $move_y";
-            accel = 4;
+            command = "ydotool mousemove -- $move_x, $move_y";
+            accel = 1.70;
             interval = 0.01;
           };
           end = {
-            command = "xdotool mouseup 1";
+            command = "ydotool click 80";
           };
         };
+        #"3" = {
+          #begin = {
+            #command = "xdotool mousedown 1";
+          #};
+          #update = {
+            #command = "xdotool mousemove_relative -- $move_x, $move_y";
+            #accel = 4;
+            #interval = 0.01;
+          #};
+          #end = {
+            #command = "xdotool mouseup 1";
+          #};
+        #};
       };
       pinch = {
         "4" = {

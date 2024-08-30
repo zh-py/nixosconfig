@@ -447,6 +447,7 @@ in
     touchpad.clickMethod = "clickfinger";
     touchpad.tappingDragLock = true;
   };
+  programs.ydotool.enable = true;
 
   #services.xserver.desktopManager.session =
     #[ { manage = "desktop";
@@ -469,36 +470,65 @@ in
     package = pkgs.usbmuxd2;
   };
 
+
+  powerManagement = {
+      enable = true;
+      powertop.enable = true;
+      cpuFreqGovernor = "powersave";
+  };
+
+  services = {
+
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+          enable_thresholds = true;
+          start_threshold = 20;
+          stop_threshold = 60;
+        };
+        charger = {
+          governor = "powersave";
+          turbo = "never";
+        };
+      };
+    };
+
+    thermald.enable = true;
+    power-profiles-daemon.enable = false;
+
+    tlp = {
+      enable = true;
+      settings = {
+        START_CHARGE_THRESH_BAT0 = 60;
+        STOP_CHARGE_THRESH_BAT0 = 80;
+      };
+    };
+
+    mbpfan = {
+      enable = true;
+      settings = {
+        general = {
+          low_temp = 68;
+          high_temp = 78;
+          max_temp = 85;
+          polling_interval = 9;
+        };
+      };
+    };
+
+  };
+
+
   #hardware.facetimehd.enable = true;
   #hardware.facetimehd.withCalibration = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.system76.power-daemon.enable = true;
-
+  hardware.system76.enableAll = true;
   services.blueman.enable = true;
-
-  services.tlp = {
-    enable = true;
-    settings = {
-      START_CHARGE_THRESH_BAT0="60";
-      STOP_CHARGE_THRESH_BAT0="80";
-    };
-  };
-
-  services.thermald.enable = true;
-  services.mbpfan = {
-    enable = true;
-    settings = {
-      general = {
-        low_temp = 68;
-        high_temp = 78;
-        max_temp = 85;
-        polling_interval = 9;
-      };
-    };
-  };
-
-
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -624,7 +654,8 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #nur.repos.wolfangaukang.vdhcoapp
+    #nur.repos.xddxdd.wine-wechat
+    #nur.repos.xddxdd.wechat-uos-without-sandbox
     thermald
     #linuxKernel.packages.linux_6_6.facetimehd
     brightnessctl
@@ -641,10 +672,10 @@ in
     vimix-cursors
     volantes-cursors
     xdotool
+    ydotool
     libinput-gestures
     libinput
     inxi
-    #linuxKernel.packages.linux_6_8.system76-power
     ##coreboot-utils #ectool
     #xorg.xmodmap
     #xorg.xev
