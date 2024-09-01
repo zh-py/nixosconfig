@@ -636,7 +636,7 @@ in
   users.users.py = {
     isNormalUser = true;
     description = "py";
-    extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" ];
+    extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" "ydotool"];
     #packages = with pkgs; [
     #];
   };

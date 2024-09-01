@@ -205,14 +205,16 @@
       swipe = {
         "4" = {
           left = {
-            command = "xdotool key ctrl+Right";
+            #command = "xdotool key ctrl+Right";
+            command = "ydotool key 29:1 106:1 106:0 29:0";
             threshold = 0.5;
-            interval = 0.75;
+            interval = 0.5;
           };
           right = {
-            command = "xdotool key ctrl+Left";
+            #command = "xdotool key ctrl+Left";
+            command = "ydotool key 29:1 105:1 105:0 29:0";
             threshold = 0.5;
-            interval = 0.75;
+            interval = 0.5;
           };
           up = {
             command = "xdotool key ctrl+alt+m";
