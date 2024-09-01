@@ -200,21 +200,25 @@
     #'';
     #settings = builtins.readFile ./dotfiles/fusuma/config.yml;
     settings = {
-      threshold = { swipe = 0.1; };
-      interval = { swipe = 0.7; };
+      #threshold = { swipe = 0.1; };
+      #interval = { swipe = 0.7; };
       swipe = {
         "4" = {
           left = {
             #command = "xdotool key ctrl+Right";
-            command = "ydotool key 29:1 106:1 106:0 29:0";
+            command = "xte 'keydown Control_L' 'key Right' 'keyup Control_L'";
+            #command = "ydotool key 29:1 106:1 106:0 29:0";
             threshold = 0.5;
-            interval = 0.5;
+            #interval = 0.75;
+            interval = 0.8;
           };
           right = {
             #command = "xdotool key ctrl+Left";
-            command = "ydotool key 29:1 105:1 105:0 29:0";
+            command = "xte 'keydown Control_L' 'key Left' 'keyup Control_L'";
+            #command = "ydotool key 29:1 105:1 105:0 29:0";
             threshold = 0.5;
-            interval = 0.5;
+            #interval = 0.75;
+            interval = 0.8;
           };
           up = {
             command = "xdotool key ctrl+alt+m";
@@ -228,24 +232,27 @@
           };
           update = {
             command = "ydotool mousemove -- $move_x, $move_y";
-            accel = 1.70;
-            interval = 0.01;
+            accel = 2;
+            interval = 0.1;
           };
           end = {
             command = "ydotool click 80";
+            interval = 0.00;
           };
         };
         #"3" = {
           #begin = {
             #command = "xdotool mousedown 1";
+            #interval = 0.0;
           #};
           #update = {
             #command = "xdotool mousemove_relative -- $move_x, $move_y";
-            #accel = 4;
+            #accel = 2;
             #interval = 0.01;
           #};
           #end = {
             #command = "xdotool mouseup 1";
+            #interval = 0.0;
           #};
         #};
       };

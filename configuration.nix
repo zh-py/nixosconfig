@@ -673,6 +673,7 @@ in
     volantes-cursors
     xdotool
     ydotool
+    xautomation
     libinput-gestures
     libinput
     inxi
