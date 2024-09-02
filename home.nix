@@ -73,8 +73,8 @@
     lsof
     tldr
     #bandwhich
-    sage
-    sagetex
+    #sage
+    #sagetex
     openblas
     exfatprogs
     progress
@@ -344,7 +344,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.sagemath.enable = true;
+  #programs.sagemath.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;

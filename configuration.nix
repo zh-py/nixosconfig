@@ -471,11 +471,11 @@ in
   };
 
 
-  powerManagement = {
-      enable = true;
-      powertop.enable = true;
-      cpuFreqGovernor = "powersave";
-  };
+  #powerManagement = {
+      #enable = true;
+      #powertop.enable = true;
+      #cpuFreqGovernor = "powersave";
+  #};
 
   services = {
 
@@ -490,7 +490,7 @@ in
           stop_threshold = 60;
         };
         charger = {
-          governor = "powersave";
+          governor = "performance";
           turbo = "never";
         };
       };
@@ -499,13 +499,13 @@ in
     thermald.enable = true;
     power-profiles-daemon.enable = false;
 
-    tlp = {
-      enable = true;
-      settings = {
-        START_CHARGE_THRESH_BAT0 = 60;
-        STOP_CHARGE_THRESH_BAT0 = 80;
-      };
-    };
+    #tlp = {
+      #enable = true;
+      #settings = {
+        #START_CHARGE_THRESH_BAT0 = 60;
+        #STOP_CHARGE_THRESH_BAT0 = 80;
+      #};
+    #};
 
     mbpfan = {
       enable = true;
@@ -657,6 +657,10 @@ in
     #nur.repos.xddxdd.wine-wechat
     #nur.repos.xddxdd.wechat-uos-without-sandbox
     thermald
+    powertop
+    dmidecode
+    acpi
+    auto-cpufreq
     #linuxKernel.packages.linux_6_6.facetimehd
     brightnessctl
     libimobiledevice
@@ -672,7 +676,7 @@ in
     vimix-cursors
     volantes-cursors
     xdotool
-    ydotool
+    #ydotool
     xautomation
     libinput-gestures
     libinput
