@@ -6,12 +6,12 @@
   ...
 }:
 {
-#}: let
+  #}: let
   #inherit (pkgs.lib) mkIf optionals;
   #tex = (pkgs.texlive.combine {
-    #inherit (pkgs.texlive) scheme-full;
+  #inherit (pkgs.texlive) scheme-full;
   #});
-#in {
+  #in {
   home.username = "py";
   home.homeDirectory = "/home/py";
 
@@ -116,6 +116,7 @@
     rclone
     syncthing
     nil
+    nixfmt-rfc-style
     pyright
     ruff
     ruff-lsp
@@ -143,7 +144,7 @@
     gfortran
     libgcc
     tcsh
- 
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -158,12 +159,12 @@
     # '')
 
     #(python311.withPackages (p:
-      #with p; [
-        #extractcode
-      #]))
+    #with p; [
+    #extractcode
+    #]))
 
-    (python312.withPackages (p:
-      with p; [
+    (python312.withPackages (
+      p: with p; [
         py-cpuinfo
         extractcode
         pip
@@ -182,21 +183,21 @@
         pysnooper
         debugpy
         python-lsp-server
+        python-lsp-ruff
         pynvim
         send2trash
         openpyxl
         pytest
         torch
-      ]))
+      ]
+    ))
   ];
-
-
 
   services.fusuma = {
     enable = true;
     extraPackages = with pkgs; [ xdotool ];
     #settings = ''
-      #${builtins.readFile ./dotfiles/fusuma/settingconfig.yml}
+    #${builtins.readFile ./dotfiles/fusuma/settingconfig.yml}
     #'';
     #settings = builtins.readFile ./dotfiles/fusuma/config.yml;
     settings = {
@@ -228,7 +229,7 @@
         "3" = {
           begin = {
             command = "ydotool click 40";
-            interval = 0.00;
+            interval = 0.0;
           };
           update = {
             command = "ydotool mousemove -- $move_x, $move_y";
@@ -237,23 +238,23 @@
           };
           end = {
             command = "ydotool click 80";
-            interval = 0.00;
+            interval = 0.0;
           };
         };
         #"3" = {
-          #begin = {
-            #command = "xdotool mousedown 1";
-            #interval = 0.0;
-          #};
-          #update = {
-            #command = "xdotool mousemove_relative -- $move_x, $move_y";
-            #accel = 2;
-            #interval = 0.01;
-          #};
-          #end = {
-            #command = "xdotool mouseup 1";
-            #interval = 0.0;
-          #};
+        #begin = {
+        #command = "xdotool mousedown 1";
+        #interval = 0.0;
+        #};
+        #update = {
+        #command = "xdotool mousemove_relative -- $move_x, $move_y";
+        #accel = 2;
+        #interval = 0.01;
+        #};
+        #end = {
+        #command = "xdotool mouseup 1";
+        #interval = 0.0;
+        #};
         #};
       };
       pinch = {
@@ -270,11 +271,11 @@
         "2" = {
           "in" = {
             command = "xdotool keydown ctrl click 5 keyup ctrl";
-            threshold = 0.02;
+            threshold = 2.0e-2;
           };
           out = {
             command = "xdotool keydown ctrl click 4 keyup ctrl";
-            threshold = 0.02;
+            threshold = 2.0e-2;
           };
         };
       };
@@ -289,8 +290,6 @@
       };
     };
   };
-
-
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -341,7 +340,6 @@
     XDG_CONFIG_HOME = "$HOME/.config";
   };
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   #programs.sagemath.enable = true;
@@ -352,19 +350,19 @@
   };
 
   #programs.mpv = {
-    #enable = true;
-    #bindings = {
-      #"Alt+0" = "set window-scale 0.5";
-    #};
-    #config = {
-      #ytdl-format="bestvideo[height<=?480][fps<=?30][vcodec!=?webm]+bestaudio/best";
-      #cache-default = 4000000;
-    #};
+  #enable = true;
+  #bindings = {
+  #"Alt+0" = "set window-scale 0.5";
+  #};
+  #config = {
+  #ytdl-format="bestvideo[height<=?480][fps<=?30][vcodec!=?webm]+bestaudio/best";
+  #cache-default = 4000000;
+  #};
   #};
 
   #programs.tint2 = {
-    #enable = true;
-    #extraConfig = builtins.readFile ./dotfiles/tint2rc;
+  #enable = true;
+  #extraConfig = builtins.readFile ./dotfiles/tint2rc;
   #};
 
   programs.lf = {
@@ -449,7 +447,7 @@
       tmuxPlugins.better-mouse-mode
       {
         plugin = tmuxPlugins.catppuccin;
-        extraConfig = '' 
+        extraConfig = ''
           set -g @catppuccin_flavour 'frappe'
           set -g @catppuccin_window_tabs_enabled on
           set -g @catppuccin_date_time "%H:%M"
@@ -680,21 +678,21 @@
       autocmd FileType help wincmd L
       autocmd FileType gitcommit setlocal spell
     '';
-      #let g:airline#extensions#tabline#enabled = 1
-      #let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
-      #if !exists('g:airline_symbols')
-        #let g:airline_symbols = {}
-      #endif
-      #let g:airline_left_sep = ''
-      #let g:airline_left_alt_sep = ''
-      #let g:airline_right_sep = ''
-      #let g:airline_right_alt_sep = ''
-      #let g:airline_symbols.branch = ''
-      #let g:airline_symbols.colnr = ' ℅:'
-      #let g:airline_symbols.readonly = ''
-      #let g:airline_symbols.linenr = ' :'
-      #let g:airline_symbols.maxlinenr = '☰ '
-      #let g:airline_symbols.dirty='⚡'
+    #let g:airline#extensions#tabline#enabled = 1
+    #let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
+    #if !exists('g:airline_symbols')
+    #let g:airline_symbols = {}
+    #endif
+    #let g:airline_left_sep = ''
+    #let g:airline_left_alt_sep = ''
+    #let g:airline_right_sep = ''
+    #let g:airline_right_alt_sep = ''
+    #let g:airline_symbols.branch = ''
+    #let g:airline_symbols.colnr = ' ℅:'
+    #let g:airline_symbols.readonly = ''
+    #let g:airline_symbols.linenr = ' :'
+    #let g:airline_symbols.maxlinenr = '☰ '
+    #let g:airline_symbols.dirty='⚡'
     plugins = with pkgs.vimPlugins; [
       #copilot-vim
       vim-visual-multi
@@ -706,29 +704,29 @@
       vim-bbye
       tmux-nvim
       #{
-        #plugin = zk-nvim;
-        #type = "lua";
-        #config = ''
-          #require("zk").setup({
-            #-- can be "telescope", "fzf", "fzf_lua" or "select" (`vim.ui.select`)
-            #-- it's recommended to use "telescope", "fzf" or "fzf_lua"
-            #picker = "telescope",
-            #lsp = {
-              #-- `config` is passed to `vim.lsp.start_client(config)`
-              #config = {
-                #cmd = { "zk", "lsp" },
-                #name = "zk",
-                #-- on_attach = ...
-                #-- etc, see `:h vim.lsp.start_client()`
-              #},
-              #-- automatically attach buffers in a zk notebook that match the given filetypes
-              #auto_attach = {
-                #enabled = true,
-                #filetypes = { "markdown" },
-              #},
-            #},
-          #})
-        #'';
+      #plugin = zk-nvim;
+      #type = "lua";
+      #config = ''
+      #require("zk").setup({
+      #-- can be "telescope", "fzf", "fzf_lua" or "select" (`vim.ui.select`)
+      #-- it's recommended to use "telescope", "fzf" or "fzf_lua"
+      #picker = "telescope",
+      #lsp = {
+      #-- `config` is passed to `vim.lsp.start_client(config)`
+      #config = {
+      #cmd = { "zk", "lsp" },
+      #name = "zk",
+      #-- on_attach = ...
+      #-- etc, see `:h vim.lsp.start_client()`
+      #},
+      #-- automatically attach buffers in a zk notebook that match the given filetypes
+      #auto_attach = {
+      #enabled = true,
+      #filetypes = { "markdown" },
+      #},
+      #},
+      #})
+      #'';
       #}
       #vim-airline
       #vim-airline-themes
@@ -748,9 +746,9 @@
       #nui-nvim
       #nvim-notify
       #{
-        #plugin = noice-nvim;
-        #type = "lua";
-        #config = builtins.readFile(./neovim/noice.lua);
+      #plugin = noice-nvim;
+      #type = "lua";
+      #config = builtins.readFile(./neovim/noice.lua);
       #}
       {
         plugin = nvim-web-devicons;
@@ -771,42 +769,44 @@
         '';
       }
       #{
-        #plugin = nvim-tree-lua;
-        #type = "lua";
-        #config = builtins.readFile(./neovim/nvimtree.lua);
+      #plugin = nvim-tree-lua;
+      #type = "lua";
+      #config = builtins.readFile(./neovim/nvimtree.lua);
       #}
       {
         plugin = lualine-nvim;
         type = "lua";
-        config = builtins.readFile(./neovim/lualine.lua);
+        config = builtins.readFile (./neovim/lualine.lua);
       }
       #{
-        #plugin = bufferline-nvim;
-        #type = "lua";
-        #config = ''
-          #vim.opt.termguicolors = true
-          #require("bufferline").setup{}
-        #'';
+      #plugin = bufferline-nvim;
+      #type = "lua";
+      #config = ''
+      #vim.opt.termguicolors = true
+      #require("bufferline").setup{}
+      #'';
       #}
       {
         plugin = vimtex;
-        config = /* vim */ ''
-          let g:vimtex_view_general_method='qpdfview'
-          "let g:vimtex_view_skim_activate=0
-          "let g:vimtex_view_skim_reading_bar=1
-          let g:vimtex_syntax_enabled=0
-        '';
+        config = # vim
+          ''
+            let g:vimtex_view_general_method='qpdfview'
+            "let g:vimtex_view_skim_activate=0
+            "let g:vimtex_view_skim_reading_bar=1
+            let g:vimtex_syntax_enabled=0
+          '';
       }
       markdown-preview-nvim
       {
         plugin = vim-markdown;
-        config = /* vim */ ''
-          let g:vim_markdown_folding_disabled = 1
-          let g:vim_markdown_conceal = 0
-          let g:vim_markdown_frontmatter = 1
-          let g:vim_markdown_toml_frontmatter = 1
-          let g:vim_markdown_json_frontmatter = 1
-        '';
+        config = # vim
+          ''
+            let g:vim_markdown_folding_disabled = 1
+            let g:vim_markdown_conceal = 0
+            let g:vim_markdown_frontmatter = 1
+            let g:vim_markdown_toml_frontmatter = 1
+            let g:vim_markdown_json_frontmatter = 1
+          '';
       }
       {
         plugin = nvim-lastplace;
@@ -818,7 +818,7 @@
       {
         plugin = nvim-lspconfig;
         type = "lua";
-        config = builtins.readFile(./neovim/lspconfig.lua);
+        config = builtins.readFile (./neovim/lspconfig.lua);
       }
       cmp-buffer
       cmp-path
@@ -839,7 +839,7 @@
       {
         plugin = nvim-cmp;
         type = "lua";
-        config = builtins.readFile(./neovim/completion.lua);
+        config = builtins.readFile (./neovim/completion.lua);
       }
       plenary-nvim
       {
@@ -852,12 +852,12 @@
       {
         plugin = harpoon2;
         type = "lua";
-        config = builtins.readFile(./neovim/harpoon.lua);
+        config = builtins.readFile (./neovim/harpoon.lua);
       }
       {
         plugin = telescope-nvim;
         type = "lua";
-        config = builtins.readFile(./neovim/telescope.lua);
+        config = builtins.readFile (./neovim/telescope.lua);
       }
       telescope-file-browser-nvim
       telescope-ui-select-nvim
@@ -899,9 +899,9 @@
       }
       nvim-dap
       #{
-        #plugin = nvim-dap-python;
-        #type = "lua";
-        #config = builtins.readFile(./neovim/debuggerpy.lua);
+      #plugin = nvim-dap-python;
+      #type = "lua";
+      #config = builtins.readFile(./neovim/debuggerpy.lua);
       #}
       telescope-dap-nvim
       nvim-dap-ui
@@ -910,7 +910,7 @@
     ];
   };
 
-  programs.alacritty =  {
+  programs.alacritty = {
     enable = true;
     settings = {
       env = {
@@ -984,12 +984,15 @@
       };
       keyboard = {
         bindings = [
-          { key = "Q"; mods = "Control"; action = "Quit"; }
+          {
+            key = "Q";
+            mods = "Control";
+            action = "Quit";
+          }
         ];
       };
     };
   };
-
 
   #home.activation = mkIf pkgs.stdenv.isDarwin {
   #copyApplications = let
