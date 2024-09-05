@@ -758,6 +758,7 @@ in
 
   # List services that you want to enable:
 
+  programs.bandwhich.enable = true;
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   networking.nftables.enable = true;

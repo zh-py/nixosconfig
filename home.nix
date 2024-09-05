@@ -72,7 +72,7 @@
     eza
     lsof
     tldr
-    #bandwhich
+    bandwhich
     sagetex
     openblas
     exfatprogs
@@ -129,8 +129,6 @@
     spotify
     spotube
     vlc
-    #ffmpeg_7-headless
-    #ffmpeg_7-full
     ffmpeg_7
     conda
     zotero_7
