@@ -2,11 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 #let
-  #compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
-    #${pkgs.xorg.xkbcomp}/bin/xkbcomp ${./path/to/layout.xkb} $out
-  #'';
+#compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
+#${pkgs.xorg.xkbcomp}/bin/xkbcomp ${./path/to/layout.xkb} $out
+#'';
 #in
 let
   customKeyboardLayout = pkgs.writeText "custom-keyboard-layout" ''
@@ -26,22 +31,19 @@ let
 
   # Help catch errors in the custom keyboard layout at build time
 
-  compiledKeyboardLayout = pkgs.runCommand "compiled-keyboard-layout" {} ''
+  compiledKeyboardLayout = pkgs.runCommand "compiled-keyboard-layout" { } ''
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $out
   '';
 in
 
-
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-  
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
   #nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://mirrors.ustc.edu.cn/nix-channels/store" "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   #nix.settings.substituters = lib.mkBefore [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://mirrors.ustc.edu.cn/nix-channels/store" "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
-
 
   nix.gc = {
     automatic = true;
@@ -49,12 +51,15 @@ in
     options = "--delete-older-than 30d";
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.extraModprobeConfig = ''
-    #options hid_apple fnmode=1
+  #options hid_apple fnmode=1
   #'';
 
   services.connman.enable = true;
@@ -88,13 +93,11 @@ in
     };
 
     #proxy = {
-      #default = "http://user:password@proxy:port/";
-      #noProxy = "127.0.0.1,localhost,internal.domain";
+    #default = "http://user:password@proxy:port/";
+    #noProxy = "127.0.0.1,localhost,internal.domain";
     #};
 
   };
-
-
 
   # Set your time zone.
   time.timeZone = "Africa/Dar_es_Salaam";
@@ -114,11 +117,10 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [libpinyin];
+    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
     #type = "fcitx5";
     #fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
@@ -131,45 +133,46 @@ in
   #services.xserver.windowManager.fvwm3.enable = true
   #services.xserver.desktopManager.default = "fvwm3";
   #services.xserver.desktopManager.session =
-    #[ { manage = "desktop";
-      #name = "fvwm3";
-      #start =
-        #''
-          ##xmodmap ~/.Xmodmap
-          #${pkgs.fvwm3}/bin/fvwm3 &
-          #waitPID=$!
-        #'';
-      #}
-    #];
+  #[ { manage = "desktop";
+  #name = "fvwm3";
+  #start =
+  #''
+  ##xmodmap ~/.Xmodmap
+  #${pkgs.fvwm3}/bin/fvwm3 &
+  #waitPID=$!
+  #'';
+  #}
+  #];
   #services.xserver.displayManager.defaultSession = "fvwm3";
   #services.xserver.windowManager.fvwm3.enable = true;
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
 
   services.displayManager = {
     autoLogin = {
       enable = false;
       user = "py";
     };
-    sddm = {
+    ly = {
       enable = true;
-      wayland.enable = false;
     };
   };
 
-  # Configure keymap in X11 37
+  services.haveged.enable = true;
+
+
   services.xserver = {
     enable = true;
     #displayManager = {
-      #lightdm = {
-        #enable = true;
-        #greeters.slick = {
-          #enable = true;
-          #theme.name = "Zukitre-dark";
-        #};
-      #};
+    #lightdm = {
+    #enable = true;
+    #greeters.slick = {
+    #enable = true;
+    #theme.name = "Zukitre-dark";
+    #};
+    #};
     #};
     desktopManager.lxqt.enable = true;
     #windowManager.icewm.enable = true;
@@ -179,14 +182,14 @@ in
     #displayManager.sessionCommands = "xkbcomp dotfiles/mylayout.xkb $DISPLAY";
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
     #displayManager.sessionCommands =
-      #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
-          #keycode 51 = Return
-          #keycode 36 = backslash bar
-      #''}"
+    #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
+    #keycode 51 = Return
+    #keycode 36 = backslash bar
+    #''}"
     #xkb.extraLayouts.mylayout = {
-      #description = "swap Return and Backslash";
-      #languages   = [ "eng" ];
-      #symbolsFile = /etc/nixos/dotfiles/mylayout;
+    #description = "swap Return and Backslash";
+    #languages   = [ "eng" ];
+    #symbolsFile = /etc/nixos/dotfiles/mylayout;
     #};
 
     # Load custom keyboard layout on boot/resume
@@ -198,22 +201,19 @@ in
     #displayManager.sessionCommands = "xkbcomp ${customKeyboardLayout} $DISPLAY";
     #displayManager.sessionCommands = "xmodmap -e 'keycode 51 = Return'";
 
-
-#displayManager.sessionCommands =
-  #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
-      #keycode 51 = Return
-      #keycode 36 = backslash bar
-  #''}"
+    #displayManager.sessionCommands =
+    #${pkgs.xorg.xmodmap}/bin/xmodmap "${pkgs.writeText  "xkb-layout" ''
+    #keycode 51 = Return
+    #keycode 36 = backslash bar
+    #''}"
 
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
-    displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
+    displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d"; # use which to find out the path.
   };
 
-
-
-  environment.variables = {
-  };
-
+  environment.variables =
+    {
+    };
 
   services.keyd = {
     enable = true;
@@ -299,144 +299,142 @@ in
   };
 
   #services.input-remapper = {
-    #enable = true;
+  #enable = true;
   #};
 
   #systemd.user.services.set-xhost = { #114
-    #description = "Run a one-shot command upon user login";
-    #path = [ pkgs.xorg.xhost ];
-    #wantedBy = [ "default.target" ];
-    #script = "xhost +SI:localuser:root";
-    #environment.DISPLAY = ":0.0"; # NOTE: This is hardcoded for this flake
+  #description = "Run a one-shot command upon user login";
+  #path = [ pkgs.xorg.xhost ];
+  #wantedBy = [ "default.target" ];
+  #script = "xhost +SI:localuser:root";
+  #environment.DISPLAY = ":0.0"; # NOTE: This is hardcoded for this flake
   #};
   #services.xremap = {
-    #withX11 = true;
-    ##yamlConfig = ''
-      ##keymap:
-        ##- name: Google
-          ##application:
-            ##only: Google-chrome
-          ##remap:
-            ##Super-1: C-1
-            ##Super-2: C-2
-    ##'';
-    #config = {
-      #modmap = [
-        #{
-          #name = "Global";
-          #remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
-          #remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
-          ##remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
-        #}
-        #{
-          #name = "Chrome";
-          #remap = { "Super_L" = "Ctrl_L"; };
-          #application.only = [ "Google-chrome" ];
-        #}
-      #];
+  #withX11 = true;
+  ##yamlConfig = ''
+  ##keymap:
+  ##- name: Google
+  ##application:
+  ##only: Google-chrome
+  ##remap:
+  ##Super-1: C-1
+  ##Super-2: C-2
+  ##'';
+  #config = {
+  #modmap = [
+  #{
+  #name = "Global";
+  #remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+  #remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+  ##remap = { "KEY_LSGT" = "KEY_LEFTSHIFT"; };
+  #}
+  #{
+  #name = "Chrome";
+  #remap = { "Super_L" = "Ctrl_L"; };
+  #application.only = [ "Google-chrome" ];
+  #}
+  #];
 
-      #keymap = [
-        #{
-          #name = "Global";
-          #remap = {
-            #"Super-Shift-T" = "C-Shift-T";
-            #"Super-w" = "C-w";
-            #"Super-q" = "C-q";
-            #"Super-f" = "C-f";
-            #"Super-t" = "C-t";
-            #"Super-c" = "C-c";
-            #"Super-x" = "C-x";
-            #"Super-v" = "C-v";
-            #"Super-r" = "C-r";
-            #"Super-l" = "C-l";
-            #"Super-Equal" = "C-Equal";
-            #"Super-Minus" = "C-Minus";
-            ##"Super-0" = ["C-0" "M-0"];
-            ##"Super-1" = ["C-1" "M-1"];
-            ##"Super-2" = ["C-2" "M-2"];
-            ##"Super-3" = ["C-3" "M-3"];
-            ##"Super-4" = ["C-4" "M-4"];
-            ##"Super-5" = ["C-5" "M-5"];
-            ##"Super-6" = ["C-6" "M-6"];
-            ##"Super-7" = ["C-7" "M-7"];
-            ##"Super-8" = ["C-8" "M-8"];
-            ##"Super-9" = ["C-9" "M-9"];
-            ##"Super-1" = "M-1";
-            ##"Super-2" = "M-2";
-            ##"Super-3" = "M-3";
-            ##"Super-4" = "M-4";
-            ##"Super-5" = "M-5";
-            ##"Super-6" = "M-6";
-            ##"Super-7" = "M-7";
-            ##"Super-8" = "M-8";
-            ##"Super-9" = "M-9";
-            ##"Super-BTN_LEFT" = "C-BTN_LEFT";
-          #};
-        #}
-        #{
-          #name = "Chrome";
-          #remap = {
-            #"Super-1" = "C-1";
-            #"Super-2" = "C-2";
-            #"Super-3" = "C-3";
-            #"Super-4" = "C-4";
-            #"Super-5" = "C-5";
-            #"Super-6" = "C-6";
-            #"Super-7" = "C-7";
-            #"Super-8" = "C-8";
-            #"Super-9" = "C-9";
-            #"Super-0" = "C-0";
-          #};
-          #application.only = [ "Google-chrome" ];
-        #}
-        #{
-          #name = "Firefox";
-          #remap = {
-            #"Super-1" = "M-1";
-            #"Super-2" = "M-2";
-            #"Super-3" = "M-3";
-            #"Super-4" = "M-4";
-            #"Super-5" = "M-5";
-            #"Super-6" = "M-6";
-            #"Super-7" = "M-7";
-            #"Super-8" = "M-8";
-            #"Super-9" = "M-9";
-            #"Super-0" = "M-0";
-          #};
-          #application.only = [ "firefox" ];
-        #}
-      #];
-    #};
+  #keymap = [
+  #{
+  #name = "Global";
+  #remap = {
+  #"Super-Shift-T" = "C-Shift-T";
+  #"Super-w" = "C-w";
+  #"Super-q" = "C-q";
+  #"Super-f" = "C-f";
+  #"Super-t" = "C-t";
+  #"Super-c" = "C-c";
+  #"Super-x" = "C-x";
+  #"Super-v" = "C-v";
+  #"Super-r" = "C-r";
+  #"Super-l" = "C-l";
+  #"Super-Equal" = "C-Equal";
+  #"Super-Minus" = "C-Minus";
+  ##"Super-0" = ["C-0" "M-0"];
+  ##"Super-1" = ["C-1" "M-1"];
+  ##"Super-2" = ["C-2" "M-2"];
+  ##"Super-3" = ["C-3" "M-3"];
+  ##"Super-4" = ["C-4" "M-4"];
+  ##"Super-5" = ["C-5" "M-5"];
+  ##"Super-6" = ["C-6" "M-6"];
+  ##"Super-7" = ["C-7" "M-7"];
+  ##"Super-8" = ["C-8" "M-8"];
+  ##"Super-9" = ["C-9" "M-9"];
+  ##"Super-1" = "M-1";
+  ##"Super-2" = "M-2";
+  ##"Super-3" = "M-3";
+  ##"Super-4" = "M-4";
+  ##"Super-5" = "M-5";
+  ##"Super-6" = "M-6";
+  ##"Super-7" = "M-7";
+  ##"Super-8" = "M-8";
+  ##"Super-9" = "M-9";
+  ##"Super-BTN_LEFT" = "C-BTN_LEFT";
   #};
-
+  #}
+  #{
+  #name = "Chrome";
+  #remap = {
+  #"Super-1" = "C-1";
+  #"Super-2" = "C-2";
+  #"Super-3" = "C-3";
+  #"Super-4" = "C-4";
+  #"Super-5" = "C-5";
+  #"Super-6" = "C-6";
+  #"Super-7" = "C-7";
+  #"Super-8" = "C-8";
+  #"Super-9" = "C-9";
+  #"Super-0" = "C-0";
+  #};
+  #application.only = [ "Google-chrome" ];
+  #}
+  #{
+  #name = "Firefox";
+  #remap = {
+  #"Super-1" = "M-1";
+  #"Super-2" = "M-2";
+  #"Super-3" = "M-3";
+  #"Super-4" = "M-4";
+  #"Super-5" = "M-5";
+  #"Super-6" = "M-6";
+  #"Super-7" = "M-7";
+  #"Super-8" = "M-8";
+  #"Super-9" = "M-9";
+  #"Super-0" = "M-0";
+  #};
+  #application.only = [ "firefox" ];
+  #}
+  #];
+  #};
+  #};
 
   ### Modmap for single key rebinds
   ##services.xremap.config.modmap = [
-    ##{
-      ##name = "Global";
-      ##remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
-      ##remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
-      ##name = "Chrome";
-      #remap = { "LEFTMETA" = "LEFTCTRL"; };
-      #application.only = [ "Google-chrome" ];
-    #}
+  ##{
+  ##name = "Global";
+  ##remap = { "KEY_ENTER" = "KEY_BACKSLASH"; };
+  ##remap = { "KEY_BACKSLASH" = "KEY_ENTER"; };
+  ##name = "Chrome";
+  #remap = { "LEFTMETA" = "LEFTCTRL"; };
+  #application.only = [ "Google-chrome" ];
+  #}
   #];
 
   ## Keymap for key combo rebinds
   #services.xremap.config.keymap = [
-    #{
-      #name = "CMD";
-      #remap = { "Super-tab" = "c-tab"; };
-      #remap = { "Super-w" = "c-w"; };
-      #remap = { "Super-q" = "c-q"; };
-      #remap = { "Super-t" = "c-t"; };
-      #remap = { "Super-c" = "c-c"; };
-      #remap = { "Super-x" = "c-x"; };
-      #remap = { "Super-v" = "c-v"; };
-      ## NOTE: no application-specific remaps work without features (see configuration)
-    #}
+  #{
+  #name = "CMD";
+  #remap = { "Super-tab" = "c-tab"; };
+  #remap = { "Super-w" = "c-w"; };
+  #remap = { "Super-q" = "c-q"; };
+  #remap = { "Super-t" = "c-t"; };
+  #remap = { "Super-c" = "c-c"; };
+  #remap = { "Super-x" = "c-x"; };
+  #remap = { "Super-v" = "c-v"; };
+  ## NOTE: no application-specific remaps work without features (see configuration)
+  #}
   #];
-
 
   services.libinput = {
     enable = true;
@@ -450,14 +448,12 @@ in
   programs.ydotool.enable = true;
 
   #services.xserver.desktopManager.session =
-    #[ { manage = "desktop";
-        #start = ''
-          #xmodmap /etc/nixos/dotfiles/.Xmodmap
-        #'';
-      #}
-    #];
-  
-
+  #[ { manage = "desktop";
+  #start = ''
+  #xmodmap /etc/nixos/dotfiles/.Xmodmap
+  #'';
+  #}
+  #];
 
   ## Configure the console keymap from the xserver keyboard settings
   #console.useXkbConfig = true;
@@ -470,11 +466,10 @@ in
     package = pkgs.usbmuxd2;
   };
 
-
   #powerManagement = {
-      #enable = true;
-      #powertop.enable = true;
-      #cpuFreqGovernor = "powersave";
+  #enable = true;
+  #powertop.enable = true;
+  #cpuFreqGovernor = "powersave";
   #};
 
   services = {
@@ -500,11 +495,11 @@ in
     power-profiles-daemon.enable = false;
 
     #tlp = {
-      #enable = true;
-      #settings = {
-        #START_CHARGE_THRESH_BAT0 = 60;
-        #STOP_CHARGE_THRESH_BAT0 = 80;
-      #};
+    #enable = true;
+    #settings = {
+    #START_CHARGE_THRESH_BAT0 = 60;
+    #STOP_CHARGE_THRESH_BAT0 = 80;
+    #};
     #};
 
     mbpfan = {
@@ -520,7 +515,6 @@ in
     };
 
   };
-
 
   #hardware.facetimehd.enable = true;
   #hardware.facetimehd.withCalibration = true;
@@ -561,26 +555,41 @@ in
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
-          "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" "hfp_hf" "hfp_ag" "hsp_hs" "hsp_ag" ];
+          "bluez5.roles" = [
+            "a2dp_sink"
+            "a2dp_source"
+            "bap_sink"
+            "bap_source"
+            "hfp_hf"
+            "hfp_ag"
+            "hsp_hs"
+            "hsp_ag"
+          ];
         };
       };
-    #wireplumber = {
+      #wireplumber = {
       #enable = true;
       #configPackages = [
-        #(pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/bluez.conf" ''
-          #monitor.bluez.properties = {
-            #bluez5.default.rate = 44100
-            #bluez5.enable-sbc-xq = true
-            #bluez5.enable-hw-volume = true
-            #}
-        #'')
+      #(pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/bluez.conf" ''
+      #monitor.bluez.properties = {
+      #bluez5.default.rate = 44100
+      #bluez5.enable-sbc-xq = true
+      #bluez5.enable-hw-volume = true
+      #}
+      #'')
       #];
     };
   };
 
-
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" "Hack" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "Iosevka"
+        "JetBrainsMono"
+        "Hack"
+      ];
+    })
     meslo-lgs-nf
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -623,7 +632,6 @@ in
     wineWowPackages.fonts
   ];
 
-
   virtualisation.docker = {
     enable = true;
     rootless = {
@@ -636,11 +644,17 @@ in
   users.users.py = {
     isNormalUser = true;
     description = "py";
-    extraGroups = [ "input" "networkmanager" "wheel" "docker" "keyd" "ydotool"];
+    extraGroups = [
+      "input"
+      "networkmanager"
+      "wheel"
+      "docker"
+      "keyd"
+      "ydotool"
+    ];
     #packages = with pkgs; [
     #];
   };
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -656,6 +670,10 @@ in
   environment.systemPackages = with pkgs; [
     #nur.repos.xddxdd.wine-wechat
     #nur.repos.xddxdd.wechat-uos-without-sandbox
+    #grim # screenshot functionality
+    #slurp # screenshot functionality
+    #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    #mako # notification system developed by swaywm maintainer
     thermald
     powertop
     dmidecode
