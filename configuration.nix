@@ -45,6 +45,7 @@ in
   #nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://mirrors.ustc.edu.cn/nix-channels/store" "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   #nix.settings.substituters = lib.mkBefore [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://mirrors.ustc.edu.cn/nix-channels/store" "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
 
+  systemd.extraConfig = "DefaultLimitNOFILE=4096";
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -768,6 +769,7 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  services.teamviewer.enable = true;
   services.v2raya.enable = true;
 
   # This value determines the NixOS release from which the default

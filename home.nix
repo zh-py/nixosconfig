@@ -33,12 +33,14 @@
     firefox
     google-chrome
     tor-browser
+    rustdesk-flutter
+    teamviewer
     nomacs
     gimp
     peazip
     libsForQt5.kio-extras
     libsForQt5.konsole
-    libreoffice-qt6
+    libreoffice-qt-still
     speedcrunch
     gpicview
     gImageReader
@@ -46,7 +48,7 @@
     krusader
     xxdiff
     okular
-    qpdfview
+    #qpdfview
     zathura
     telegram-desktop
     skypeforlinux
