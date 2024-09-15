@@ -48,8 +48,10 @@
     krusader
     xxdiff
     okular
-    #qpdfview
+    mupdf
+    llpp
     zathura
+    #qpdfview
     telegram-desktop
     skypeforlinux
     zoom-us
@@ -98,7 +100,6 @@
     mpv
     yt-dlp
     wordnet
-    mupdf
     #wechat-uos
     btop
     htop
@@ -789,7 +790,9 @@
         plugin = vimtex;
         config = # vim
           ''
-            let g:vimtex_view_general_method='qpdfview'
+            "let g:vimtex_view_general_method='qpdfview'
+            let g:vimtex_view_method = 'mupdf'
+            let g:vimtex_view_mupdf_send_keys = 'f'
             "let g:vimtex_view_skim_activate=0
             "let g:vimtex_view_skim_reading_bar=1
             let g:vimtex_syntax_enabled=0
