@@ -695,7 +695,6 @@ in
     vimix-cursors
     volantes-cursors
     xdotool
-    #ydotool
     xautomation
     libinput-gestures
     libinput

@@ -792,7 +792,10 @@
           ''
             "let g:vimtex_view_general_method='qpdfview'
             let g:vimtex_view_method = 'mupdf'
-            let g:vimtex_view_mupdf_send_keys = 'f'
+            let g:vimtex_view_mupdf_send_keys = 'shift+h'
+            "let g:vimtex_view_general_options = '-reuse-instance u/pdf'
+            "let g:vimtex_view_general_viewer = 'okular'
+            "let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
             "let g:vimtex_view_skim_activate=0
             "let g:vimtex_view_skim_reading_bar=1
             let g:vimtex_syntax_enabled=0
