@@ -51,7 +51,7 @@
     mupdf
     llpp
     zathura
-    #qpdfview
+    qpdfview
     telegram-desktop
     skypeforlinux
     zoom-us
@@ -464,7 +464,7 @@
     shellIntegration.enableZshIntegration = true;
     font.name = "Terminus (TTF)";
     font.size = 12;
-    theme = "Space Gray Eighties";
+    themeFile= "SpaceGray_Eighties";
     extraConfig = ''
       shell_integration enabled
       shell zsh

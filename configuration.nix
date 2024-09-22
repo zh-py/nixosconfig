@@ -677,6 +677,7 @@ in
     #mako # notification system developed by swaywm maintainer
     thermald
     powertop
+    smartmontools
     dmidecode
     acpi
     auto-cpufreq
@@ -768,6 +769,7 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  services.hddfancontrol.smartctl = true;
   services.teamviewer.enable = true;
   services.v2raya.enable = true;
 
