@@ -150,7 +150,14 @@ in
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.ly.enableGnomeKeyring = true;
-
+  #programs.sway = {
+    #enable = true;
+    #wrapperFeatures.gtk = true;
+  #};
+  #programs.hyprland = {
+    #enable = true;
+    #xwayland.enable = true;
+  #};
   services.displayManager = {
     autoLogin = {
       enable = false;
@@ -164,7 +171,7 @@ in
   services.haveged.enable = true;
 
 
-  services.xserver = {
+  services.xserver = { #47lines
     enable = true;
     #displayManager = {
     #lightdm = {
@@ -521,10 +528,11 @@ in
   #hardware.facetimehd.withCalibration = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  hardware.system76.power-daemon.enable = true;
-  hardware.system76.enableAll = true;
+  #hardware.system76.power-daemon.enable = true;
+  #hardware.system76.enableAll = true;
   services.blueman.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.graphics.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -652,6 +660,7 @@ in
       "docker"
       "keyd"
       "ydotool"
+      "deluge"
     ];
     #packages = with pkgs; [
     #];
@@ -724,7 +733,6 @@ in
     #xfce.xfwm4
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
-    #lxqt.lxqt-runner
     playerctl
     qpwgraph
     #pavucontrol
@@ -770,8 +778,24 @@ in
   # networking.firewall.enable = false;
 
   services.hddfancontrol.smartctl = true;
-  services.teamviewer.enable = true;
   services.v2raya.enable = true;
+  services.deluge = {
+    enable = true;
+    #web = {
+      #enable = true;
+      #openFirewall = true;
+    #};
+    declarative = true;
+    user = "py";
+    dataDir = "/home/py";
+    openFirewall = true;
+    authFile = let deluge_auth_file = (builtins.toFile "auth" ''
+      localclient::10
+      ''); in deluge_auth_file;
+    config = {
+      allow_remote = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

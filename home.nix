@@ -34,16 +34,15 @@
     google-chrome
     tor-browser
     rustdesk-flutter
-    teamviewer
     nomacs
     gimp
     peazip
     libsForQt5.kio-extras
     libsForQt5.konsole
-    libreoffice-qt-still
+    libreoffice-qt6
     speedcrunch
-    gpicview
-    gImageReader
+    photoqt
+    qview
     viewnior
     krusader
     xxdiff
@@ -84,7 +83,6 @@
     calcurse
     hunspell
     cava
-    deluge
     xsel
     libheif
     imagemagick
@@ -100,7 +98,6 @@
     mpv
     yt-dlp
     wordnet
-    #wechat-uos
     btop
     htop
     neofetch
@@ -122,7 +119,7 @@
     pyright
     ruff
     ruff-lsp
-    luajitPackages.luacheck
+    #luajitPackages.luacheck
     lua-language-server
     marksman
     tree-sitter
@@ -132,6 +129,7 @@
     spotify
     spotube
     vlc
+    smplayer
     ffmpeg_7
     conda
     zotero_7
@@ -499,68 +497,68 @@
     '';
   };
 
-  programs.wezterm = {
-    enable = true;
-    enableZshIntegration = true;
-    extraConfig = ''
-      local wezterm = require 'wezterm'
-      local my_framer = wezterm.color.get_builtin_schemes()['Framer (base16)']
-      my_framer.cursor_fg = '#181818'
-      my_framer.cursor_bg = '#EEEEEE'
-      my_framer.compose_cursor = '#20BCFC'
-      local mux = wezterm.mux
-      wezterm.on('gui-startup', function()
-        local tab, pane, window = mux.spawn_window(cmd or {})
-        window:gui_window():maximize()
-      end)
-      local gpus = wezterm.gui.enumerate_gpus()
-      local act = wezterm.action
-      return {
-        font_size = 12,
-        --font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Light', }),
-        --font = wezterm.font('FiraCode Nerd Font Mono'),
-        --font = wezterm.font('Terminus'),
-        --font = wezterm.font("MesloLGS NF"),
-        font = wezterm.font('Ttyp0'),
-        --font = wezterm.font('System'),
-        webgpu_preferred_adapter = gpus[1],
-        --front_end = "WebGpu",
-        front_end = "OpenGL",
-        enable_wayland = false,
-        webgpu_force_fallback_adapter = true,
-        webgpu_power_preference = "HighPerformance",
-        window_background_opacity = 1,
-        hide_tab_bar_if_only_one_tab = true,
-        default_cursor_style = "SteadyBar",
-        cursor_blink_rate = 600,
-        default_prog = { "zsh" },
-        window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
-        window_decorations = "NONE",
-        use_fancy_tab_bar = false,
-        adjust_window_size_when_changing_font_size = false,
-        inactive_pane_hsb = { saturation = 1, brightness = 1 }, -- s0.9, b0.8
-        color_schemes = { ['My Framer'] = my_framer, },
-        color_scheme = 'My Framer',
-        keys = {
-          { key = 't', mods = 'CMD|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
-          --{ key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain', },
-          { key = 'l', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(1) },
-          { key = 'h', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(-1) },
-          { key = '1', mods = 'ALT',       action = act.ActivateTab(0) },
-          { key = '2', mods = 'ALT',       action = act.ActivateTab(1) },
-          { key = '3', mods = 'ALT',       action = act.ActivateTab(2) },
-          { key = '4', mods = 'ALT',       action = act.ActivateTab(3) },
-          { key = '5', mods = 'ALT',       action = act.ActivateTab(4) },
-          { key = '6', mods = 'ALT',       action = act.ActivateTab(5) },
-          { key = '7', mods = 'ALT',       action = act.ActivateTab(6) },
-          { key = '8', mods = 'ALT',       action = act.ActivateTab(7) },
-          { key = '9', mods = 'ALT',       action = act.ActivateTab(8) },
-          --{ key = 'c', mods = 'CMD', action = act.CopyTo 'Clipboard' },
-          --{ key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
-        }
-      }
-    '';
-  };
+  #programs.wezterm = { #62 lines
+    #enable = true;
+    #enableZshIntegration = true;
+    #extraConfig = ''
+      #local wezterm = require 'wezterm'
+      #local my_framer = wezterm.color.get_builtin_schemes()['Framer (base16)']
+      #my_framer.cursor_fg = '#181818'
+      #my_framer.cursor_bg = '#EEEEEE'
+      #my_framer.compose_cursor = '#20BCFC'
+      #local mux = wezterm.mux
+      #wezterm.on('gui-startup', function()
+        #local tab, pane, window = mux.spawn_window(cmd or {})
+        #window:gui_window():maximize()
+      #end)
+      #local gpus = wezterm.gui.enumerate_gpus()
+      #local act = wezterm.action
+      #return {
+        #font_size = 12,
+        #--font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Light', }),
+        #--font = wezterm.font('FiraCode Nerd Font Mono'),
+        #--font = wezterm.font('Terminus'),
+        #--font = wezterm.font("MesloLGS NF"),
+        #font = wezterm.font('Ttyp0'),
+        #--font = wezterm.font('System'),
+        #webgpu_preferred_adapter = gpus[1],
+        #--front_end = "WebGpu",
+        #front_end = "OpenGL",
+        #enable_wayland = false,
+        #webgpu_force_fallback_adapter = true,
+        #webgpu_power_preference = "HighPerformance",
+        #window_background_opacity = 1,
+        #hide_tab_bar_if_only_one_tab = true,
+        #default_cursor_style = "SteadyBar",
+        #cursor_blink_rate = 600,
+        #default_prog = { "zsh" },
+        #window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+        #window_decorations = "NONE",
+        #use_fancy_tab_bar = false,
+        #adjust_window_size_when_changing_font_size = false,
+        #inactive_pane_hsb = { saturation = 1, brightness = 1 }, -- s0.9, b0.8
+        #color_schemes = { ['My Framer'] = my_framer, },
+        #color_scheme = 'My Framer',
+        #keys = {
+          #{ key = 't', mods = 'CMD|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
+          #--{ key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain', },
+          #{ key = 'l', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(1) },
+          #{ key = 'h', mods = 'CMD|SHIFT', action = act.ActivateTabRelative(-1) },
+          #{ key = '1', mods = 'ALT',       action = act.ActivateTab(0) },
+          #{ key = '2', mods = 'ALT',       action = act.ActivateTab(1) },
+          #{ key = '3', mods = 'ALT',       action = act.ActivateTab(2) },
+          #{ key = '4', mods = 'ALT',       action = act.ActivateTab(3) },
+          #{ key = '5', mods = 'ALT',       action = act.ActivateTab(4) },
+          #{ key = '6', mods = 'ALT',       action = act.ActivateTab(5) },
+          #{ key = '7', mods = 'ALT',       action = act.ActivateTab(6) },
+          #{ key = '8', mods = 'ALT',       action = act.ActivateTab(7) },
+          #{ key = '9', mods = 'ALT',       action = act.ActivateTab(8) },
+          #--{ key = 'c', mods = 'CMD', action = act.CopyTo 'Clipboard' },
+          #--{ key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
+        #}
+      #}
+    #'';
+  #};
 
   programs.zsh = {
     enable = true;
@@ -955,11 +953,13 @@
         history = 10000;
         multiplier = 3;
       };
-      shell = {
-        program = "zsh";
-        args = [
-          "-l"
-        ];
+      terminal = {
+        shell = {
+          program = "zsh";
+          args = [
+            "-l"
+          ];
+        };
       };
       colors = {
         primary = {
