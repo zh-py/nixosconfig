@@ -34,6 +34,7 @@
     google-chrome
     tor-browser
     rustdesk-flutter
+    wechat-uos
     nomacs
     gimp
     peazip
@@ -55,6 +56,7 @@
     skypeforlinux
     zoom-us
     gparted
+    ventoy-full
     galculator
     qalculate-gtk
     playerctl
@@ -68,6 +70,7 @@
     maestral
     keepassxc
     #appimage-run
+    calibre
 
     #share
     mc
@@ -76,6 +79,7 @@
     lsof
     tldr
     bandwhich
+    octaveFull
     sagetex
     openblas
     exfatprogs
@@ -97,6 +101,7 @@
     gh
     mpv
     yt-dlp
+    bitcomet
     wordnet
     btop
     htop
@@ -119,7 +124,7 @@
     pyright
     ruff
     ruff-lsp
-    #luajitPackages.luacheck
+    luajitPackages.luacheck
     lua-language-server
     marksman
     tree-sitter
@@ -127,7 +132,7 @@
     texlab
     obsidian
     spotify
-    spotube
+    #spotube
     vlc
     smplayer
     ffmpeg_7

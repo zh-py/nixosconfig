@@ -680,6 +680,7 @@ in
   environment.systemPackages = with pkgs; [
     #nur.repos.xddxdd.wine-wechat
     #nur.repos.xddxdd.wechat-uos-without-sandbox
+    #nur.repos.novel2430.wechat-universal-bwrap
     #grim # screenshot functionality
     #slurp # screenshot functionality
     #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout

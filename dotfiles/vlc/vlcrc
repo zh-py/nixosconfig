@@ -1265,7 +1265,7 @@
 #logo-opacity=255
 
 # Logo position (integer)
-logo-position=0
+#logo-position=-1
 
 [remoteosd] # Remote-OSD over VNC
 
@@ -1279,7 +1279,7 @@ logo-position=0
 #rmtosd-password=
 
 # VNC poll interval (integer)
-rmtosd-update=300
+#rmtosd-update=1000
 
 # VNC polling (boolean)
 #rmtosd-vnc-polling=0
@@ -1378,7 +1378,7 @@ rmtosd-update=300
 #audiobargraph_v-transparency=255
 
 # Bargraph position (integer)
-audiobargraph_v-position=0
+#audiobargraph_v-position=-1
 
 # Bar width in pixel (integer)
 #audiobargraph_v-barWidth=10
@@ -1406,7 +1406,7 @@ audiobargraph_v-position=0
 #rss-y=0
 
 # Text position (integer)
-rss-position=0
+#rss-position=-1
 
 # Opacity (integer)
 #rss-opacity=255
@@ -1447,7 +1447,7 @@ rss-position=0
 #marq-y=0
 
 # Marquee position (integer)
-marq-position=0
+#marq-position=-1
 
 # Opacity (integer)
 #marq-opacity=255
@@ -2112,7 +2112,7 @@ qt-continue=2
 qt-privacy-ask=0
 
 # Define which screen fullscreen goes (integer)
-qt-fullscreen-screennumber=0
+#qt-fullscreen-screennumber=-1
 
 # Load extensions on startup (boolean)
 #qt-autoload-extensions=1
@@ -2133,12 +2133,12 @@ qt-fullscreen-screennumber=0
 #qt-fs-sensitivity=3
 
 # When to raise the interface (integer)
-qt-auto-raise=3
+#qt-auto-raise=1
 
 [skins2] # Skinnable Interface
 
 # Skin to use (string)
-skins2-last=/nix/store/3c7sgynqiclyzghqp198q8ql6fn81j2q-vlc-3.0.20/share/vlc/skins2/default.vlt
+#skins2-last=
 
 # Config of last used skin (string)
 #skins2-config=
@@ -2227,10 +2227,10 @@ skins2-last=/nix/store/3c7sgynqiclyzghqp198q8ql6fn81j2q-vlc-3.0.20/share/vlc/ski
 [freetype] # Freetype2 font renderer
 
 # Font (string)
-freetype-font=DejaVu Sans
+#freetype-font=Serif Bold
 
 # Monospace Font (string)
-freetype-monofont=DejaVu Sans Mono
+#freetype-monofont=Monospace
 
 # Font size in pixels (integer)
 #freetype-fontsize=0
@@ -3472,7 +3472,7 @@ freetype-monofont=DejaVu Sans Mono
 #grayscale=0
 
 # Fullscreen video output (boolean)
-fullscreen=1
+#fullscreen=0
 
 # Embedded video (boolean)
 #embedded-video=1
@@ -3583,7 +3583,7 @@ fullscreen=1
 #zoom=1.000000
 
 # Deinterlace (integer)
-deinterlace=0
+#deinterlace=-1
 
 # Deinterlace mode (string)
 #deinterlace-mode=auto
@@ -3604,7 +3604,7 @@ vout=gl
 #osd=1
 
 # Text rendering module (string)
-text-renderer=any
+#text-renderer=
 
 # Use subtitle file (string)
 #sub-file=
@@ -3643,7 +3643,7 @@ text-renderer=any
 #audio-language=
 
 # Subtitle language (string)
-sub-language=en;English;eng
+#sub-language=
 
 # Menu language (string)
 #menu-language=
@@ -3862,7 +3862,7 @@ sub-language=en;English;eng
 #packetizer=
 
 # VoD server module (string)
-vod-server=any
+#vod-server=
 
 # Use a plugins cache (boolean)
 #plugins-cache=1
@@ -4078,13 +4078,13 @@ hotkeys-x-wheel-mode=-1
 #global-key-jump-short=
 
 # Short backwards jump (string)
-key-jump-short=
+key-jump-short=Left
 
 # Short forward jump (string)
 #global-key-jump+short=
 
 # Short forward jump (string)
-key-jump+short=
+key-jump+short=Right
 
 # Medium backwards jump (string)
 #global-key-jump-medium=
@@ -4102,13 +4102,13 @@ key-jump+medium=Alt+Right
 #global-key-jump-long=
 
 # Long backwards jump (string)
-#key-jump-long=Ctrl+Alt+Left
+key-jump-long=
 
 # Long forward jump (string)
 #global-key-jump+long=
 
 # Long forward jump (string)
-#key-jump+long=Ctrl+Alt+Right
+key-jump+long=
 
 # Next frame (string)
 #global-key-frame-next=
@@ -4138,13 +4138,13 @@ key-jump+medium=Alt+Right
 #global-key-nav-left=
 
 # Navigate left (string)
-#key-nav-left=Left
+key-nav-left=
 
 # Navigate right (string)
 #global-key-nav-right=
 
 # Navigate right (string)
-#key-nav-right=Right
+key-nav-right=
 
 # Go to the DVD menu (string)
 #global-key-disc-menu=
@@ -4240,13 +4240,13 @@ key-jump+medium=Alt+Right
 #global-key-subpos-up=
 
 # Subtitle position up (string)
-key-subpos-up=Alt+Up
+#key-subpos-up=
 
 # Subtitle position down (string)
 #global-key-subpos-down=
 
 # Subtitle position down (string)
-key-subpos-down=Alt+Down
+#key-subpos-down=
 
 # Audio delay up (string)
 #global-key-audiodelay-up=
@@ -4312,7 +4312,7 @@ key-subtitle-toggle=c
 #global-key-crop=
 
 # Cycle video crop (string)
-key-crop=Shift+c
+key-crop=
 
 # Toggle autoscaling (string)
 #global-key-toggle-autoscale=
