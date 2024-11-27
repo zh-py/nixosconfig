@@ -33,8 +33,10 @@
     firefox
     google-chrome
     tor-browser
-    rustdesk-flutter
+    rustdesk
     wechat-uos
+    calibre
+    #goldendict-ng
     nomacs
     gimp
     peazip
@@ -70,7 +72,6 @@
     maestral
     keepassxc
     #appimage-run
-    calibre
 
     #share
     mc
@@ -86,7 +87,8 @@
     progress
     calcurse
     hunspell
-    cava
+    #cava
+    dmenu
     xsel
     libheif
     imagemagick

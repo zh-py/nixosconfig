@@ -63,6 +63,11 @@ in
   #options hid_apple fnmode=1
   #'';
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+    HandlePowerKeyLongPress=poweroff
+  '';
+
   services.connman.enable = true;
   services.connman.wifi.backend = "iwd";
 
@@ -118,6 +123,15 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
+  #i18n.inputMethod = {
+    #type = "fcitx5";
+    #enable = true;
+    #fcitx5.addons = with pkgs; [
+      #fcitx5-gtk
+      #fcitx5-chinese-addons
+      #fcitx5-nord
+    #];
+  #};
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
@@ -593,7 +607,7 @@ in
   fonts.packages = with pkgs; [
     (nerdfonts.override {
       fonts = [
-        "FiraCode"
+        #"FiraCode"
         "Iosevka"
         "JetBrainsMono"
         "Hack"
@@ -637,7 +651,7 @@ in
     spleen
     ucs-fonts
     #google-fonts
-    corefonts
+    #corefonts
     wineWowPackages.fonts
   ];
 
@@ -779,6 +793,7 @@ in
   services.openssh.enable = true;
   services.hddfancontrol.smartctl = true;
   services.v2raya.enable = true;
+  services.dictd.enable = true;
   services.deluge = {
     enable = true;
     #web = {
