@@ -13,7 +13,7 @@
       py = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          nur.nixosModules.nur
+          nur.modules.nixos.default
           # This adds a nur configuration option.
           # Use `config.nur` for packages like this:
           # ({ config, ... }: {

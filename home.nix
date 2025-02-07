@@ -33,7 +33,7 @@
     firefox
     google-chrome
     tor-browser
-    rustdesk
+    #rustdesk
     wechat-uos
     calibre
     #goldendict-ng
@@ -168,13 +168,11 @@
     #extractcode
     #]))
 
-    (python312.withPackages (
+    (python313.withPackages (
       p: with p; [
         py-cpuinfo
-        extractcode
         pip
         numpy
-        jupyter
         qtconsole
         sympy
         requests
@@ -187,18 +185,20 @@
         ipython
         pysnooper
         debugpy
-        python-lsp-server
-        python-lsp-ruff
         pynvim
         send2trash
         openpyxl
+        jupyter
         pytest
-        torch
+        #python-lsp-server
+        #python-lsp-ruff
+        #torch
+        #extractcode
       ]
     ))
   ];
 
-  services.fusuma = {
+  services.fusuma = { #97
     enable = true;
     extraPackages = with pkgs; [ xdotool ];
     #settings = ''
@@ -212,16 +212,16 @@
         "4" = {
           left = {
             #command = "xdotool key ctrl+Right";
-            command = "xte 'keydown Control_L' 'key Right' 'keyup Control_L'";
-            #command = "ydotool key 29:1 106:1 106:0 29:0";
+            #command = "xte 'keydown Control_L' 'key Right' 'keyup Control_L'";
+            command = "ydotool key 29:1 106:1 106:0 29:0";
             threshold = 0.5;
             #interval = 0.75;
             interval = 0.8;
           };
           right = {
             #command = "xdotool key ctrl+Left";
-            command = "xte 'keydown Control_L' 'key Left' 'keyup Control_L'";
-            #command = "ydotool key 29:1 105:1 105:0 29:0";
+            #command = "xte 'keydown Control_L' 'key Left' 'keyup Control_L'";
+            command = "ydotool key 29:1 105:1 105:0 29:0";
             threshold = 0.5;
             #interval = 0.75;
             interval = 0.8;
@@ -316,6 +316,7 @@
     ".config/lf/lfcd.sh".source = dotfiles/lf-config/lfcd.sh;
     ".config/lf/lf.bash".source = dotfiles/lf-config/lf.bash;
     ".config/openbox/rc.xml".source = dotfiles/openbox/rc.xml;
+    ".config/libinput-gestures.conf".source = dotfiles/libinput-gestures.conf;
     #".jupyter/jupyter_qtconsole_config.py".source = dotfiles/jupyter_qtconsole_config.py;
     #".config/calcurse/caldav/config".source = dotfiles/calcurse-caldav/config; #git doesn't allow, so manually copy
     #".config/lf".source = dotfiles/lf-config;
@@ -573,6 +574,11 @@
     enableCompletion = true;
     shellAliases = {
       ll = "ls -l";
+      y7 = "(){ yt-dlp -f 137+140 --no-mtime $1. ;}";
+      y6 = "(){ yt-dlp -f 136+140 --no-mtime $1. ;}";
+      y67 = "(){ yt-dlp -f '137+140/136+140' --no-mtime $1. ;}";
+      yfm = "(){ yt-dlp --list-formats $1. ;}";
+      yf = "(){ yt-dlp --write-auto-sub --write-sub --sub-lang en --convert-subtitles srt -f '137+140/136+140/135+140/134+140' --no-mtime $1. ;}";
       #bl = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 42";
       #bh = "sudo python3 ~/Downloads/osx_battery_charge_limit/main.py -s 77";
     };

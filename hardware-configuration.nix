@@ -18,7 +18,7 @@
       fsType = "ext4";
     };
 
-  fileSystems."/CESM" =
+  fileSystems."/data" =
     { device = "/dev/disk/by-uuid/46f63c4b-ba24-44bb-a975-403e92d00483";
       fsType = "ext4";
     };

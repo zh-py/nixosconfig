@@ -68,6 +68,16 @@ in
     HandlePowerKeyLongPress=poweroff
   '';
 
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=yes
+    AllowHibernation=yes
+    AllowHybridSleep=yes
+    AllowSuspendThenHibernate=yes
+    HibernateDelaySec=1h
+  '';
+
+  programs.hyprlock.enable = true;
+
   services.connman.enable = true;
   services.connman.wifi.backend = "iwd";
 
@@ -79,16 +89,24 @@ in
       iwd = {
         enable = true;
         settings = {
+          # https://wiki.gentoo.org/wiki/Iwd
           General = {
             EnableNetworkConfiguration = true;
+            Country = "US";
+            #RoamThreshold = 1;
+            #CriticalRoamThreshold = 1;
           };
           Network = {
             EnableIPv6 = true;
             RoutePriorityOffset = 300;
           };
-          Settings = {
-            AutoConnect = true;
+          Rank = {
+            BandModifier2_4GHz = 1.0;
+            BandModifier5GHz = 1.0;
           };
+          #Settings = {
+            #AutoConnect = true;
+          #};
         };
       };
     };
@@ -106,7 +124,7 @@ in
   };
 
   # Set your time zone.
-  time.timeZone = "Asia/Shanghai";
+  time.timeZone = "America/Denver";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -132,14 +150,23 @@ in
       #fcitx5-nord
     #];
   #};
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-    #type = "fcitx5";
-    #fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
-  };
+  #i18n.inputMethod = {
+    #enable = true;
+    #type = "ibus";
+    #ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+    ##type = "fcitx5";
+    ##fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
+  #};
 
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      fcitx5-chinese-addons
+      fcitx5-nord
+    ];
+  };
   #options = {
   #+    services.xserver.windowManager.fvwm3 = {
   #+      enable = mkEnableOption "Fvwm3 window manager";
@@ -162,16 +189,33 @@ in
   #services.xserver.windowManager.fvwm3.enable = true;
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.ly.enableGnomeKeyring = true;
-  #programs.sway = {
-    #enable = true;
-    #wrapperFeatures.gtk = true;
+
+  #services.xserver.videoDrivers = ["nvidia"];
+  #hardware.nvidia = {
+    #modesetting.enable = true;
+    #powerManagement.enable = false;
+    #powerManagement.finegrained = false;
+    #open = false;
+    #nvidiaSettings = true;
+    #package = config.boot.kernelPackages.nvidiaPackages.stable;
+    #prime = {
+      #sync.enable = true;
+      #intelBusId = "PCI:0:2:0";
+      #nvidiaBusId = "PCI:0:3:0";
+      #};
   #};
+
   #programs.hyprland = {
     #enable = true;
     #xwayland.enable = true;
   #};
+  #programs.waybar.enable = true;
+  #services.getty.autologinUser = "py";
+
+
+  services.gnome.gnome-keyring.enable = true;
+
+  security.pam.services.ly.enableGnomeKeyring = true;
   services.displayManager = {
     autoLogin = {
       enable = false;
@@ -182,11 +226,17 @@ in
     };
   };
 
+
+
+  security.polkit.enable = true;
   services.haveged.enable = true;
 
 
   services.xserver = { #47lines
     enable = true;
+    displayManager = {
+      startx.enable = false;
+    };
     #displayManager = {
     #lightdm = {
     #enable = true;
@@ -483,10 +533,10 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.usbmuxd = {
-    enable = true;
-    package = pkgs.usbmuxd2;
-  };
+  #services.usbmuxd = {
+    #enable = true;
+    #package = pkgs.usbmuxd2;
+  #};
 
   #powerManagement = {
   #enable = true;
@@ -545,7 +595,7 @@ in
   #hardware.system76.power-daemon.enable = true;
   #hardware.system76.enableAll = true;
   services.blueman.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   hardware.graphics.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -605,14 +655,10 @@ in
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        #"FiraCode"
-        "Iosevka"
-        "JetBrainsMono"
-        "Hack"
-      ];
-    })
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.iosevka
+    nerd-fonts.hack
     meslo-lgs-nf
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -629,7 +675,6 @@ in
     fira
     #maple-mono
     julia-mono
-    jetbrains-mono
     paratype-pt-sans
     uw-ttyp0
     #tamsyn
@@ -699,6 +744,9 @@ in
     #slurp # screenshot functionality
     #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     #mako # notification system developed by swaywm maintainer
+    wirelesstools
+    pciutils
+    lshw
     thermald
     powertop
     smartmontools
@@ -793,7 +841,7 @@ in
   services.openssh.enable = true;
   services.hddfancontrol.smartctl = true;
   services.v2raya.enable = true;
-  services.dictd.enable = true;
+  #services.dictd.enable = true;
   services.deluge = {
     enable = true;
     #web = {
