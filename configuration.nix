@@ -78,6 +78,13 @@ in
 
   programs.hyprlock.enable = true;
 
+  #networking.wireless = {
+    #enable = true;
+    #extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+  #};
+  #networking.networkmanager.enable = false;
+  #networking.wireless.userControlled.enable = true;
+
   services.connman.enable = true;
   services.connman.wifi.backend = "iwd";
 
@@ -97,12 +104,12 @@ in
             #CriticalRoamThreshold = 1;
           };
           Network = {
-            EnableIPv6 = true;
-            RoutePriorityOffset = 300;
+            EnableIPv6 = false;
+            #RoutePriorityOffset = 300;
           };
           Rank = {
-            BandModifier2_4GHz = 1.0;
-            BandModifier5GHz = 1.0;
+            #BandModifier2_4GHz = 1.0;
+            #BandModifier5GHz = 1.0;
           };
           #Settings = {
             #AutoConnect = true;
@@ -111,10 +118,10 @@ in
       };
     };
 
-    networkmanager = {
-      enable = false;
-      wifi.backend = "iwd";
-    };
+    #networkmanager = {
+      #enable = true;
+      #wifi.backend = "iwd";
+    #};
 
     #proxy = {
     #default = "http://user:password@proxy:port/";
@@ -279,8 +286,9 @@ in
     #keycode 36 = backslash bar
     #''}"
 
-    #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d"; #use which to find out the path.
-    #displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d"; # use which to find out the path.
+    #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d";
+    #displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
+    displayManager.sessionCommands = "systemctl --user start libinput-gestures";
   };
 
   environment.variables =
@@ -745,6 +753,7 @@ in
     #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     #mako # notification system developed by swaywm maintainer
     wirelesstools
+    aircrack-ng
     pciutils
     lshw
     thermald
