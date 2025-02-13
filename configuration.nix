@@ -538,8 +538,15 @@ in
   ## Configure the console keymap from the xserver keyboard settings
   #console.useXkbConfig = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    #drivers = [ pkgs.hplipWithPlugin ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   #services.usbmuxd = {
     #enable = true;
@@ -753,6 +760,7 @@ in
     #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     #mako # notification system developed by swaywm maintainer
     wirelesstools
+    iw
     aircrack-ng
     pciutils
     lshw
@@ -850,7 +858,7 @@ in
   services.openssh.enable = true;
   services.hddfancontrol.smartctl = true;
   services.v2raya.enable = true;
-  #services.dictd.enable = true;
+  services.dictd.enable = true;
   services.deluge = {
     enable = true;
     #web = {

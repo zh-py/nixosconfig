@@ -134,7 +134,10 @@
     texlab
     obsidian
     spotify
-    #spotube
+    spotify-qt
+    librespot
+    spotifyd
+    spotube
     vlc
     smplayer
     ffmpeg_7
@@ -350,7 +353,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  #programs.sagemath.enable = true;
+  programs.sagemath.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
