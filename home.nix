@@ -140,7 +140,7 @@
     spotube
     vlc
     smplayer
-    ffmpeg_7
+    ffmpeg-full
     conda
     zotero_7
     netcdf

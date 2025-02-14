@@ -197,7 +197,7 @@ in
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
 
-  #services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["nvidia"];
   #hardware.nvidia = {
     #modesetting.enable = true;
     #powerManagement.enable = false;
@@ -796,6 +796,13 @@ in
     #xorg.libxcb
     #xorg.libXrender
     #xorg.libXi
+
+    #xorg.libXpresent
+    #libvdpau-va-gl
+    #libvdpau
+    #libva-vdpau-driver
+    vdpauinfo
+
     libsForQt5.qt5.qtwayland
     libsForQt5.qt5.qtbase
     kdePackages.qtwayland
