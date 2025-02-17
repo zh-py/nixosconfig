@@ -23,7 +23,7 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
+            home-manager.useGlobalPkgs = false;
             home-manager.useUserPackages = true;
             home-manager.users.py = import ./home.nix;
             # Optionally, use home-manager.extraSpecialArgs to pass

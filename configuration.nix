@@ -108,8 +108,8 @@ in
             #RoutePriorityOffset = 300;
           };
           Rank = {
-            #BandModifier2_4GHz = 1.0;
-            #BandModifier5GHz = 1.0;
+            BandModifier2_4GHz = 0.5;
+            BandModifier5GHz = 1.0;
           };
           #Settings = {
             #AutoConnect = true;
@@ -239,6 +239,12 @@ in
   services.haveged.enable = true;
 
 
+  qt = {
+    enable = true;
+    #platformTheme = "lxqt";
+    #style = "kvantum";
+  };
+
   services.xserver = { #47lines
     enable = true;
     displayManager = {
@@ -255,7 +261,7 @@ in
     #};
     desktopManager.lxqt.enable = true;
     #windowManager.icewm.enable = true;
-    #windowManager.i3.enable = true;
+    #windowManager.openbox.enable = true;
     #xkb.layout = "us";
     #xkb.variant = "";
     #displayManager.sessionCommands = "xkbcomp dotfiles/mylayout.xkb $DISPLAY";
@@ -610,7 +616,10 @@ in
   #hardware.system76.power-daemon.enable = true;
   #hardware.system76.enableAll = true;
   services.blueman.enable = true;
-  services.pulseaudio.enable = false;
+  services.pulseaudio = {
+    enable = false;
+    package = pkgs.pulseaudioFull;
+  };
   hardware.graphics.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -803,24 +812,29 @@ in
     #libva-vdpau-driver
     vdpauinfo
 
-    libsForQt5.qt5.qtwayland
-    libsForQt5.qt5.qtbase
-    kdePackages.qtwayland
-    kdePackages.qtbase
-    kdePackages.qt6gtk2
-    kdePackages.qt6ct
+    #libsForQt5.qt5.qtwayland
+    #libsForQt5.qt5.qtbase
+    #kdePackages.qtwayland
+    #kdePackages.qtbase
+    #kdePackages.qt6gtk2
+    #kdePackages.qt6ct
+
+    synapse
+    #albert
+
     #xorg.setxkbmap
     #xorg.xkbcomp
     #xorg.xhost # for gparted
     #xkeysnail
     #xfce.xfce4-dict
     #xfce.xfce4-panel
-    #xfce.xfce4-appfinder
+    xfce.xfce4-appfinder
     #xfce.xfce4-settings
     #xfce.xfwm4
     #xfce.xfce4-dict
     #xfce.xfce4-pulseaudio-plugin
     playerctl
+    pulseaudioFull
     qpwgraph
     #pavucontrol
     #pamixer

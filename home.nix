@@ -152,6 +152,7 @@
     gfortran
     libgcc
     tcsh
+    sshfs
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -167,9 +168,9 @@
     # '')
 
     #(python314.withPackages (
-      #p: with p; [
-        #extractcode
-      #]
+    #p: with p; [
+    #extractcode
+    #]
     #))
 
     (python313.withPackages (
@@ -376,6 +377,12 @@
   #extraConfig = builtins.readFile ./dotfiles/tint2rc;
   #};
 
+  #programs.tofi = {
+    #enable = true;
+    #settings = {
+    #};
+  #};
+
   programs.lf = {
     enable = true;
     settings = {
@@ -462,6 +469,16 @@
           set -g @catppuccin_flavour 'frappe'
           set -g @catppuccin_window_tabs_enabled on
           set -g @catppuccin_date_time "%H:%M"
+        '';
+      }
+      {
+        plugin = tmuxPlugins.vim-tmux-navigator;
+        extraConfig = ''
+          set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
+          set -g @vim_navigator_mapping_right "C-Right C-l"
+          set -g @vim_navigator_mapping_up "C-k"
+          set -g @vim_navigator_mapping_down "C-j"
+          set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
         '';
       }
     ];
