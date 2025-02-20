@@ -274,7 +274,7 @@ in
     #''}"
 
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d";
-    #displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
+    displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
     #displayManager.sessionCommands = "systemctl --user start libinput-gestures";
   };
 
