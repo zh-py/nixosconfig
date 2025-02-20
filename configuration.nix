@@ -79,8 +79,8 @@ in
   programs.hyprlock.enable = true;
 
   #networking.wireless = {
-    #enable = true;
-    #extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+  #enable = true;
+  #extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
   #};
   #networking.networkmanager.enable = false;
   #networking.wireless.userControlled.enable = true;
@@ -112,15 +112,15 @@ in
             BandModifier5GHz = 1.0;
           };
           #Settings = {
-            #AutoConnect = true;
+          #AutoConnect = true;
           #};
         };
       };
     };
 
     #networkmanager = {
-      #enable = true;
-      #wifi.backend = "iwd";
+    #enable = true;
+    #wifi.backend = "iwd";
     #};
 
     #proxy = {
@@ -149,20 +149,20 @@ in
   };
 
   #i18n.inputMethod = {
-    #type = "fcitx5";
-    #enable = true;
-    #fcitx5.addons = with pkgs; [
-      #fcitx5-gtk
-      #fcitx5-chinese-addons
-      #fcitx5-nord
-    #];
+  #type = "fcitx5";
+  #enable = true;
+  #fcitx5.addons = with pkgs; [
+  #fcitx5-gtk
+  #fcitx5-chinese-addons
+  #fcitx5-nord
+  #];
   #};
   #i18n.inputMethod = {
-    #enable = true;
-    #type = "ibus";
-    #ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-    ##type = "fcitx5";
-    ##fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
+  #enable = true;
+  #type = "ibus";
+  #ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+  ##type = "fcitx5";
+  ##fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   #};
 
   i18n.inputMethod = {
@@ -196,32 +196,14 @@ in
   #services.xserver.windowManager.fvwm3.enable = true;
   #services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY";
 
-
-  services.xserver.videoDrivers = ["nvidia"];
-  #hardware.nvidia = {
-    #modesetting.enable = true;
-    #powerManagement.enable = false;
-    #powerManagement.finegrained = false;
-    #open = false;
-    #nvidiaSettings = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.stable;
-    #prime = {
-      #sync.enable = true;
-      #intelBusId = "PCI:0:2:0";
-      #nvidiaBusId = "PCI:0:3:0";
-      #};
-  #};
-
   #programs.hyprland = {
-    #enable = true;
-    #xwayland.enable = true;
+  #enable = true;
+  #xwayland.enable = true;
   #};
   #programs.waybar.enable = true;
   #services.getty.autologinUser = "py";
 
-
   services.gnome.gnome-keyring.enable = true;
-
   security.pam.services.ly.enableGnomeKeyring = true;
   services.displayManager = {
     autoLogin = {
@@ -233,11 +215,9 @@ in
     };
   };
 
-
-
   security.polkit.enable = true;
   services.haveged.enable = true;
-
+  #services.getty.autologinUser = "py";
 
   qt = {
     enable = true;
@@ -245,7 +225,8 @@ in
     #style = "kvantum";
   };
 
-  services.xserver = { #47lines
+  services.xserver = {
+    # 47lines
     enable = true;
     displayManager = {
       startx.enable = false;
@@ -294,12 +275,11 @@ in
 
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d";
     #displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
-    displayManager.sessionCommands = "systemctl --user start libinput-gestures";
+    #displayManager.sessionCommands = "systemctl --user start libinput-gestures";
   };
 
-  environment.variables =
-    {
-    };
+  environment.variables = {
+  };
 
   services.keyd = {
     enable = true;
@@ -555,8 +535,8 @@ in
   };
 
   #services.usbmuxd = {
-    #enable = true;
-    #package = pkgs.usbmuxd2;
+  #enable = true;
+  #package = pkgs.usbmuxd2;
   #};
 
   #powerManagement = {
@@ -609,6 +589,32 @@ in
 
   };
 
+  hardware.graphics.enable = true;
+
+  hardware.nvidia = {
+    open = true;
+  };
+
+  #services.xserver.videoDrivers = [ "nvidia" ];
+  #nixpkgs.config.nvidia.acceptLicense = true;
+  #hardware.nvidia = {
+  ##package = config.boot.kernelPackages.nvidiaPackages.legacy_340;
+  ##package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+  #package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #gsp.enable = false;
+
+  #modesetting.enable = true;
+  #powerManagement.enable = false;
+  #powerManagement.finegrained = false;
+  #open = false;
+  #nvidiaSettings = true;
+  ##prime = {
+  ##sync.enable = true;
+  ##intelBusId = "PCI:0:2:0";
+  ##nvidiaBusId = "PCI:0:3:0";
+  ##};
+  #};
+
   #hardware.facetimehd.enable = true;
   #hardware.facetimehd.withCalibration = true;
   hardware.bluetooth.enable = true;
@@ -616,11 +622,10 @@ in
   #hardware.system76.power-daemon.enable = true;
   #hardware.system76.enableAll = true;
   services.blueman.enable = true;
-  services.pulseaudio = {
-    enable = false;
-    package = pkgs.pulseaudioFull;
-  };
-  hardware.graphics.enable = true;
+  #services.pulseaudio = {
+  #enable = false;
+  #package = pkgs.pulseaudioFull;
+  #};
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -678,17 +683,36 @@ in
     };
   };
 
+  #fonts.fontconfig.enable = lib.mkForce true;
+  #fonts.fontconfig = {
+  #enable = true;
+  #subpixel.rgba = "bgr";
+  #subpixel.lcdfilter = "legacy";
+  #hinting.style = "full";
+  #};
+  #nixpkgs.config.permittedInsecurePackages = [ "archiver-3.5.1" ];
   fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.iosevka
-    nerd-fonts.hack
+    #font-awesome
+    #uw-ttyp0
+    #gohufont
+    #terminus_font_ttf
+    #profont
+    #efont-unicode
+    #noto-fonts-emoji
+    #dina-font
+
+    #nerd-fonts.fira-code
+    #nerd-fonts.jetbrains-mono
+    #nerd-fonts.iosevka
+    #nerd-fonts.hack
+    #nerd-fonts.hack
+    source-han-sans
+
     meslo-lgs-nf
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     source-han-sans-vf-ttf
     source-han-serif-vf-ttf
-    source-han-sans
     source-han-serif
     #ark-pixel-font
     #zpix-pixel-font
@@ -768,11 +792,14 @@ in
     #slurp # screenshot functionality
     #wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     #mako # notification system developed by swaywm maintainer
+    nvd
+    nix-diff
     wirelesstools
     iw
     aircrack-ng
     pciutils
     lshw
+    mesa
     thermald
     powertop
     smartmontools
@@ -883,16 +910,22 @@ in
   services.deluge = {
     enable = true;
     #web = {
-      #enable = true;
-      #openFirewall = true;
+    #enable = true;
+    #openFirewall = true;
     #};
     declarative = true;
     user = "py";
     dataDir = "/home/py";
     openFirewall = true;
-    authFile = let deluge_auth_file = (builtins.toFile "auth" ''
-      localclient::10
-      ''); in deluge_auth_file;
+    authFile =
+      let
+        deluge_auth_file = (
+          builtins.toFile "auth" ''
+            localclient::10
+          ''
+        );
+      in
+      deluge_auth_file;
     config = {
       allow_remote = true;
     };
