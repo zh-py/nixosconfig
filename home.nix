@@ -101,7 +101,6 @@
     #unar
     graphviz
     gh
-    mpv
     yt-dlp
     bitcomet
     wordnet
@@ -361,16 +360,26 @@
     allowUnfreePredicate = _: true;
   };
 
-  #programs.mpv = {
-  #enable = true;
-  #bindings = {
-  #"Alt+0" = "set window-scale 0.5";
-  #};
-  #config = {
-  #ytdl-format="bestvideo[height<=?480][fps<=?30][vcodec!=?webm]+bestaudio/best";
-  #cache-default = 4000000;
-  #};
-  #};
+  services.mpris-proxy.enable = true;
+  programs.mpv = {
+    # mkdir /var/log/mpv && sudo chmod -R u=rwx,g=rwx,o=rwx /var/log/mpv    ### for recent.lua history.log
+    enable = true;
+    package = (
+      pkgs.mpv-unwrapped.wrapper {
+        scripts = with pkgs.mpvScripts; [
+          #uosc
+          sponsorblock
+          mpris
+          thumbfast
+        ];
+        mpv = pkgs.mpv-unwrapped.override {
+          waylandSupport = true;
+          ffmpeg = pkgs.ffmpeg-full;
+        };
+      }
+    );
+  };
+
 
   #programs.tint2 = {
   #enable = true;
@@ -378,9 +387,9 @@
   #};
 
   #programs.tofi = {
-    #enable = true;
-    #settings = {
-    #};
+  #enable = true;
+  #settings = {
+  #};
   #};
 
   programs.lf = {
