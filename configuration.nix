@@ -274,8 +274,8 @@ in
     #''}"
 
     #displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${customKeyboardLayout} $DISPLAY && /etc/profiles/per-user/py/bin/fusuma -d";
-    displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
-    #displayManager.sessionCommands = "systemctl --user start libinput-gestures";
+    #displayManager.sessionCommands = "/etc/profiles/per-user/py/bin/fusuma -d";
+    displayManager.sessionCommands = "systemctl --user start libinput-gestures";
   };
 
   environment.variables = {
@@ -817,7 +817,6 @@ in
     nordzy-cursor-theme
     numix-cursor-theme
     openzone-cursors
-    vimix-cursor-theme
     vimix-cursors
     volantes-cursors
     xdotool
@@ -904,7 +903,7 @@ in
   # networking.firewall.enable = false;
 
   services.openssh.enable = true;
-  services.hddfancontrol.smartctl = true;
+  #services.hddfancontrol.smartctl = true;
   services.v2raya.enable = true;
   services.dictd.enable = true;
   services.deluge = {
